@@ -3,7 +3,7 @@
 // ============================================================
 
 import { lazy, Suspense } from "react";
-import type { ComponentType, ReactNode } from "react";
+import type { ComponentType, ReactNode, JSX } from "react";
 import { LoadingSpinner } from "@/components/ui";
 
 /**
