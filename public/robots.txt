@@ -1,16 +1,37 @@
 # Robots.txt for vigneshm.me
-# Allow all search engines to crawl the entire site
+# Vignesh M - Full Stack Developer Portfolio
+# Website: https://vigneshm.me
 
+# Allow all search engines to crawl the entire site
 User-agent: *
 Allow: /
+Crawl-delay: 1
+
+# Google specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Google Images
+User-agent: Googlebot-Image
+Allow: /
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
 
 # Sitemap location
 Sitemap: https://vigneshm.me/sitemap.xml
-
-# Crawl-delay for polite crawling (optional)
-Crawl-delay: 1
 
 # Block unnecessary paths
 Disallow: /api/
 Disallow: /_next/
 Disallow: /node_modules/
+Disallow: /*.json$
+Disallow: /assets/*.map
+
+# Allow important files
+Allow: /manifest.json
+Allow: /favicon.svg
+Allow: /og-image.png

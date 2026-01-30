@@ -1,0 +1,11 @@
+# Security Policy for vigneshm.me
+# Vignesh M - Full Stack Developer Portfolio
+
+Contact: mailto:security@vigneshm.me
+Contact: https://vigneshm.me/contact
+Expires: 2027-01-30T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://vigneshm.me/.well-known/security.txt
+
+# If you discover a security vulnerability, please report it responsibly.
+# I appreciate your help in keeping vigneshm.me secure.

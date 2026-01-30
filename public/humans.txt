@@ -1,0 +1,26 @@
+/* VigneshM - vigneshm.me */
+/* Portfolio of Vignesh M - Full Stack Developer */
+
+Name: Vignesh M
+Website: https://vigneshm.me
+GitHub: https://github.com/VIG-NESH-M
+Role: Full Stack Developer & Software Engineer
+
+/* Technologies */
+Frontend: React, TypeScript, JavaScript, HTML5, CSS3, Tailwind CSS
+Backend: Node.js, Express.js, Python, Django
+Database: MongoDB, PostgreSQL, MySQL, Redis
+Cloud: AWS, Google Cloud, Vercel, Docker
+
+/* About */
+I'm Vignesh M, a passionate Full Stack Developer with expertise in 
+building scalable web applications. I love creating elegant solutions 
+to complex problems and am always learning new technologies.
+
+/* Search Keywords */
+vigneshm, vignesh m, VigneshM, Vignesh M developer, 
+full stack developer, software engineer, react developer,
+typescript developer, web developer, india developer
+
+/* Contact */
+For project inquiries, visit: https://vigneshm.me
