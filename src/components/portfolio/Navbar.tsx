@@ -2,8 +2,8 @@
 // NAVBAR - Subtle Folio Exact Style (Icon-only Pill)
 // ============================================================
 
-import { useState } from "react";
-import { Home, User, Briefcase, Lock, Plus } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Home, User, Briefcase, Lock, Plus, Sun, Moon } from "lucide-react";
 
 const navIcons = [
   { name: "Home", href: "#home", icon: Home },
@@ -14,6 +14,30 @@ const navIcons = [
 
 export default function Navbar() {
   const [activeNav, setActiveNav] = useState("Home");
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+
+  useEffect(() => {
+    // Check for saved theme or system preference
+    const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
+    const systemPrefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)",
+    ).matches;
+
+    if (savedTheme) {
+      setTheme(savedTheme);
+      document.documentElement.classList.toggle("dark", savedTheme === "dark");
+    } else if (systemPrefersDark) {
+      setTheme("dark");
+      document.documentElement.classList.add("dark");
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+    document.documentElement.classList.toggle("dark", newTheme === "dark");
+  };
 
   return (
     <>
@@ -36,6 +60,21 @@ export default function Navbar() {
               <item.icon className="w-5 h-5" strokeWidth={1.5} />
             </a>
           ))}
+
+          {/* Theme Toggle */}
+          <button
+            onClick={toggleTheme}
+            className="p-3 rounded-full transition-all text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300"
+            title={
+              theme === "light" ? "Switch to dark mode" : "Switch to light mode"
+            }
+          >
+            {theme === "light" ? (
+              <Moon className="w-5 h-5" strokeWidth={1.5} />
+            ) : (
+              <Sun className="w-5 h-5" strokeWidth={1.5} />
+            )}
+          </button>
 
           {/* Hire Me Button */}
           <a
@@ -66,6 +105,17 @@ export default function Navbar() {
                 <item.icon className="w-5 h-5" strokeWidth={1.5} />
               </a>
             ))}
+            {/* Mobile Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="p-2.5 rounded-full transition-all text-gray-500 dark:text-gray-400"
+            >
+              {theme === "light" ? (
+                <Moon className="w-5 h-5" strokeWidth={1.5} />
+              ) : (
+                <Sun className="w-5 h-5" strokeWidth={1.5} />
+              )}
+            </button>
           </div>
           <a
             href="#contact"

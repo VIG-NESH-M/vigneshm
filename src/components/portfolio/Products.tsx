@@ -3,58 +3,7 @@
 // ============================================================
 
 import { ExternalLink } from "lucide-react";
-
-interface Product {
-  id: number;
-  name: string;
-  tag: string;
-  tagColor: string;
-  icon: string;
-  iconBg: string;
-  url: string;
-}
-
-const products: Product[] = [
-  {
-    id: 1,
-    name: "React Starter Kit",
-    tag: "GITHUB TEMPLATE",
-    tagColor:
-      "bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400",
-    icon: "⚛️",
-    iconBg: "bg-gradient-to-br from-cyan-400 to-blue-500",
-    url: "https://github.com/VIG-NESH-M",
-  },
-  {
-    id: 2,
-    name: "Node.js API Boilerplate",
-    tag: "OPEN SOURCE",
-    tagColor:
-      "bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400",
-    icon: "🟢",
-    iconBg: "bg-gradient-to-br from-green-400 to-emerald-500",
-    url: "https://github.com/VIG-NESH-M",
-  },
-  {
-    id: 3,
-    name: "TypeScript Utilities",
-    tag: "NPM PACKAGE",
-    tagColor: "bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400",
-    icon: "📦",
-    iconBg: "bg-gradient-to-br from-blue-500 to-indigo-600",
-    url: "https://github.com/VIG-NESH-M",
-  },
-  {
-    id: 4,
-    name: "Portfolio Template",
-    tag: "VITE TEMPLATE",
-    tagColor:
-      "bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400",
-    icon: "🎨",
-    iconBg: "bg-gradient-to-br from-purple-400 to-pink-500",
-    url: "https://github.com/VIG-NESH-M",
-  },
-];
+import { products } from "@/config";
 
 export default function Products() {
   return (
@@ -91,9 +40,9 @@ export default function Products() {
               >
                 {/* Icon */}
                 <div
-                  className={`w-12 h-12 ${product.iconBg} rounded-2xl flex items-center justify-center text-xl shadow-lg shrink-0`}
+                  className={`w-12 h-12 ${product.iconBg} rounded-2xl flex items-center justify-center text-white shadow-lg shrink-0`}
                 >
-                  {product.icon}
+                  <product.icon className="w-6 h-6" strokeWidth={1.5} />
                 </div>
 
                 {/* Content */}

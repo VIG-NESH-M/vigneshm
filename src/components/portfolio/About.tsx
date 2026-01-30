@@ -4,25 +4,7 @@
 
 import { Sparkles, Download, Briefcase } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
-
-const stats = [
-  { label: "Years Experience", value: "5+" },
-  { label: "Projects Completed", value: "50+" },
-  { label: "Happy Clients", value: "30+" },
-];
-
-const skills = [
-  "React.js",
-  "TypeScript",
-  "Node.js",
-  "Python",
-  "Next.js",
-  "MongoDB",
-  "PostgreSQL",
-  "AWS",
-  "Docker",
-  "GraphQL",
-];
+import { personalInfo, stats, skills } from "@/config";
 
 export default function About() {
   return (
@@ -35,18 +17,18 @@ export default function About() {
               <Sparkles className="w-5 h-5" /> About Me
             </h2>
 
-            <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
-              I'm a passionate Full Stack Developer with 5+ years of experience
-              building modern web applications. I specialize in React,
-              TypeScript, and Node.js, creating scalable and user-friendly
-              digital experiences.
-            </p>
-
-            <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
-              Based in India, I work with clients globally to bring their ideas
-              to life. I believe in clean code, great design, and continuous
-              learning.
-            </p>
+            {personalInfo.description.about.map((paragraph, index) => (
+              <p
+                key={index}
+                className={`text-gray-600 dark:text-gray-400 ${
+                  index === personalInfo.description.about.length - 1
+                    ? "mb-8"
+                    : "mb-6"
+                } leading-relaxed`}
+              >
+                {paragraph}
+              </p>
+            ))}
 
             {/* Stats */}
             <div className="flex flex-wrap gap-6 sm:gap-8 mb-8">
@@ -64,7 +46,7 @@ export default function About() {
 
             {/* Download CV */}
             <a
-              href="/resume.pdf"
+              href={personalInfo.resume}
               download
               className="inline-flex items-center gap-2 px-5 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-medium hover:opacity-90 transition-opacity"
             >

@@ -4,12 +4,13 @@
 
 import { useState } from "react";
 import { Copy, Check, Plus } from "lucide-react";
+import { personalInfo } from "@/config";
 
 export default function Hero() {
   const [copied, setCopied] = useState(false);
 
   const copyEmail = () => {
-    navigator.clipboard.writeText("contact@vigneshm.me");
+    navigator.clipboard.writeText(personalInfo.email);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -25,16 +26,18 @@ export default function Hero() {
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
               <span className="text-sm font-medium text-gray-900 dark:text-white">
-                Full Stack Developer
+                {personalInfo.role}
               </span>
             </div>
             {/* Available Badge */}
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-green-50 dark:bg-green-900/20 rounded-full">
-              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-              <span className="text-xs font-semibold text-green-600 dark:text-green-400 uppercase tracking-wide">
-                Available for Work
-              </span>
-            </div>
+            {personalInfo.availability.status && (
+              <div className="flex items-center gap-2 px-3 py-1.5 bg-green-50 dark:bg-green-900/20 rounded-full">
+                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                <span className="text-xs font-semibold text-green-600 dark:text-green-400 uppercase tracking-wide">
+                  {personalInfo.availability.text}
+                </span>
+              </div>
+            )}
           </div>
 
           {/* Content with Avatar */}
@@ -43,14 +46,14 @@ export default function Hero() {
             <div className="flex-1">
               {/* Name */}
               <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
-                I'm Vignesh M
+                I'm {personalInfo.name}
               </h1>
 
               {/* Description */}
               <p className="text-gray-500 dark:text-gray-400 mb-6 leading-relaxed">
-                Full Stack Developer from India.
+                {personalInfo.description.short}
                 <br />
-                Currently building amazing web experiences.
+                {personalInfo.description.extended}
               </p>
 
               {/* CTA Buttons */}
@@ -84,7 +87,10 @@ export default function Hero() {
             {/* Avatar */}
             <div className="hidden sm:block shrink-0">
               <div className="w-28 h-28 rounded-full bg-gradient-to-br from-amber-100 via-orange-100 to-yellow-100 dark:from-amber-900/30 dark:via-orange-900/30 dark:to-yellow-900/30 flex items-center justify-center overflow-hidden shadow-lg">
-                <span className="text-5xl">👨‍💻</span>
+                <personalInfo.avatarIcon
+                  className="w-14 h-14 text-amber-600 dark:text-amber-400"
+                  strokeWidth={1.5}
+                />
               </div>
             </div>
           </div>

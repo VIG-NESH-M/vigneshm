@@ -3,42 +3,8 @@
 // ============================================================
 
 import { useState } from "react";
-import { Twitter, Instagram, Dribbble, Linkedin, Send } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
-
-interface SocialLink {
-  name: string;
-  icon: LucideIcon;
-  url: string;
-  bgColor: string;
-}
-
-const socialLinks: SocialLink[] = [
-  {
-    name: "X",
-    icon: Twitter,
-    url: "https://twitter.com/vigneshm",
-    bgColor: "bg-gradient-to-br from-gray-700 to-gray-900",
-  },
-  {
-    name: "Instagram",
-    icon: Instagram,
-    url: "https://instagram.com/vigneshm",
-    bgColor: "bg-gradient-to-br from-pink-500 to-purple-600",
-  },
-  {
-    name: "Dribbble",
-    icon: Dribbble,
-    url: "https://dribbble.com/vigneshm",
-    bgColor: "bg-gradient-to-br from-pink-400 to-pink-600",
-  },
-  {
-    name: "LinkedIn",
-    icon: Linkedin,
-    url: "https://linkedin.com/in/vigneshm",
-    bgColor: "bg-gradient-to-br from-blue-500 to-blue-700",
-  },
-];
+import { Send } from "lucide-react";
+import { socialLinks, personalInfo } from "@/config";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -71,9 +37,11 @@ export default function Contact() {
                 Hire Me
               </span>
             </div>
-            <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-xs font-semibold rounded-full uppercase">
-              Available for Work
-            </span>
+            {personalInfo.availability.status && (
+              <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-xs font-semibold rounded-full uppercase">
+                {personalInfo.availability.text}
+              </span>
+            )}
           </div>
 
           {/* Title */}
