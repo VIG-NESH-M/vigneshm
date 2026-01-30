@@ -42,86 +42,86 @@ export default function Navbar() {
   return (
     <>
       {/* Desktop Navbar - Centered Floating Pill */}
-      <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 hidden md:block">
-        <div className="flex items-center gap-2 p-2 bg-white dark:bg-gray-900 rounded-full shadow-lg border border-gray-100 dark:border-gray-800">
+      <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 hidden md:block">
+        <div className="flex items-center gap-1 p-1.5 bg-white dark:bg-gray-900 rounded-full shadow-md border border-gray-100 dark:border-gray-800">
           {/* Nav Icons */}
           {navIcons.map((item) => (
             <a
               key={item.name}
               href={item.href}
               onClick={() => setActiveNav(item.name)}
-              className={`p-3 rounded-full transition-all ${
+              className={`p-2.5 rounded-full transition-all ${
                 activeNav === item.name
                   ? "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white"
                   : "text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300"
               }`}
               title={item.name}
             >
-              <item.icon className="w-5 h-5" strokeWidth={1.5} />
+              <item.icon className="w-4 h-4" strokeWidth={1.5} />
             </a>
           ))}
 
           {/* Theme Toggle */}
           <button
             onClick={toggleTheme}
-            className="p-3 rounded-full transition-all text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300"
+            className="p-2.5 rounded-full transition-all text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300"
             title={
               theme === "light" ? "Switch to dark mode" : "Switch to light mode"
             }
           >
             {theme === "light" ? (
-              <Moon className="w-5 h-5" strokeWidth={1.5} />
+              <Moon className="w-4 h-4" strokeWidth={1.5} />
             ) : (
-              <Sun className="w-5 h-5" strokeWidth={1.5} />
+              <Sun className="w-4 h-4" strokeWidth={1.5} />
             )}
           </button>
 
           {/* Hire Me Button */}
           <a
             href="#contact"
-            className="ml-1 flex items-center gap-2 px-5 py-2.5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full text-sm font-medium hover:opacity-90 transition-opacity"
+            className="ml-0.5 flex items-center gap-1.5 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full text-xs font-medium hover:opacity-90 transition-opacity"
           >
-            <Plus className="w-4 h-4" />
+            <Plus className="w-3.5 h-3.5" />
             Hire Me
           </a>
         </div>
       </nav>
 
       {/* Mobile Navbar */}
-      <nav className="fixed top-4 left-4 right-4 z-50 md:hidden">
-        <div className="flex items-center justify-between p-3 bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-800">
-          <div className="flex items-center gap-1">
+      <nav className="fixed top-3 left-3 right-3 z-50 md:hidden">
+        <div className="flex items-center justify-between p-2 bg-white dark:bg-gray-900 rounded-xl shadow-md border border-gray-100 dark:border-gray-800">
+          <div className="flex items-center gap-0.5">
             {navIcons.slice(0, 4).map((item) => (
               <a
                 key={item.name}
                 href={item.href}
                 onClick={() => setActiveNav(item.name)}
-                className={`p-2.5 rounded-full transition-all ${
+                className={`p-2 rounded-full transition-all ${
                   activeNav === item.name
                     ? "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white"
                     : "text-gray-500 dark:text-gray-400"
                 }`}
               >
-                <item.icon className="w-5 h-5" strokeWidth={1.5} />
+                <item.icon className="w-4 h-4" strokeWidth={1.5} />
               </a>
             ))}
             {/* Mobile Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="p-2.5 rounded-full transition-all text-gray-500 dark:text-gray-400"
+              className="p-2 rounded-full transition-all text-gray-500 dark:text-gray-400"
             >
               {theme === "light" ? (
-                <Moon className="w-5 h-5" strokeWidth={1.5} />
+                <Moon className="w-4 h-4" strokeWidth={1.5} />
               ) : (
-                <Sun className="w-5 h-5" strokeWidth={1.5} />
+                <Sun className="w-4 h-4" strokeWidth={1.5} />
               )}
             </button>
           </div>
           <a
             href="#contact"
-            className="flex items-center gap-1.5 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full text-sm font-medium"
+            className="flex items-center gap-1 px-3 py-1.5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full text-xs font-medium"
           >
-            <Plus className="w-4 h-4" />
+            <Plus className="w-3.5 h-3.5" />
             Hire Me
           </a>
         </div>
