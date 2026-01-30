@@ -87,10 +87,11 @@ export default function Hero() {
 
             {/* Avatar */}
             <div className="hidden xs:block shrink-0">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-amber-100 via-orange-100 to-yellow-100 dark:from-amber-900/30 dark:via-orange-900/30 dark:to-yellow-900/30 flex items-center justify-center overflow-hidden shadow-lg">
-                <personalInfo.avatarIcon
-                  className="w-8 h-8 sm:w-10 sm:h-10 text-amber-600 dark:text-amber-400"
-                  strokeWidth={1.5}
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden shadow-lg ring-2 ring-gray-100 dark:ring-neutral-700">
+                <img
+                  src="/myImage.jpg"
+                  alt={personalInfo.name}
+                  className="w-full h-full object-cover"
                 />
               </div>
             </div>
