@@ -1,10 +1,9 @@
 // ============================================================
-// HERO - Clean Minimal Design with Lucide Icons
+// HERO - Subtle Folio Style
 // ============================================================
 
 import { useState } from "react";
-import { Sparkles, ArrowRight, Copy, Check, Code2 } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { Copy, Check, ArrowRight } from "lucide-react";
 
 export default function Hero() {
   const [copied, setCopied] = useState(false);
@@ -18,65 +17,87 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center px-4 pt-24 pb-12"
+      className="min-h-screen flex items-center px-4 pt-24 pb-12"
     >
-      <div className="max-w-2xl mx-auto text-center">
-        {/* Available Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-50 dark:bg-green-900/20 rounded-full mb-8">
-          <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-          <span className="text-sm font-medium text-green-700 dark:text-green-400">
-            AVAILABLE FOR WORK
-          </span>
-        </div>
+      <div className="max-w-6xl mx-auto w-full">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+          {/* Left Content */}
+          <div className="order-2 lg:order-1">
+            {/* Role Badge */}
+            <div className="inline-block mb-6">
+              <span className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                Full Stack Developer
+              </span>
+            </div>
 
-        {/* Role */}
-        <p className="text-gray-500 dark:text-gray-400 text-lg mb-4 flex items-center justify-center gap-2">
-          <Sparkles className="w-4 h-4" /> Full Stack Developer
-        </p>
+            {/* Main Heading */}
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-6 leading-[1.1]">
+              I'm Vignesh M
+            </h1>
 
-        {/* Name */}
-        <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6 tracking-tight">
-          I'm Vignesh M
-        </h1>
+            {/* Description */}
+            <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-md leading-relaxed">
+              Full Stack Developer from India. Currently building amazing web
+              experiences and digital products.
+            </p>
 
-        {/* Description */}
-        <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 mb-10 leading-relaxed max-w-lg mx-auto">
-          Full Stack Developer from India.
-          <br />
-          Currently building amazing web experiences.
-        </p>
-
-        {/* Avatar */}
-        <div className="relative w-32 h-32 sm:w-40 sm:h-40 mx-auto mb-10">
-          <div className="w-full h-full rounded-3xl bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 flex items-center justify-center shadow-xl overflow-hidden">
-            <Code2 className="w-16 h-16 sm:w-20 sm:h-20 text-gray-700 dark:text-gray-300" />
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap items-center gap-4">
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-medium hover:opacity-90 transition-all group"
+              >
+                Hire Me
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </a>
+              <button
+                onClick={copyEmail}
+                className="inline-flex items-center gap-2 px-6 py-3 text-gray-700 dark:text-gray-300 font-medium hover:text-gray-900 dark:hover:text-white transition-colors"
+              >
+                {copied ? (
+                  <>
+                    <Check className="w-4 h-4 text-green-500" />
+                    Copied!
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-4 h-4" />
+                    Copy Email
+                  </>
+                )}
+              </button>
+            </div>
           </div>
-          {/* Decorative dots */}
-          <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-400 rounded-full"></div>
-          <div className="absolute -bottom-1 -left-1 w-4 h-4 bg-blue-400 rounded-full"></div>
-        </div>
 
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a
-            href="#contact"
-            className="flex items-center gap-2 px-6 py-3.5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-medium hover:opacity-90 transition-all hover:scale-105 shadow-lg"
-          >
-            <span>Hire Me</span>
-            <ArrowRight className="w-4 h-4" />
-          </a>
-          <Button
-            variant="outline"
-            onClick={copyEmail}
-            className="rounded-full px-6 py-3.5 hover:scale-105 transition-transform"
-          >
-            {copied ? (
-              <Check className="w-4 h-4" />
-            ) : (
-              <Copy className="w-4 h-4" />
-            )}
-            <span>{copied ? "Copied!" : "Copy Email"}</span>
-          </Button>
+          {/* Right - Avatar/Image */}
+          <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
+            <div className="relative">
+              {/* Main Avatar */}
+              <div className="w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-3xl bg-gradient-to-br from-violet-100 via-purple-50 to-blue-100 dark:from-violet-900/30 dark:via-purple-900/20 dark:to-blue-900/30 overflow-hidden shadow-2xl">
+                <div className="w-full h-full flex items-center justify-center">
+                  {/* Placeholder Avatar - Replace with actual image */}
+                  <div className="w-full h-full bg-gradient-to-br from-violet-200 to-blue-200 dark:from-violet-800/50 dark:to-blue-800/50 flex items-center justify-center">
+                    <span className="text-8xl sm:text-9xl font-bold text-white/80 dark:text-white/40">
+                      V
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Decorative Elements */}
+              <div className="absolute -top-4 -right-4 w-8 h-8 bg-green-400 rounded-full shadow-lg"></div>
+              <div className="absolute -bottom-2 -left-2 w-6 h-6 bg-blue-400 rounded-full shadow-lg"></div>
+              <div className="absolute top-1/2 -left-6 w-4 h-4 bg-purple-400 rounded-full shadow-lg"></div>
+
+              {/* Available Badge */}
+              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-900 rounded-full shadow-lg border border-gray-100 dark:border-gray-800">
+                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                <span className="text-xs font-medium text-gray-700 dark:text-gray-300">
+                  Available for work
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

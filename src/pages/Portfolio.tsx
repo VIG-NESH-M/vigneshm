@@ -1,5 +1,5 @@
 // ============================================================
-// PORTFOLIO PAGE - Main Single Page Portfolio
+// PORTFOLIO PAGE - Subtle Folio Style
 // ============================================================
 
 import { useEffect } from "react";
@@ -7,8 +7,8 @@ import { useDocumentTitle } from "@/hooks";
 import { useAppSelector } from "@/hooks";
 import { selectTheme } from "@/store/selectors";
 import Hero from "@/components/portfolio/Hero";
-import About from "@/components/portfolio/About";
 import Projects from "@/components/portfolio/Projects";
+import Products from "@/components/portfolio/Products";
 import Contact from "@/components/portfolio/Contact";
 import Footer from "@/components/portfolio/Footer";
 import Navbar from "@/components/portfolio/Navbar";
@@ -28,12 +28,12 @@ export default function Portfolio() {
   }, [theme]);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <div className="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300">
       <Navbar />
       <main>
         <Hero />
         <Projects />
-        <About />
+        <Products />
         <Contact />
       </main>
       <Footer />
