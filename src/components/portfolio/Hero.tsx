@@ -1,8 +1,10 @@
 // ============================================================
-// HERO - Clean Minimal Design (Like Brian Do)
+// HERO - Clean Minimal Design with Lucide Icons
 // ============================================================
 
 import { useState } from "react";
+import { Sparkles, ArrowRight, Copy, Check, Code2 } from "lucide-react";
+import { Button } from "@/components/ui/Button";
 
 export default function Hero() {
   const [copied, setCopied] = useState(false);
@@ -14,7 +16,10 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center px-4 pt-24 pb-12">
+    <section
+      id="home"
+      className="min-h-screen flex items-center justify-center px-4 pt-24 pb-12"
+    >
       <div className="max-w-2xl mx-auto text-center">
         {/* Available Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-50 dark:bg-green-900/20 rounded-full mb-8">
@@ -26,7 +31,7 @@ export default function Hero() {
 
         {/* Role */}
         <p className="text-gray-500 dark:text-gray-400 text-lg mb-4 flex items-center justify-center gap-2">
-          <span>✦</span> Full Stack Developer
+          <Sparkles className="w-4 h-4" /> Full Stack Developer
         </p>
 
         {/* Name */}
@@ -44,7 +49,7 @@ export default function Hero() {
         {/* Avatar */}
         <div className="relative w-32 h-32 sm:w-40 sm:h-40 mx-auto mb-10">
           <div className="w-full h-full rounded-3xl bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 flex items-center justify-center shadow-xl overflow-hidden">
-            <span className="text-6xl sm:text-7xl">👨‍💻</span>
+            <Code2 className="w-16 h-16 sm:w-20 sm:h-20 text-gray-700 dark:text-gray-300" />
           </div>
           {/* Decorative dots */}
           <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-400 rounded-full"></div>
@@ -58,19 +63,20 @@ export default function Hero() {
             className="flex items-center gap-2 px-6 py-3.5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-medium hover:opacity-90 transition-all hover:scale-105 shadow-lg"
           >
             <span>Hire Me</span>
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
+            <ArrowRight className="w-4 h-4" />
           </a>
-          <button
+          <Button
+            variant="outline"
             onClick={copyEmail}
-            className="flex items-center gap-2 px-6 py-3.5 border-2 border-gray-200 dark:border-gray-700 rounded-full font-medium text-gray-700 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600 transition-all hover:scale-105"
+            className="rounded-full px-6 py-3.5 hover:scale-105 transition-transform"
           >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-            </svg>
+            {copied ? (
+              <Check className="w-4 h-4" />
+            ) : (
+              <Copy className="w-4 h-4" />
+            )}
             <span>{copied ? "Copied!" : "Copy Email"}</span>
-          </button>
+          </Button>
         </div>
       </div>
     </section>

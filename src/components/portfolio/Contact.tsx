@@ -1,15 +1,34 @@
 // ============================================================
-// CONTACT - Design Inquiry Style
+// CONTACT - Design Inquiry Style with Lucide Icons
 // ============================================================
 
 import { useState } from "react";
 import type { FormEvent } from "react";
+import {
+  Twitter,
+  Instagram,
+  Github,
+  Linkedin,
+  CheckCircle,
+  Zap,
+  ArrowLeft,
+} from "lucide-react";
+import { Button } from "@/components/ui/Button";
+import { Input } from "@/components/ui/Input";
+import { Textarea } from "@/components/ui/Textarea";
+import type { LucideIcon } from "lucide-react";
 
-const socialLinks = [
-  { name: "X", icon: "𝕏", url: "https://twitter.com/vigneshm" },
-  { name: "Instagram", icon: "📷", url: "https://instagram.com/vigneshm" },
-  { name: "GitHub", icon: "🐙", url: "https://github.com/VIG-NESH-M" },
-  { name: "LinkedIn", icon: "💼", url: "https://linkedin.com/in/vigneshm" },
+interface SocialLink {
+  name: string;
+  icon: LucideIcon;
+  url: string;
+}
+
+const socialLinks: SocialLink[] = [
+  { name: "X", icon: Twitter, url: "https://twitter.com/vigneshm" },
+  { name: "Instagram", icon: Instagram, url: "https://instagram.com/vigneshm" },
+  { name: "GitHub", icon: Github, url: "https://github.com/VIG-NESH-M" },
+  { name: "LinkedIn", icon: Linkedin, url: "https://linkedin.com/in/vigneshm" },
 ];
 
 export default function Contact() {
@@ -56,7 +75,7 @@ export default function Contact() {
 
             {submitted ? (
               <div className="py-12 text-center">
-                <div className="text-5xl mb-4">✅</div>
+                <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                   Message Sent!
                 </h3>
@@ -67,37 +86,40 @@ export default function Contact() {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid sm:grid-cols-2 gap-4">
-                  <input
+                  <Input
                     type="text"
                     placeholder="Name"
                     required
                     value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-3.5 bg-gray-50 dark:bg-gray-800 border-0 rounded-xl text-gray-900 dark:text-white placeholder:text-gray-400 focus:ring-2 focus:ring-gray-900 dark:focus:ring-white transition-all"
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
+                    className="bg-gray-50 dark:bg-gray-800 border-0"
                   />
-                  <input
+                  <Input
                     type="email"
                     placeholder="Email"
                     required
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-3.5 bg-gray-50 dark:bg-gray-800 border-0 rounded-xl text-gray-900 dark:text-white placeholder:text-gray-400 focus:ring-2 focus:ring-gray-900 dark:focus:ring-white transition-all"
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
+                    className="bg-gray-50 dark:bg-gray-800 border-0"
                   />
                 </div>
-                <textarea
+                <Textarea
                   placeholder="Message"
                   rows={4}
                   required
                   value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-4 py-3.5 bg-gray-50 dark:bg-gray-800 border-0 rounded-xl text-gray-900 dark:text-white placeholder:text-gray-400 focus:ring-2 focus:ring-gray-900 dark:focus:ring-white transition-all resize-none"
+                  onChange={(e) =>
+                    setFormData({ ...formData, message: e.target.value })
+                  }
+                  className="bg-gray-50 dark:bg-gray-800 border-0"
                 />
-                <button
-                  type="submit"
-                  className="w-full py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-xl font-medium hover:opacity-90 transition-opacity"
-                >
+                <Button type="submit" className="w-full py-4 h-auto">
                   Submit Inquiry
-                </button>
+                </Button>
               </form>
             )}
           </div>
@@ -105,8 +127,8 @@ export default function Contact() {
           {/* Right - Social Links */}
           <div className="lg:col-span-2 flex flex-col gap-6">
             <div>
-              <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-4">
-                ← Follow Me
+              <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-4 flex items-center gap-2">
+                <ArrowLeft className="w-4 h-4" /> Follow Me
               </h3>
               <div className="flex flex-wrap gap-3">
                 {socialLinks.map((link) => (
@@ -115,10 +137,10 @@ export default function Contact() {
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-12 h-12 flex items-center justify-center bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-full text-gray-700 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600 hover:scale-110 transition-all text-xl"
+                    className="w-12 h-12 flex items-center justify-center bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-full text-gray-700 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600 hover:scale-110 transition-all"
                     title={link.name}
                   >
-                    {link.icon}
+                    <link.icon className="w-5 h-5" />
                   </a>
                 ))}
               </div>
@@ -147,8 +169,8 @@ export default function Contact() {
 
             {/* Response Time */}
             <div className="p-6 bg-blue-50 dark:bg-blue-900/20 rounded-2xl">
-              <p className="text-sm text-blue-600 dark:text-blue-400 mb-1">
-                ⚡ Fast Response
+              <p className="text-sm text-blue-600 dark:text-blue-400 mb-1 flex items-center gap-2">
+                <Zap className="w-4 h-4" /> Fast Response
               </p>
               <p className="font-medium text-gray-900 dark:text-white">
                 Usually within 24 hours
