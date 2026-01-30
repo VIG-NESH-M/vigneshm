@@ -1,5 +1,5 @@
 // ============================================================
-// PORTFOLIO PAGE - Subtle Folio Style
+// PORTFOLIO PAGE - Subtle Folio Exact Style
 // ============================================================
 
 import { useEffect } from "react";
@@ -28,9 +28,9 @@ export default function Portfolio() {
   }, [theme]);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300">
       <Navbar />
-      <main>
+      <main className="pt-24 pb-8">
         <Hero />
         <Projects />
         <Products />

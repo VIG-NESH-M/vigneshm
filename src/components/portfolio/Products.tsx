@@ -1,5 +1,5 @@
 // ============================================================
-// PRODUCTS - Subtle Folio Style
+// PRODUCTS - Subtle Folio Exact Style (List with Tags)
 // ============================================================
 
 import { ExternalLink } from "lucide-react";
@@ -8,7 +8,9 @@ interface Product {
   id: number;
   name: string;
   tag: string;
-  gradient: string;
+  tagColor: string;
+  icon: string;
+  iconBg: string;
   url: string;
 }
 
@@ -16,78 +18,103 @@ const products: Product[] = [
   {
     id: 1,
     name: "React Starter Kit",
-    tag: "TEMPLATE",
-    gradient: "from-rose-400 via-fuchsia-500 to-indigo-500",
+    tag: "GITHUB TEMPLATE",
+    tagColor:
+      "bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400",
+    icon: "⚛️",
+    iconBg: "bg-gradient-to-br from-cyan-400 to-blue-500",
     url: "https://github.com/VIG-NESH-M",
   },
   {
     id: 2,
     name: "Node.js API Boilerplate",
     tag: "OPEN SOURCE",
-    gradient: "from-green-400 via-emerald-500 to-teal-500",
+    tagColor:
+      "bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400",
+    icon: "🟢",
+    iconBg: "bg-gradient-to-br from-green-400 to-emerald-500",
     url: "https://github.com/VIG-NESH-M",
   },
   {
     id: 3,
     name: "TypeScript Utilities",
-    tag: "LIBRARY",
-    gradient: "from-blue-400 via-indigo-500 to-purple-500",
+    tag: "NPM PACKAGE",
+    tagColor: "bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400",
+    icon: "📦",
+    iconBg: "bg-gradient-to-br from-blue-500 to-indigo-600",
     url: "https://github.com/VIG-NESH-M",
   },
   {
     id: 4,
     name: "Portfolio Template",
-    tag: "TEMPLATE",
-    gradient: "from-amber-400 via-orange-500 to-red-500",
+    tag: "VITE TEMPLATE",
+    tagColor:
+      "bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400",
+    icon: "🎨",
+    iconBg: "bg-gradient-to-br from-purple-400 to-pink-500",
     url: "https://github.com/VIG-NESH-M",
   },
 ];
 
 export default function Products() {
   return (
-    <section
-      id="products"
-      className="py-24 px-4 bg-gray-50 dark:bg-gray-900/50"
-    >
-      <div className="max-w-6xl mx-auto">
-        {/* Section Header */}
-        <div className="mb-12">
-          <h2 className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-            Products
-          </h2>
-        </div>
+    <section id="products" className="py-8 px-4">
+      <div className="max-w-xl mx-auto">
+        {/* Main Card */}
+        <div className="bg-white dark:bg-gray-900 rounded-3xl p-6 shadow-sm border border-gray-100 dark:border-gray-800">
+          {/* Header */}
+          <div className="mb-4">
+            <div className="flex items-center gap-2 mb-4">
+              <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
+              <span className="text-sm font-medium text-gray-900 dark:text-white">
+                Products
+              </span>
+            </div>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+              Explore My Products
+            </h2>
+            <p className="text-gray-500 dark:text-gray-400 text-sm">
+              Open source tools, templates, and resources I've created for the
+              developer community.
+            </p>
+          </div>
 
-        {/* Products Grid */}
-        <div className="grid sm:grid-cols-2 gap-4">
-          {products.map((product) => (
-            <a
-              key={product.id}
-              href={product.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-all hover:shadow-lg"
-            >
-              {/* Gradient Background */}
-              <div
-                className={`h-32 bg-gradient-to-br ${product.gradient} relative`}
+          {/* Products List */}
+          <div className="space-y-2 mt-6">
+            {products.map((product) => (
+              <a
+                key={product.id}
+                href={product.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-4 p-4 rounded-2xl hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
               >
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(255,255,255,0.15)_0%,transparent_50%)]"></div>
-              </div>
+                {/* Icon */}
+                <div
+                  className={`w-12 h-12 ${product.iconBg} rounded-2xl flex items-center justify-center text-xl shadow-lg shrink-0`}
+                >
+                  {product.icon}
+                </div>
 
-              {/* Content */}
-              <div className="p-5 flex items-center justify-between">
-                <div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white mb-1 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors">
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-semibold text-gray-900 dark:text-white">
                     {product.name}
                   </h3>
-                  <span className="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider">
-                    {product.tag}
-                  </span>
                 </div>
-                <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors shrink-0" />
-              </div>
-            </a>
-          ))}
+
+                {/* Tag */}
+                <span
+                  className={`px-3 py-1 rounded-full text-xs font-semibold ${product.tagColor} shrink-0`}
+                >
+                  {product.tag}
+                </span>
+
+                {/* External Link */}
+                <ExternalLink className="w-4 h-4 text-gray-300 dark:text-gray-600 group-hover:text-gray-400 dark:group-hover:text-gray-500 transition-colors shrink-0" />
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </section>
