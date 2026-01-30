@@ -1,150 +1,76 @@
 // ============================================================
-// HERO SECTION
+// HERO - Clean Minimal Design (Like Brian Do)
 // ============================================================
 
-const socialLinks = [
-  {
-    name: "GitHub",
-    url: "https://github.com/VIG-NESH-M",
-    icon: (
-      <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-        <path
-          fillRule="evenodd"
-          d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-          clipRule="evenodd"
-        />
-      </svg>
-    ),
-  },
-  {
-    name: "LinkedIn",
-    url: "https://linkedin.com/in/vigneshm",
-    icon: (
-      <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-      </svg>
-    ),
-  },
-  {
-    name: "Twitter",
-    url: "https://twitter.com/vigneshm",
-    icon: (
-      <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-      </svg>
-    ),
-  },
-  {
-    name: "Email",
-    url: "mailto:contact@vigneshm.me",
-    icon: (
-      <svg
-        className="w-6 h-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-        />
-      </svg>
-    ),
-  },
-];
+import { useState } from "react";
 
 export default function Hero() {
+  const [copied, setCopied] = useState(false);
+
+  const copyEmail = () => {
+    navigator.clipboard.writeText("contact@vigneshm.me");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
-    <section
-      id="home"
-      className="min-h-screen flex items-center justify-center pt-20 px-4"
-    >
-      <div className="max-w-4xl mx-auto text-center">
-        {/* Profile Image */}
-        <div className="mb-8">
-          <div className="w-40 h-40 mx-auto rounded-full bg-gradient-to-r from-primary-500 to-primary-700 p-1">
-            <div className="w-full h-full rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center text-5xl font-bold text-primary-600 dark:text-primary-400">
-              VM
-            </div>
-          </div>
+    <section id="home" className="min-h-screen flex items-center justify-center px-4 pt-24 pb-12">
+      <div className="max-w-2xl mx-auto text-center">
+        {/* Available Badge */}
+        <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-50 dark:bg-green-900/20 rounded-full mb-8">
+          <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+          <span className="text-sm font-medium text-green-700 dark:text-green-400">
+            AVAILABLE FOR WORK
+          </span>
         </div>
 
-        {/* Greeting */}
-        <p className="text-primary-600 dark:text-primary-400 font-medium mb-4 text-lg">
-          Hello, I'm
+        {/* Role */}
+        <p className="text-gray-500 dark:text-gray-400 text-lg mb-4 flex items-center justify-center gap-2">
+          <span>✦</span> Full Stack Developer
         </p>
 
         {/* Name */}
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-4">
-          Vignesh M
+        <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6 tracking-tight">
+          I'm Vignesh M
         </h1>
 
-        {/* Title */}
-        <h2 className="text-xl sm:text-2xl md:text-3xl text-gray-600 dark:text-gray-400 mb-6">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-purple-600">
-            Full Stack Developer
-          </span>{" "}
-          & Software Engineer
-        </h2>
-
         {/* Description */}
-        <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8">
-          I build exceptional digital experiences with modern technologies.
-          Passionate about creating scalable, user-friendly applications that
-          make a difference.
+        <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 mb-10 leading-relaxed max-w-lg mx-auto">
+          Full Stack Developer from India.
+          <br />
+          Currently building amazing web experiences.
         </p>
 
+        {/* Avatar */}
+        <div className="relative w-32 h-32 sm:w-40 sm:h-40 mx-auto mb-10">
+          <div className="w-full h-full rounded-3xl bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 flex items-center justify-center shadow-xl overflow-hidden">
+            <span className="text-6xl sm:text-7xl">👨‍💻</span>
+          </div>
+          {/* Decorative dots */}
+          <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-400 rounded-full"></div>
+          <div className="absolute -bottom-1 -left-1 w-4 h-4 bg-blue-400 rounded-full"></div>
+        </div>
+
         {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
             href="#contact"
-            className="px-8 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors"
+            className="flex items-center gap-2 px-6 py-3.5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-medium hover:opacity-90 transition-all hover:scale-105 shadow-lg"
           >
-            Get In Touch
-          </a>
-          <a
-            href="#projects"
-            className="px-8 py-3 border-2 border-primary-600 text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 font-medium rounded-lg transition-colors"
-          >
-            View My Work
-          </a>
-        </div>
-
-        {/* Social Links */}
-        <div className="flex justify-center gap-6">
-          {socialLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-              aria-label={link.name}
-            >
-              {link.icon}
-            </a>
-          ))}
-        </div>
-
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce hidden md:block">
-          <a href="#about" aria-label="Scroll to about section">
-            <svg
-              className="w-6 h-6 text-gray-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 14l-7 7m0 0l-7-7m7 7V3"
-              />
+            <span>Hire Me</span>
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </a>
+          <button
+            onClick={copyEmail}
+            className="flex items-center gap-2 px-6 py-3.5 border-2 border-gray-200 dark:border-gray-700 rounded-full font-medium text-gray-700 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600 transition-all hover:scale-105"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
+            <span>{copied ? "Copied!" : "Copy Email"}</span>
+          </button>
         </div>
       </div>
     </section>

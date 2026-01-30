@@ -1,134 +1,110 @@
 // ============================================================
-// ABOUT SECTION
+// ABOUT - Clean Minimal Design
 // ============================================================
+
+const stats = [
+  { label: "Years Experience", value: "5+" },
+  { label: "Projects Completed", value: "50+" },
+  { label: "Happy Clients", value: "30+" },
+];
+
+const skills = [
+  "React.js",
+  "TypeScript",
+  "Node.js",
+  "Python",
+  "Next.js",
+  "MongoDB",
+  "PostgreSQL",
+  "AWS",
+  "Docker",
+  "GraphQL",
+];
 
 export default function About() {
   return (
-    <section id="about" className="py-20 px-4 bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-6xl mx-auto">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            About Me
-          </h2>
-          <div className="w-20 h-1 bg-primary-600 mx-auto rounded-full"></div>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Left - Image/Info Card */}
-          <div className="relative">
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl">
-              <div className="grid grid-cols-2 gap-6">
-                <div className="text-center p-4 bg-primary-50 dark:bg-primary-900/20 rounded-xl">
-                  <span className="text-3xl font-bold text-primary-600 dark:text-primary-400">
-                    5+
-                  </span>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">
-                    Years Experience
-                  </p>
-                </div>
-                <div className="text-center p-4 bg-primary-50 dark:bg-primary-900/20 rounded-xl">
-                  <span className="text-3xl font-bold text-primary-600 dark:text-primary-400">
-                    50+
-                  </span>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">
-                    Projects Completed
-                  </p>
-                </div>
-                <div className="text-center p-4 bg-primary-50 dark:bg-primary-900/20 rounded-xl">
-                  <span className="text-3xl font-bold text-primary-600 dark:text-primary-400">
-                    30+
-                  </span>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">
-                    Happy Clients
-                  </p>
-                </div>
-                <div className="text-center p-4 bg-primary-50 dark:bg-primary-900/20 rounded-xl">
-                  <span className="text-3xl font-bold text-primary-600 dark:text-primary-400">
-                    10+
-                  </span>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">
-                    Technologies
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right - Text Content */}
+    <section id="about" className="py-20 px-4 bg-gray-50 dark:bg-gray-900/50">
+      <div className="max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-12 items-start">
+          {/* Left Column - Info */}
           <div>
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              I'm Vignesh M, a Full Stack Developer based in India
-            </h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-              With over 5 years of experience in software development, I
-              specialize in building modern web applications using cutting-edge
-              technologies. My journey in tech started with a passion for
-              problem-solving and has evolved into expertise across the full
-              development stack.
-            </p>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+              <span>✦</span> About Me
+            </h2>
+            
             <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
-              I believe in writing clean, maintainable code and creating
-              intuitive user experiences. Whether it's a startup MVP or an
-              enterprise application, I bring the same level of dedication and
-              attention to detail to every project.
+              I'm a passionate Full Stack Developer with 5+ years of experience building 
+              modern web applications. I specialize in React, TypeScript, and Node.js, 
+              creating scalable and user-friendly digital experiences.
             </p>
 
-            {/* Info List */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-              <div className="flex items-center gap-3">
-                <span className="text-primary-600 dark:text-primary-400">
-                  📍
-                </span>
-                <span className="text-gray-700 dark:text-gray-300">India</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="text-primary-600 dark:text-primary-400">
-                  💼
-                </span>
-                <span className="text-gray-700 dark:text-gray-300">
-                  Available for Work
-                </span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="text-primary-600 dark:text-primary-400">
-                  🎓
-                </span>
-                <span className="text-gray-700 dark:text-gray-300">
-                  B.Tech in Computer Science
-                </span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="text-primary-600 dark:text-primary-400">
-                  🌐
-                </span>
-                <span className="text-gray-700 dark:text-gray-300">
-                  Remote Friendly
-                </span>
-              </div>
+            <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
+              Based in India, I work with clients globally to bring their ideas to life. 
+              I believe in clean code, great design, and continuous learning.
+            </p>
+
+            {/* Stats */}
+            <div className="flex flex-wrap gap-6 sm:gap-8 mb-8">
+              {stats.map((stat) => (
+                <div key={stat.label}>
+                  <div className="text-3xl font-bold text-gray-900 dark:text-white">
+                    {stat.value}
+                  </div>
+                  <div className="text-sm text-gray-500 dark:text-gray-400">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
             </div>
 
-            {/* Download CV Button */}
+            {/* Download CV */}
             <a
               href="/resume.pdf"
               download
-              className="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-medium hover:opacity-90 transition-opacity"
             >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                />
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
               Download Resume
             </a>
+          </div>
+
+          {/* Right Column - Skills */}
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+              Technologies I work with
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {skills.map((skill) => (
+                <span
+                  key={skill}
+                  className="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full text-sm font-medium text-gray-700 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600 transition-colors cursor-default"
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
+
+            {/* Experience Card */}
+            <div className="mt-8 p-6 bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700">
+              <div className="flex items-start gap-4 mb-4">
+                <div className="w-10 h-10 bg-blue-500 rounded-xl flex items-center justify-center text-white text-lg">
+                  💼
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 dark:text-white">
+                    Senior Full Stack Developer
+                  </h4>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    2023 - Present
+                  </p>
+                </div>
+              </div>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Leading development of scalable web applications and mentoring junior developers.
+              </p>
+            </div>
           </div>
         </div>
       </div>
