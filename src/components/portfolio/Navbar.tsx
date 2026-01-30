@@ -3,20 +3,7 @@
 // ============================================================
 
 import { useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/hooks";
-import { selectTheme } from "@/store/selectors";
-import { toggleTheme } from "@/store";
-import {
-  Home,
-  User,
-  Briefcase,
-  Lock,
-  Plus,
-  Sun,
-  Moon,
-  Menu,
-  X,
-} from "lucide-react";
+import { Home, User, Briefcase, Lock, Plus } from "lucide-react";
 
 const navIcons = [
   { name: "Home", href: "#home", icon: Home },
@@ -26,9 +13,6 @@ const navIcons = [
 ];
 
 export default function Navbar() {
-  const dispatch = useAppDispatch();
-  const theme = useAppSelector(selectTheme);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeNav, setActiveNav] = useState("Home");
 
   return (

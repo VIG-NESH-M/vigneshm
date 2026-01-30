@@ -3,7 +3,6 @@
 // ============================================================
 
 import { ChevronRight, ArrowRight } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
 
 interface Project {
   id: number;
