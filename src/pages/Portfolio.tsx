@@ -28,7 +28,7 @@ export default function Portfolio() {
   }, [theme]);
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <div className="min-h-screen bg-gray-100 dark:bg-neutral-950 text-gray-900 dark:text-neutral-100 transition-colors duration-300">
       <Navbar />
       <main className="pt-24 pb-8">
         <Hero />

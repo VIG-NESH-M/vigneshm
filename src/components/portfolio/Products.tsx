@@ -10,19 +10,19 @@ export default function Products() {
     <section id="products" className="py-3 sm:py-4 px-3 sm:px-4">
       <div className="max-w-xl mx-auto">
         {/* Main Card */}
-        <div className="bg-white dark:bg-gray-900 rounded-2xl p-4 sm:p-5 shadow-sm border border-gray-100 dark:border-gray-800">
+        <div className="bg-white dark:bg-neutral-900 rounded-2xl p-4 sm:p-5 shadow-sm border border-gray-100 dark:border-neutral-800">
           {/* Header */}
           <div className="mb-3 sm:mb-4">
             <div className="flex items-center gap-2 mb-2 sm:mb-3">
               <span className="w-1.5 h-1.5 bg-purple-500 rounded-full"></span>
-              <span className="text-[10px] sm:text-xs font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wider">
+              <span className="text-[10px] sm:text-xs font-medium text-gray-600 dark:text-neutral-400 uppercase tracking-wider">
                 Products
               </span>
             </div>
             <h2 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-1">
               Explore My Products
             </h2>
-            <p className="text-gray-500 dark:text-gray-400 text-[10px] sm:text-xs">
+            <p className="text-gray-500 dark:text-neutral-400 text-[10px] sm:text-xs">
               Open source tools, templates, and resources I've created for the
               developer community.
             </p>
@@ -36,7 +36,7 @@ export default function Products() {
                 href={product.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-2.5 sm:gap-3 p-2.5 sm:p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
+                className="group flex items-center gap-2.5 sm:gap-3 p-2.5 sm:p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-neutral-800/50 transition-colors"
               >
                 {/* Icon */}
                 <div
@@ -63,7 +63,7 @@ export default function Products() {
                 </span>
 
                 {/* External Link */}
-                <ExternalLink className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-gray-300 dark:text-gray-600 group-hover:text-gray-400 dark:group-hover:text-gray-500 transition-colors shrink-0" />
+                <ExternalLink className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-gray-300 dark:text-neutral-600 group-hover:text-gray-400 dark:group-hover:text-neutral-500 transition-colors shrink-0" />
               </a>
             ))}
           </div>

@@ -11,7 +11,7 @@ export default function Footer() {
     <footer className="py-3 sm:py-4 px-3 sm:px-4">
       <div className="max-w-xl mx-auto">
         <div className="text-center">
-          <p className="text-[10px] sm:text-xs text-gray-400 dark:text-gray-500">
+          <p className="text-[10px] sm:text-xs text-gray-400 dark:text-neutral-500">
             © {currentYear} {personalInfo.name} – Built with ❤️ using React &
             Vite
           </p>

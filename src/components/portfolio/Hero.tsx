@@ -19,13 +19,13 @@ export default function Hero() {
     <section id="home" className="pt-2 sm:pt-6 pb-3 sm:pb-4 px-3 sm:px-4">
       <div className="max-w-xl mx-auto">
         {/* Main Card */}
-        <div className="bg-white dark:bg-gray-900 rounded-2xl p-4 sm:p-5 shadow-sm border border-gray-100 dark:border-gray-800">
+        <div className="bg-white dark:bg-neutral-900 rounded-2xl p-4 sm:p-5 shadow-sm border border-gray-100 dark:border-neutral-800">
           {/* Header Row */}
           <div className="flex items-center justify-between mb-4 sm:mb-5 flex-wrap gap-2">
             {/* Role with dot */}
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
-              <span className="text-[10px] sm:text-xs font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wider">
+              <span className="text-[10px] sm:text-xs font-medium text-gray-600 dark:text-neutral-400 uppercase tracking-wider">
                 {personalInfo.role}
               </span>
             </div>
@@ -50,7 +50,7 @@ export default function Hero() {
               </h1>
 
               {/* Description */}
-              <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mb-4 sm:mb-5 leading-relaxed">
+              <p className="text-xs sm:text-sm text-gray-500 dark:text-neutral-400 mb-4 sm:mb-5 leading-relaxed">
                 {personalInfo.description.short}
                 <br className="hidden sm:block" />
                 <span className="sm:hidden"> </span>
@@ -61,14 +61,14 @@ export default function Hero() {
               <div className="flex flex-wrap items-center gap-2">
                 <a
                   href="#contact"
-                  className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full text-[11px] sm:text-xs font-medium hover:opacity-90 transition-all"
+                  className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-900 dark:bg-white text-white dark:text-neutral-900 rounded-full text-[11px] sm:text-xs font-medium hover:opacity-90 transition-all"
                 >
                   <Plus className="w-3 sm:w-3.5 h-3 sm:h-3.5" />
                   Hire Me
                 </a>
                 <button
                   onClick={copyEmail}
-                  className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full text-[11px] sm:text-xs font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all"
+                  className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-full text-[11px] sm:text-xs font-medium text-gray-700 dark:text-neutral-300 hover:bg-gray-50 dark:hover:bg-neutral-700 transition-all"
                 >
                   {copied ? (
                     <>
