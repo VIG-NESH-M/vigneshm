@@ -16,7 +16,7 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" className="pt-16 sm:pt-20 pb-4 sm:pb-6 px-3 sm:px-4">
+    <section id="home" className="pt-14 sm:pt-16 pb-2 sm:pb-3 px-3 sm:px-4">
       <div className="max-w-xl mx-auto">
         {/* Main Card */}
         <div className="bg-white dark:bg-gray-900 rounded-2xl p-4 sm:p-5 shadow-sm border border-gray-100 dark:border-gray-800">
