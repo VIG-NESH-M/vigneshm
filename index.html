@@ -211,31 +211,20 @@
 
   <!-- Critical CSS for above-the-fold content -->
   <style>
-    /* Critical CSS - Prevents FOUC */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box
-    }
-
+    /* Critical CSS - Prevents FOUC - Minimal styles only */
     html {
-      scroll-behavior: smooth
+      scroll-behavior: smooth;
     }
 
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background: #f9fafb;
-      color: #111827;
-      line-height: 1.6
-    }
-
-    .dark body {
-      background: #030712;
-      color: #f3f4f6
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
     }
 
     #root {
-      min-height: 100vh
+      min-height: 100vh;
     }
 
     .sr-only {
@@ -247,20 +236,7 @@
       overflow: hidden;
       clip: rect(0, 0, 0, 0);
       white-space: nowrap;
-      border: 0
-    }
-
-    /* Loading state */
-    .initial-loader {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      background: #f9fafb
-    }
-
-    .dark .initial-loader {
-      background: #030712
+      border: 0;
     }
   </style>
 </head>
