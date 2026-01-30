@@ -10,7 +10,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="py-3 sm:py-4 px-3 sm:px-4 bg-gray-50 dark:bg-neutral-900/50"
+      className="py-1.5 sm:py-2 px-3 sm:px-4 bg-gray-50 dark:bg-neutral-900/50"
     >
       <div className="max-w-3xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-start">

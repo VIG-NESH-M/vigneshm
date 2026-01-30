@@ -25,7 +25,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-3 sm:py-4 px-3 sm:px-4">
+    <section id="contact" className="py-1.5 sm:py-2 px-3 sm:px-4">
       <div className="max-w-xl mx-auto space-y-3 sm:space-y-4">
         {/* Hire Me Card */}
         <div className="bg-white dark:bg-neutral-900 rounded-2xl p-4 sm:p-5 shadow-sm border border-gray-100 dark:border-neutral-800">
