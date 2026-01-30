@@ -7,7 +7,7 @@ import { products } from "@/config";
 
 export default function Products() {
   return (
-    <section id="products" className="py-4 sm:py-5 px-3 sm:px-4">
+    <section id="products" className="py-3 sm:py-4 px-3 sm:px-4">
       <div className="max-w-xl mx-auto">
         {/* Main Card */}
         <div className="bg-white dark:bg-gray-900 rounded-2xl p-4 sm:p-5 shadow-sm border border-gray-100 dark:border-gray-800">
