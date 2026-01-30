@@ -1,0 +1,149 @@
+{
+    "users": [
+        {
+            "id": "1",
+            "email": "john.doe@example.com",
+            "firstName": "John",
+            "lastName": "Doe",
+            "avatar": null,
+            "role": "admin",
+            "createdAt": "2025-01-01T10:00:00.000Z",
+            "updatedAt": "2025-01-15T14:30:00.000Z"
+        },
+        {
+            "id": "2",
+            "email": "jane.smith@example.com",
+            "firstName": "Jane",
+            "lastName": "Smith",
+            "avatar": null,
+            "role": "user",
+            "createdAt": "2025-01-05T08:15:00.000Z",
+            "updatedAt": "2025-01-20T09:45:00.000Z"
+        },
+        {
+            "id": "3",
+            "email": "bob.wilson@example.com",
+            "firstName": "Bob",
+            "lastName": "Wilson",
+            "avatar": null,
+            "role": "user",
+            "createdAt": "2025-01-10T12:00:00.000Z",
+            "updatedAt": "2025-01-25T16:20:00.000Z"
+        },
+        {
+            "id": "4",
+            "email": "alice.johnson@example.com",
+            "firstName": "Alice",
+            "lastName": "Johnson",
+            "avatar": null,
+            "role": "user",
+            "createdAt": "2025-01-12T15:30:00.000Z",
+            "updatedAt": "2025-01-28T11:10:00.000Z"
+        },
+        {
+            "id": "5",
+            "email": "charlie.brown@example.com",
+            "firstName": "Charlie",
+            "lastName": "Brown",
+            "avatar": null,
+            "role": "guest",
+            "createdAt": "2025-01-15T09:00:00.000Z",
+            "updatedAt": "2025-01-29T13:45:00.000Z"
+        }
+    ],
+    "posts": [
+        {
+            "id": "1",
+            "title": "Getting Started with React 19",
+            "body": "React 19 introduces several exciting features including improved concurrent rendering, automatic batching, and new hooks. In this comprehensive guide, we'll explore how to leverage these features to build better applications. The new concurrent features allow React to prepare multiple versions of your UI at the same time, making your apps more responsive.",
+            "userId": "1",
+            "published": true,
+            "tags": [
+                "react",
+                "javascript",
+                "frontend"
+            ],
+            "createdAt": "2025-01-01T10:00:00.000Z",
+            "updatedAt": "2025-01-15T14:30:00.000Z"
+        },
+        {
+            "id": "2",
+            "title": "TypeScript Best Practices in 2025",
+            "body": "TypeScript has become the standard for building large-scale applications. This article covers essential best practices including strict type checking, utility types, and advanced patterns. We'll discuss how to structure your types, when to use interfaces vs types, and how to leverage TypeScript's powerful type inference.",
+            "userId": "1",
+            "published": true,
+            "tags": [
+                "typescript",
+                "javascript",
+                "best-practices"
+            ],
+            "createdAt": "2025-01-05T08:15:00.000Z",
+            "updatedAt": "2025-01-20T09:45:00.000Z"
+        },
+        {
+            "id": "3",
+            "title": "Building Scalable Redux Applications",
+            "body": "Redux Toolkit has revolutionized how we write Redux code. In this tutorial, we'll build a scalable application architecture using Redux Toolkit, including createSlice, createAsyncThunk, and RTK Query. Learn how to organize your store, handle async operations, and optimize performance.",
+            "userId": "2",
+            "published": true,
+            "tags": [
+                "redux",
+                "state-management",
+                "react"
+            ],
+            "createdAt": "2025-01-10T12:00:00.000Z",
+            "updatedAt": "2025-01-25T16:20:00.000Z"
+        },
+        {
+            "id": "4",
+            "title": "Mastering TanStack Query",
+            "body": "TanStack Query (formerly React Query) simplifies data fetching in React applications. This guide covers everything from basic queries to advanced patterns like optimistic updates, infinite scrolling, and cache invalidation strategies.",
+            "userId": "2",
+            "published": true,
+            "tags": [
+                "react-query",
+                "data-fetching",
+                "caching"
+            ],
+            "createdAt": "2025-01-12T15:30:00.000Z",
+            "updatedAt": "2025-01-28T11:10:00.000Z"
+        },
+        {
+            "id": "5",
+            "title": "CSS Architecture with Tailwind",
+            "body": "Tailwind CSS provides a utility-first approach to styling. This article explores how to create a maintainable CSS architecture using Tailwind, including custom configurations, component patterns, and theme customization.",
+            "userId": "3",
+            "published": false,
+            "tags": [
+                "css",
+                "tailwind",
+                "design-system"
+            ],
+            "createdAt": "2025-01-15T09:00:00.000Z",
+            "updatedAt": "2025-01-29T13:45:00.000Z"
+        }
+    ],
+    "comments": [
+        {
+            "id": "1",
+            "postId": "1",
+            "userId": "2",
+            "body": "Great article! Very helpful for getting started.",
+            "createdAt": "2025-01-02T14:00:00.000Z"
+        },
+        {
+            "id": "2",
+            "postId": "1",
+            "userId": "3",
+            "body": "Thanks for sharing these insights!",
+            "createdAt": "2025-01-03T10:30:00.000Z"
+        },
+        {
+            "id": "3",
+            "postId": "2",
+            "userId": "4",
+            "body": "Exactly what I was looking for. Clear and concise.",
+            "createdAt": "2025-01-06T16:45:00.000Z"
+        }
+    ]
+}
