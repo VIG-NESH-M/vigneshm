@@ -16,6 +16,8 @@ import {
   Package,
   Palette,
   Code2,
+  Briefcase,
+  Laptop,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -228,18 +230,24 @@ export const products: Product[] = [
 // ============================================================
 
 export interface Experience {
+  id: number;
   title: string;
   company: string;
   period: string;
   description: string;
+  icon: LucideIcon;
+  iconBg: string;
 }
 
-export const experience: Experience[] = [
+export const experiences: Experience[] = [
   {
-    title: "Senior Developer",
-    company: "Tech Company",
-    period: "2020 - Present",
-    description: "Leading development of scalable web applications",
+    id: 1,
+    title: "Full Stack Developer",
+    company: "Staunch Info Solutions",
+    period: "2022 - Present",
+    description: "Architected and developed scalable enterprise applications using React, Angular, and Spring Boot. Led full-stack development initiatives, implemented microservices architecture, and optimized database performance for high-traffic systems.",
+    icon: Briefcase,
+    iconBg: "bg-gradient-to-br from-blue-500 to-indigo-600",
   },
 ];
 

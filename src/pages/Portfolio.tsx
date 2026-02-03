@@ -7,6 +7,7 @@ import { useDocumentTitle } from "@/hooks";
 import { useAppSelector } from "@/hooks";
 import { selectTheme } from "@/store/selectors";
 import Hero from "@/components/portfolio/Hero";
+import Experience from "@/components/portfolio/Experience";
 import Projects from "@/components/portfolio/Projects";
 import Products from "@/components/portfolio/Products";
 import Contact from "@/components/portfolio/Contact";
@@ -32,6 +33,7 @@ export default function Portfolio() {
       <Navbar />
       <main className="pt-24 pb-8">
         <Hero />
+        <Experience />
         <Projects />
         <Products />
         <Contact />
