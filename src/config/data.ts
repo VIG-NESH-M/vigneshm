@@ -17,7 +17,6 @@ import {
   Palette,
   Code2,
   Briefcase,
-  Laptop,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
