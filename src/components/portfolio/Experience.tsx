@@ -2,7 +2,8 @@
 // EXPERIENCE - Subtle Folio Exact Style (List with Icons)
 // ============================================================
 
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { experiences } from "@/config";
 
 export default function Experience() {
@@ -12,11 +13,20 @@ export default function Experience() {
         {/* Main Card */}
         <div className="bg-white dark:bg-neutral-900 rounded-2xl p-4 sm:p-5 shadow-sm border border-gray-100 dark:border-neutral-800">
           {/* Header */}
-          <div className="flex items-center gap-2 mb-3 sm:mb-4">
-            <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
-            <span className="text-[10px] sm:text-xs font-medium text-gray-600 dark:text-neutral-400 uppercase tracking-wider">
-              Experience
-            </span>
+          <div className="flex items-center justify-between mb-3 sm:mb-4">
+            <div className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
+              <span className="text-[10px] sm:text-xs font-medium text-gray-600 dark:text-neutral-400 uppercase tracking-wider">
+                Experience
+              </span>
+            </div>
+            <Link
+              to="/experience"
+              className="flex items-center gap-1 px-2.5 sm:px-3 py-1 sm:py-1.5 bg-gray-100 dark:bg-neutral-800 rounded-full text-[10px] sm:text-xs font-medium text-gray-600 dark:text-neutral-400 hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors"
+            >
+              View All
+              <ArrowRight className="w-3 sm:w-3.5 h-3 sm:h-3.5" />
+            </Link>
           </div>
 
           {/* Experience List */}

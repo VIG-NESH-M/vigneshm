@@ -3,12 +3,8 @@
 // ============================================================
 
 import { ChevronRight, ArrowRight } from "lucide-react";
-import { projects, socialLinks } from "@/config";
-
-// Get GitHub URL from social links
-const githubUrl =
-  socialLinks.find((link) => link.name === "GitHub")?.url ||
-  "https://github.com";
+import { Link } from "react-router-dom";
+import { projects } from "@/config";
 
 export default function Projects() {
   return (
@@ -24,15 +20,13 @@ export default function Projects() {
                 Projects
               </span>
             </div>
-            <a
-              href={githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/projects"
               className="flex items-center gap-1 px-2.5 sm:px-3 py-1 sm:py-1.5 bg-gray-100 dark:bg-neutral-800 rounded-full text-[10px] sm:text-xs font-medium text-gray-600 dark:text-neutral-400 hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors"
             >
               View All
               <ArrowRight className="w-3 sm:w-3.5 h-3 sm:h-3.5" />
-            </a>
+            </Link>
           </div>
 
           {/* Projects List */}
