@@ -4,7 +4,7 @@
 
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft, ChevronRight } from "lucide-react";
 import { useDocumentTitle, useAppSelector } from "@/hooks";
 import { selectTheme } from "@/store/selectors";
 import { products } from "@/config";
@@ -61,11 +61,9 @@ export default function ProductsPage() {
           <div className="bg-white dark:bg-neutral-900 rounded-2xl p-4 sm:p-5 shadow-sm border border-gray-100 dark:border-neutral-800">
             <div className="space-y-1">
               {products.map((product) => (
-                <a
+                <Link
                   key={product.id}
-                  href={product.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  to={`/products/${product.id}`}
                   className="group flex items-center gap-2.5 sm:gap-3 p-2.5 sm:p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-neutral-800/50 transition-colors"
                 >
                   {/* Icon */}
@@ -90,9 +88,9 @@ export default function ProductsPage() {
                     </span>
                   </div>
 
-                  {/* External Link */}
-                  <ExternalLink className="w-4 h-4 text-gray-300 dark:text-neutral-600 group-hover:text-gray-400 dark:group-hover:text-neutral-500 transition-colors shrink-0" />
-                </a>
+                  {/* Arrow */}
+                  <ChevronRight className="w-4 h-4 text-gray-300 dark:text-neutral-600 group-hover:text-gray-400 dark:group-hover:text-neutral-500 transition-colors shrink-0" />
+                </Link>
               ))}
             </div>
 

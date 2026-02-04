@@ -4,7 +4,7 @@
 
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Building2 } from "lucide-react";
+import { ArrowLeft, Building2, ChevronRight } from "lucide-react";
 import { useDocumentTitle, useAppSelector } from "@/hooks";
 import { selectTheme } from "@/store/selectors";
 import { experiences } from "@/config";
@@ -61,9 +61,10 @@ export default function ExperiencePage() {
           <div className="bg-white dark:bg-neutral-900 rounded-2xl p-4 sm:p-5 shadow-sm border border-gray-100 dark:border-neutral-800">
             <div className="space-y-3">
               {experiences.map((exp) => (
-                <div
+                <Link
                   key={exp.id}
-                  className="p-3 sm:p-4 rounded-xl bg-gray-50 dark:bg-neutral-800/50"
+                  to={`/experience/${exp.id}`}
+                  className="block p-3 sm:p-4 rounded-xl bg-gray-50 dark:bg-neutral-800/50 hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors"
                 >
                   <div className="flex items-start gap-3">
                     {/* Icon */}
@@ -94,12 +95,15 @@ export default function ExperiencePage() {
                         </span>
                       </div>
 
-                      <p className="text-[11px] sm:text-xs text-gray-500 dark:text-neutral-400 leading-relaxed">
+                      <p className="text-[11px] sm:text-xs text-gray-500 dark:text-neutral-400 leading-relaxed line-clamp-2">
                         {exp.description}
                       </p>
                     </div>
+
+                    {/* Arrow */}
+                    <ChevronRight className="w-4 h-4 text-gray-300 dark:text-neutral-600 shrink-0 mt-1" />
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
 

@@ -2,7 +2,7 @@
 // PRODUCTS - Subtle Folio Exact Style (List with Tags)
 // ============================================================
 
-import { ExternalLink, ArrowRight } from "lucide-react";
+import { ChevronRight, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { products } from "@/config";
 
@@ -41,11 +41,9 @@ export default function Products() {
           {/* Products List */}
           <div className="space-y-1 mt-3 sm:mt-4">
             {products.map((product) => (
-              <a
+              <Link
                 key={product.id}
-                href={product.url}
-                target="_blank"
-                rel="noopener noreferrer"
+                to={`/products/${product.id}`}
                 className="group flex items-center gap-2.5 sm:gap-3 p-2.5 sm:p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-neutral-800/50 transition-colors"
               >
                 {/* Icon */}
@@ -72,9 +70,9 @@ export default function Products() {
                   {product.tag}
                 </span>
 
-                {/* External Link */}
-                <ExternalLink className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-gray-300 dark:text-neutral-600 group-hover:text-gray-400 dark:group-hover:text-neutral-500 transition-colors shrink-0" />
-              </a>
+                {/* Arrow */}
+                <ChevronRight className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-gray-300 dark:text-neutral-600 group-hover:text-gray-400 dark:group-hover:text-neutral-500 transition-colors shrink-0" />
+              </Link>
             ))}
           </div>
         </div>

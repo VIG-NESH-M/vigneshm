@@ -136,9 +136,14 @@ export interface Project {
   id: number;
   name: string;
   description: string;
+  longDescription: string;
   icon: LucideIcon;
   iconBg: string;
   url: string;
+  technologies: string[];
+  features: string[];
+  year: string;
+  status: "Completed" | "In Progress" | "Maintenance";
 }
 
 export const projects: Project[] = [
@@ -146,25 +151,40 @@ export const projects: Project[] = [
     id: 1,
     name: "E-Commerce Platform",
     description: "Full Stack Development, UI Design",
+    longDescription: "A comprehensive e-commerce solution featuring product catalog management, shopping cart functionality, secure payment processing, and order tracking. Built with modern technologies to ensure scalability and performance.",
     icon: ShoppingCart,
     iconBg: "bg-gradient-to-br from-blue-400 to-indigo-500",
     url: "https://github.com/VIG-NESH-M",
+    technologies: ["React", "Node.js", "MongoDB", "Stripe", "Redux", "Tailwind CSS"],
+    features: ["User Authentication", "Product Search & Filters", "Shopping Cart", "Payment Integration", "Order Management", "Admin Dashboard"],
+    year: "2024",
+    status: "Completed",
   },
   {
     id: 2,
     name: "Task Manager App",
     description: "React, TypeScript, Node.js",
+    longDescription: "A powerful task management application designed to help teams collaborate effectively. Features include real-time updates, task assignments, progress tracking, and comprehensive reporting capabilities.",
     icon: CheckSquare,
     iconBg: "bg-gradient-to-br from-violet-500 to-purple-600",
     url: "https://github.com/VIG-NESH-M",
+    technologies: ["React", "TypeScript", "Node.js", "PostgreSQL", "Socket.io", "Docker"],
+    features: ["Real-time Collaboration", "Task Assignments", "Progress Tracking", "Notifications", "Team Management", "Analytics Dashboard"],
+    year: "2023",
+    status: "Completed",
   },
   {
     id: 3,
     name: "Analytics Dashboard",
     description: "Data Visualization, API Development",
+    longDescription: "An interactive analytics dashboard that transforms complex data into actionable insights. Features customizable widgets, real-time data streaming, and exportable reports for business intelligence.",
     icon: BarChart3,
     iconBg: "bg-gradient-to-br from-orange-400 to-red-500",
     url: "https://github.com/VIG-NESH-M",
+    technologies: ["React", "D3.js", "Python", "FastAPI", "Redis", "AWS"],
+    features: ["Interactive Charts", "Real-time Data", "Custom Widgets", "Export Reports", "Data Filtering", "User Permissions"],
+    year: "2024",
+    status: "In Progress",
   },
 ];
 
@@ -180,6 +200,12 @@ export interface Product {
   icon: LucideIcon;
   iconBg: string;
   url: string;
+  description: string;
+  longDescription: string;
+  features: string[];
+  technologies: string[];
+  version: string;
+  downloads?: string;
 }
 
 export const products: Product[] = [
@@ -192,6 +218,12 @@ export const products: Product[] = [
     icon: Atom,
     iconBg: "bg-gradient-to-br from-cyan-400 to-blue-500",
     url: "https://github.com/VIG-NESH-M",
+    description: "Production-ready React template with best practices",
+    longDescription: "A comprehensive React starter template designed for rapid development. Includes authentication, state management, routing, and a component library following industry best practices.",
+    features: ["TypeScript Support", "Redux Toolkit", "React Router", "Tailwind CSS", "Testing Setup", "CI/CD Ready"],
+    technologies: ["React 18", "TypeScript", "Vite", "Redux", "Tailwind"],
+    version: "2.0.0",
+    downloads: "1.2k",
   },
   {
     id: 2,
@@ -202,6 +234,12 @@ export const products: Product[] = [
     icon: Server,
     iconBg: "bg-gradient-to-br from-green-400 to-emerald-500",
     url: "https://github.com/VIG-NESH-M",
+    description: "Express.js boilerplate with authentication & database",
+    longDescription: "A production-ready Node.js API boilerplate with Express.js, featuring JWT authentication, database integration, input validation, error handling, and comprehensive logging.",
+    features: ["JWT Authentication", "MongoDB Integration", "Input Validation", "Error Handling", "Rate Limiting", "API Documentation"],
+    technologies: ["Node.js", "Express", "MongoDB", "JWT", "Swagger"],
+    version: "1.5.0",
+    downloads: "850",
   },
   {
     id: 3,
@@ -211,6 +249,12 @@ export const products: Product[] = [
     icon: Package,
     iconBg: "bg-gradient-to-br from-blue-500 to-indigo-600",
     url: "https://github.com/VIG-NESH-M",
+    description: "Collection of TypeScript utility functions",
+    longDescription: "A lightweight collection of TypeScript utility functions for common operations. Includes array manipulation, string formatting, date handling, and validation helpers.",
+    features: ["Tree Shakeable", "Zero Dependencies", "Full TypeScript", "Well Documented", "Unit Tested", "ESM & CJS"],
+    technologies: ["TypeScript", "Jest", "Rollup"],
+    version: "3.1.0",
+    downloads: "2.5k",
   },
   {
     id: 4,
@@ -221,6 +265,12 @@ export const products: Product[] = [
     icon: Palette,
     iconBg: "bg-gradient-to-br from-purple-400 to-pink-500",
     url: "https://github.com/VIG-NESH-M",
+    description: "Modern portfolio template with dark mode",
+    longDescription: "A beautiful, responsive portfolio template built with React and Tailwind CSS. Features smooth animations, dark mode support, and easy customization through a central config file.",
+    features: ["Dark Mode", "Responsive Design", "SEO Optimized", "Fast Loading", "Easy Customization", "Contact Form"],
+    technologies: ["React", "Vite", "Tailwind CSS", "Framer Motion"],
+    version: "1.0.0",
+    downloads: "500",
   },
 ];
 
@@ -234,8 +284,14 @@ export interface Experience {
   company: string;
   period: string;
   description: string;
+  longDescription: string;
   icon: LucideIcon;
   iconBg: string;
+  location: string;
+  type: "Full-time" | "Part-time" | "Contract" | "Freelance";
+  responsibilities: string[];
+  achievements: string[];
+  technologies: string[];
 }
 
 export const experiences: Experience[] = [
@@ -245,8 +301,26 @@ export const experiences: Experience[] = [
     company: "Staunch Info Solutions",
     period: "2022 - Present",
     description: "Architected and developed scalable enterprise applications using React, Angular, and Spring Boot. Led full-stack development initiatives, implemented microservices architecture, and optimized database performance for high-traffic systems.",
+    longDescription: "As a Full Stack Developer at Staunch Info Solutions, I lead the development of enterprise-grade web applications serving thousands of users. I work across the entire technology stack, from designing responsive user interfaces to implementing robust backend services and managing database architectures.",
     icon: Briefcase,
     iconBg: "bg-gradient-to-br from-blue-500 to-indigo-600",
+    location: "India",
+    type: "Full-time",
+    responsibilities: [
+      "Lead development of enterprise web applications using React and Angular",
+      "Design and implement RESTful APIs using Spring Boot and Node.js",
+      "Architect microservices-based solutions for scalable applications",
+      "Collaborate with cross-functional teams to deliver client solutions",
+      "Mentor junior developers and conduct code reviews",
+      "Optimize application performance and database queries",
+    ],
+    achievements: [
+      "Reduced application load time by 40% through optimization",
+      "Led team of 5 developers on enterprise project delivery",
+      "Implemented CI/CD pipeline reducing deployment time by 60%",
+      "Built reusable component library used across 10+ projects",
+    ],
+    technologies: ["React", "Angular", "Spring Boot", "Node.js", "PostgreSQL", "MongoDB", "Docker", "AWS", "Redis", "GraphQL"],
   },
 ];
 
