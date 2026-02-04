@@ -2,7 +2,6 @@
 // EXPERIENCE DETAIL PAGE - Subtle Folio Exact Style
 // ============================================================
 
-import { useEffect } from "react";
 import { Link, useParams, Navigate } from "react-router-dom";
 import {
   ArrowLeft,
@@ -14,8 +13,7 @@ import {
   Code2,
   Trophy,
 } from "lucide-react";
-import { useDocumentTitle, useAppSelector } from "@/hooks";
-import { selectTheme } from "@/store/selectors";
+import { useDocumentTitle } from "@/hooks";
 import { experiences } from "@/config";
 import Navbar from "@/components/portfolio/Navbar";
 import Footer from "@/components/portfolio/Footer";
@@ -29,16 +27,6 @@ export default function ExperienceDetailPage() {
       ? `${experience.title} at ${experience.company} | Vignesh M`
       : "Experience Not Found",
   );
-  const theme = useAppSelector(selectTheme);
-
-  useEffect(() => {
-    const html = document.documentElement;
-    if (theme === "dark") {
-      html.classList.add("dark");
-    } else {
-      html.classList.remove("dark");
-    }
-  }, [theme]);
 
   if (!experience) {
     return <Navigate to="/experience" replace />;

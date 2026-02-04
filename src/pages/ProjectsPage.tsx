@@ -2,27 +2,15 @@
 // PROJECTS PAGE - Subtle Folio Exact Style
 // ============================================================
 
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ChevronRight } from "lucide-react";
-import { useDocumentTitle, useAppSelector } from "@/hooks";
-import { selectTheme } from "@/store/selectors";
+import { useDocumentTitle } from "@/hooks";
 import { projects } from "@/config";
 import Navbar from "@/components/portfolio/Navbar";
 import Footer from "@/components/portfolio/Footer";
 
 export default function ProjectsPage() {
   useDocumentTitle("Projects | Vignesh M");
-  const theme = useAppSelector(selectTheme);
-
-  useEffect(() => {
-    const html = document.documentElement;
-    if (theme === "dark") {
-      html.classList.add("dark");
-    } else {
-      html.classList.remove("dark");
-    }
-  }, [theme]);
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-neutral-950 text-gray-900 dark:text-neutral-100 transition-colors duration-300">

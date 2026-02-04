@@ -2,7 +2,6 @@
 // PROJECT DETAIL PAGE - Subtle Folio Exact Style
 // ============================================================
 
-import { useEffect } from "react";
 import { Link, useParams, Navigate } from "react-router-dom";
 import {
   ArrowLeft,
@@ -11,8 +10,7 @@ import {
   CheckCircle2,
   Code2,
 } from "lucide-react";
-import { useDocumentTitle, useAppSelector } from "@/hooks";
-import { selectTheme } from "@/store/selectors";
+import { useDocumentTitle } from "@/hooks";
 import { projects } from "@/config";
 import Navbar from "@/components/portfolio/Navbar";
 import Footer from "@/components/portfolio/Footer";
@@ -24,16 +22,6 @@ export default function ProjectDetailPage() {
   useDocumentTitle(
     project ? `${project.name} | Vignesh M` : "Project Not Found",
   );
-  const theme = useAppSelector(selectTheme);
-
-  useEffect(() => {
-    const html = document.documentElement;
-    if (theme === "dark") {
-      html.classList.add("dark");
-    } else {
-      html.classList.remove("dark");
-    }
-  }, [theme]);
 
   if (!project) {
     return <Navigate to="/projects" replace />;

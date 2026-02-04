@@ -2,8 +2,11 @@
 // NAVBAR - Subtle Folio Exact Style (Icon-only Pill)
 // ============================================================
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Home, User, Briefcase, Lock, Plus, Sun, Moon } from "lucide-react";
+import { useAppSelector, useAppDispatch } from "@/hooks";
+import { selectTheme } from "@/store/selectors";
+import { setTheme } from "@/store";
 
 const navIcons = [
   { name: "Home", href: "#home", icon: Home },
@@ -14,29 +17,19 @@ const navIcons = [
 
 export default function Navbar() {
   const [activeNav, setActiveNav] = useState("Home");
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const dispatch = useAppDispatch();
+  const theme = useAppSelector(selectTheme);
 
-  useEffect(() => {
-    // Check for saved theme or system preference
-    const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
-    const systemPrefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)",
-    ).matches;
-
-    if (savedTheme) {
-      setTheme(savedTheme);
-      document.documentElement.classList.toggle("dark", savedTheme === "dark");
-    } else if (systemPrefersDark) {
-      setTheme("dark");
-      document.documentElement.classList.add("dark");
-    }
-  }, []);
+  // Determine if we're in dark mode (considering 'system' setting)
+  const isDark =
+    theme === "dark" ||
+    (theme === "system" &&
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-    document.documentElement.classList.toggle("dark", newTheme === "dark");
+    const newTheme = isDark ? "light" : "dark";
+    dispatch(setTheme(newTheme));
   };
 
   return (
@@ -65,14 +58,12 @@ export default function Navbar() {
           <button
             onClick={toggleTheme}
             className="p-2.5 rounded-full transition-all text-gray-500 dark:text-neutral-400 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-700 dark:hover:text-neutral-300"
-            title={
-              theme === "light" ? "Switch to dark mode" : "Switch to light mode"
-            }
+            title={isDark ? "Switch to light mode" : "Switch to dark mode"}
           >
-            {theme === "light" ? (
-              <Moon className="w-4 h-4" strokeWidth={1.5} />
-            ) : (
+            {isDark ? (
               <Sun className="w-4 h-4" strokeWidth={1.5} />
+            ) : (
+              <Moon className="w-4 h-4" strokeWidth={1.5} />
             )}
           </button>
 
@@ -110,10 +101,10 @@ export default function Navbar() {
               onClick={toggleTheme}
               className="p-2 rounded-full transition-all text-gray-500 dark:text-neutral-400"
             >
-              {theme === "light" ? (
-                <Moon className="w-4 h-4" strokeWidth={1.5} />
-              ) : (
+              {isDark ? (
                 <Sun className="w-4 h-4" strokeWidth={1.5} />
+              ) : (
+                <Moon className="w-4 h-4" strokeWidth={1.5} />
               )}
             </button>
           </div>
