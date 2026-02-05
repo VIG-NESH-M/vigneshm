@@ -15,6 +15,7 @@ const ExperiencePage = lazyLoad(() => import("@/pages/ExperiencePage"));
 const ExperienceDetailPage = lazyLoad(
   () => import("@/pages/ExperienceDetailPage"),
 );
+const GitHubCalendarDemo = lazyLoad(() => import("@/pages/GitHubCalendarDemo"));
 const NotFoundPage = lazyLoad(() => import("@/pages/NotFound"));
 
 // Create router with route configuration
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
   {
     path: "/experience/:id",
     element: <ExperienceDetailPage />,
+  },
+  {
+    path: "/github-calendar",
+    element: <GitHubCalendarDemo />,
   },
   {
     path: "*",
