@@ -1,5 +1,5 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 501 501">
-<rect x=".5" y=".5" width="500" height="500" style="fill: #231f20; stroke: #231f20; stroke-miterlimit: 10;"/>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="100 90 300 320">
+<rect x="100" y="90" width="300" height="320" style="fill: #231f20;"/>
 <g>
 <rect x="232.56" y="133.22" width="102.76" height="234.57" rx="51.38" ry="51.38" transform="translate(163.29 -108.41) rotate(30)" style="fill: #fff;"/>
 <path d="M230.13,221.07l-34.2,59.24c-.14.24-.28.49-.43.74-.17.29-.33.58-.49.86-8.95,16.06-5.42,25.82-5.21,26.37l-4.85-8.96-45.16-78.25c-14.48-25.09-5.81-57.48,19.3-71.97,8.14-4.7,17.05-6.96,25.88-7.01,8.81.05,17.72,2.31,25.88,7.01,25.09,14.49,33.77,46.88,19.28,71.97Z" style="fill: #fff;"/>
