@@ -47,7 +47,6 @@
    ============================================================ */
 
 @layer base {
-
   /* Apply theme class to html element */
   html {
     @apply scroll-smooth;
@@ -141,7 +140,6 @@
    ============================================================ */
 
 @layer components {
-
   /* Container */
   .container {
     @apply mx-auto px-4 sm:px-6 lg:px-8;
@@ -218,7 +216,6 @@
    ============================================================ */
 
 @layer utilities {
-
   /* Text gradient */
   .text-gradient {
     @apply text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-primary-400;
@@ -326,6 +323,55 @@
 
 .animate-slideDown {
   animation: slideDown 0.3s ease-out;
+}
+
+/* Sudoku game animations */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-4px);
+  }
+  40% {
+    transform: translateX(4px);
+  }
+  60% {
+    transform: translateX(-3px);
+  }
+  80% {
+    transform: translateX(3px);
+  }
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-shake {
+  animation: shake 0.35s ease-in-out;
 }
 
 .animate-scaleIn {

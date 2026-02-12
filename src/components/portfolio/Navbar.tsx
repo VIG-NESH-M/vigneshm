@@ -3,7 +3,17 @@
 // ============================================================
 
 import { useState } from "react";
-import { Home, User, Briefcase, Lock, Plus, Sun, Moon } from "lucide-react";
+import {
+  Home,
+  User,
+  Briefcase,
+  Lock,
+  Plus,
+  Sun,
+  Moon,
+  Gamepad2,
+} from "lucide-react";
+import { Link } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "@/hooks";
 import { selectTheme } from "@/store/selectors";
 import { setTheme } from "@/store";
@@ -14,6 +24,8 @@ const navIcons = [
   { name: "Projects", href: "#projects", icon: Briefcase },
   { name: "Products", href: "#products", icon: Lock },
 ];
+
+const gameLink = { name: "Sudoku", href: "/sudoku", icon: Gamepad2 };
 
 export default function Navbar() {
   const [activeNav, setActiveNav] = useState("Home");
@@ -53,6 +65,15 @@ export default function Navbar() {
               <item.icon className="w-4 h-4" strokeWidth={1.5} />
             </a>
           ))}
+
+          {/* Game Link */}
+          <Link
+            to={gameLink.href}
+            className="p-2.5 rounded-full transition-all text-gray-500 dark:text-neutral-400 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-700 dark:hover:text-neutral-300"
+            title={gameLink.name}
+          >
+            <gameLink.icon className="w-4 h-4" strokeWidth={1.5} />
+          </Link>
 
           {/* Theme Toggle */}
           <button
@@ -96,6 +117,13 @@ export default function Navbar() {
                 <item.icon className="w-4 h-4" strokeWidth={1.5} />
               </a>
             ))}
+            {/* Mobile Game Link */}
+            <Link
+              to={gameLink.href}
+              className="p-2 rounded-full transition-all text-gray-500 dark:text-neutral-400"
+            >
+              <gameLink.icon className="w-4 h-4" strokeWidth={1.5} />
+            </Link>
             {/* Mobile Theme Toggle */}
             <button
               onClick={toggleTheme}
