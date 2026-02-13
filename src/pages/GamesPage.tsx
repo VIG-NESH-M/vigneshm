@@ -3,7 +3,13 @@
 // ============================================================
 
 import { Link } from "react-router-dom";
-import { ArrowLeft, ChevronRight, Grid2x2, Gamepad2 } from "lucide-react";
+import {
+  ArrowLeft,
+  ChevronRight,
+  Grid2x2,
+  Gamepad2,
+  Layers,
+} from "lucide-react";
 import { useDocumentTitle } from "@/hooks";
 import Navbar from "@/components/portfolio/Navbar";
 import Footer from "@/components/portfolio/Footer";
@@ -24,6 +30,14 @@ const games = [
     icon: Grid2x2,
     iconBg: "bg-gradient-to-br from-amber-500 to-orange-500",
     href: "/2048",
+  },
+  {
+    id: "memory",
+    name: "Memory Match",
+    description: "Flip cards and find matching pairs with combo scoring",
+    icon: Layers,
+    iconBg: "bg-gradient-to-br from-pink-500 to-rose-500",
+    href: "/memory",
   },
 ];
 
@@ -58,8 +72,8 @@ export default function GamesPage() {
               Mini Games
             </h1>
             <p className="text-gray-500 dark:text-neutral-400 text-xs sm:text-sm">
-              Take a break and enjoy these browser-based games — built with React
-              and smooth animations.
+              Take a break and enjoy these browser-based games — built with
+              React and smooth animations.
             </p>
           </div>
 

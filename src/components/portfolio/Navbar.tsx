@@ -3,7 +3,16 @@
 // ============================================================
 
 import { useState } from "react";
-import { Home, User, Briefcase, Lock, Plus, Sun, Moon, Gamepad2 } from "lucide-react";
+import {
+  Home,
+  User,
+  Briefcase,
+  Lock,
+  Plus,
+  Sun,
+  Moon,
+  Gamepad2,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "@/hooks";
 import { selectTheme } from "@/store/selectors";
