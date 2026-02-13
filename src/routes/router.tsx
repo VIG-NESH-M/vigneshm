@@ -17,6 +17,7 @@ const ExperienceDetailPage = lazyLoad(
 );
 const GitHubCalendarDemo = lazyLoad(() => import("@/pages/GitHubCalendarDemo"));
 const SudokuPage = lazyLoad(() => import("@/pages/SudokuPage"));
+const Game2048Page = lazyLoad(() => import("@/pages/Game2048Page"));
 const NotFoundPage = lazyLoad(() => import("@/pages/NotFound"));
 
 // Create router with route configuration
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
   {
     path: "/sudoku",
     element: <SudokuPage />,
+  },
+  {
+    path: "/2048",
+    element: <Game2048Page />,
   },
   {
     path: "*",

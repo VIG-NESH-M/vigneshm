@@ -12,6 +12,7 @@ import {
   Sun,
   Moon,
   Gamepad2,
+  Grid2x2,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "@/hooks";
@@ -25,7 +26,10 @@ const navIcons = [
   { name: "Products", href: "#products", icon: Lock },
 ];
 
-const gameLink = { name: "Sudoku", href: "/sudoku", icon: Gamepad2 };
+const gameLinks = [
+  { name: "Sudoku", href: "/sudoku", icon: Gamepad2 },
+  { name: "2048", href: "/2048", icon: Grid2x2 },
+];
 
 export default function Navbar() {
   const [activeNav, setActiveNav] = useState("Home");
@@ -66,14 +70,17 @@ export default function Navbar() {
             </a>
           ))}
 
-          {/* Game Link */}
-          <Link
-            to={gameLink.href}
-            className="p-2.5 rounded-full transition-all text-gray-500 dark:text-neutral-400 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-700 dark:hover:text-neutral-300"
-            title={gameLink.name}
-          >
-            <gameLink.icon className="w-4 h-4" strokeWidth={1.5} />
-          </Link>
+          {/* Game Links */}
+          {gameLinks.map((link) => (
+            <Link
+              key={link.name}
+              to={link.href}
+              className="p-2.5 rounded-full transition-all text-gray-500 dark:text-neutral-400 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-700 dark:hover:text-neutral-300"
+              title={link.name}
+            >
+              <link.icon className="w-4 h-4" strokeWidth={1.5} />
+            </Link>
+          ))}
 
           {/* Theme Toggle */}
           <button
@@ -117,13 +124,17 @@ export default function Navbar() {
                 <item.icon className="w-4 h-4" strokeWidth={1.5} />
               </a>
             ))}
-            {/* Mobile Game Link */}
-            <Link
-              to={gameLink.href}
-              className="p-2 rounded-full transition-all text-gray-500 dark:text-neutral-400"
-            >
-              <gameLink.icon className="w-4 h-4" strokeWidth={1.5} />
-            </Link>
+            {/* Mobile Game Links */}
+            {gameLinks.map((link) => (
+              <Link
+                key={link.name}
+                to={link.href}
+                className="p-2 rounded-full transition-all text-gray-500 dark:text-neutral-400"
+                title={link.name}
+              >
+                <link.icon className="w-4 h-4" strokeWidth={1.5} />
+              </Link>
+            ))}
             {/* Mobile Theme Toggle */}
             <button
               onClick={toggleTheme}
