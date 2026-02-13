@@ -16,6 +16,7 @@ const ExperienceDetailPage = lazyLoad(
   () => import("@/pages/ExperienceDetailPage"),
 );
 const GitHubCalendarDemo = lazyLoad(() => import("@/pages/GitHubCalendarDemo"));
+const GamesPage = lazyLoad(() => import("@/pages/GamesPage"));
 const SudokuPage = lazyLoad(() => import("@/pages/SudokuPage"));
 const Game2048Page = lazyLoad(() => import("@/pages/Game2048Page"));
 const NotFoundPage = lazyLoad(() => import("@/pages/NotFound"));
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
   {
     path: "/github-calendar",
     element: <GitHubCalendarDemo />,
+  },
+  {
+    path: "/games",
+    element: <GamesPage />,
   },
   {
     path: "/sudoku",

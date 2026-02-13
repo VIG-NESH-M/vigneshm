@@ -20,11 +20,11 @@ export default function Game2048Page() {
           {/* Back Button */}
           <div className="mb-3">
             <Link
-              to="/"
+              to="/games"
               className="inline-flex items-center gap-2 px-3 py-2 bg-white dark:bg-neutral-900 rounded-full shadow-sm border border-gray-100 dark:border-neutral-800 text-xs font-medium text-gray-600 dark:text-neutral-400 hover:bg-gray-50 dark:hover:bg-neutral-800 transition-colors"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
-              Back to Portfolio
+              Back to Games
             </Link>
           </div>
 
