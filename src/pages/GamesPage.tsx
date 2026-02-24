@@ -10,6 +10,7 @@ import {
   Gamepad2,
   Layers,
   Crown,
+  Box,
 } from "lucide-react";
 import { useDocumentTitle } from "@/hooks";
 import Navbar from "@/components/portfolio/Navbar";
@@ -47,6 +48,14 @@ const games = [
     icon: Crown,
     iconBg: "bg-gradient-to-br from-slate-600 to-slate-800",
     href: "/chess",
+  },
+  {
+    id: "rubiks-cube",
+    name: "Rubik's Cube",
+    description: "3D Rubik's Cube with drag controls, scramble, and built-in solver",
+    icon: Box,
+    iconBg: "bg-gradient-to-br from-emerald-500 to-teal-600",
+    href: "/rubiks-cube",
   },
 ];
 

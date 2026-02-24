@@ -21,6 +21,7 @@ const SudokuPage = lazyLoad(() => import("@/pages/SudokuPage"));
 const Game2048Page = lazyLoad(() => import("@/pages/Game2048Page"));
 const MemoryPage = lazyLoad(() => import("@/pages/MemoryPage"));
 const ChessPage = lazyLoad(() => import("@/pages/ChessPage"));
+const RubiksCubePage = lazyLoad(() => import("@/pages/RubiksCubePage"));
 const NotFoundPage = lazyLoad(() => import("@/pages/NotFound"));
 
 // Create router with route configuration
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
   {
     path: "/chess",
     element: <ChessPage />,
+  },
+  {
+    path: "/rubiks-cube",
+    element: <RubiksCubePage />,
   },
   {
     path: "*",
