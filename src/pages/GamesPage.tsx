@@ -9,6 +9,7 @@ import {
   Grid2x2,
   Gamepad2,
   Layers,
+  Crown,
 } from "lucide-react";
 import { useDocumentTitle } from "@/hooks";
 import Navbar from "@/components/portfolio/Navbar";
@@ -38,6 +39,14 @@ const games = [
     icon: Layers,
     iconBg: "bg-gradient-to-br from-pink-500 to-rose-500",
     href: "/memory",
+  },
+  {
+    id: "chess",
+    name: "Chess",
+    description: "Play chess vs Stockfish AI or a friend with full rules",
+    icon: Crown,
+    iconBg: "bg-gradient-to-br from-slate-600 to-slate-800",
+    href: "/chess",
   },
 ];
 

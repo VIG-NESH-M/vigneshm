@@ -1,0 +1,1758 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rubik's Cube Game + Solver</title>
+    <style>
+      :root {
+        --bg: #0b1220;
+        --panel: #131d31;
+        --panel-2: #192642;
+        --text: #e9eefc;
+        --muted: #9fb0d8;
+        --accent: #64a4ff;
+        --ok: #2ecc71;
+        --warn: #ffb347;
+        --err: #ff6b6b;
+        --sticker-border: #0a0a0f;
+        --cube-size: 210px;
+        --face-size: 150px;
+        --sticker-gap: 3px;
+        --radius: 10px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family:
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Helvetica,
+          Arial,
+          sans-serif;
+        background:
+          radial-gradient(circle at 20% 10%, #172a48, var(--bg) 45%), var(--bg);
+        color: var(--text);
+        display: flex;
+        justify-content: center;
+        padding: 18px;
+      }
+
+      .app {
+        width: min(1200px, 100%);
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 16px;
+      }
+
+      .panel {
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent),
+          var(--panel);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 14px;
+        padding: 14px;
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.28);
+      }
+
+      .title {
+        margin: 0 0 6px;
+        font-size: 1.3rem;
+        letter-spacing: 0.2px;
+      }
+
+      .sub {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .scene-wrap {
+        margin-top: 12px;
+        min-height: 380px;
+        border-radius: var(--radius);
+        background: radial-gradient(
+          circle at 50% 30%,
+          rgba(255, 255, 255, 0.08),
+          rgba(0, 0, 0, 0.2)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        touch-action: none;
+        user-select: none;
+      }
+
+      .scene {
+        width: var(--cube-size);
+        height: var(--cube-size);
+        perspective: 900px;
+        perspective-origin: 50% 48%;
+      }
+
+      .solver-scene-wrap {
+        margin-bottom: 10px;
+        min-height: 260px;
+      }
+
+      .solver-scene {
+        width: 180px;
+        height: 180px;
+      }
+
+      .solver-scene .cube {
+        transition: transform 80ms ease;
+      }
+
+      .cube {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transform-style: preserve-3d;
+        transform: rotateX(-28deg) rotateY(38deg);
+        transition: transform 120ms ease;
+      }
+
+      .face {
+        position: absolute;
+        width: var(--face-size);
+        height: var(--face-size);
+        left: calc((var(--cube-size) - var(--face-size)) / 2);
+        top: calc((var(--cube-size) - var(--face-size)) / 2);
+        border-radius: 8px;
+        background: #111;
+        border: 3px solid #111;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        gap: var(--sticker-gap);
+        padding: var(--sticker-gap);
+        backface-visibility: hidden;
+      }
+
+      .sticker {
+        border-radius: 6px;
+        border: 1px solid var(--sticker-border);
+        box-shadow:
+          inset 0 1px 2px rgba(255, 255, 255, 0.25),
+          inset 0 -1px 2px rgba(0, 0, 0, 0.35);
+      }
+
+      .controls {
+        margin-top: 12px;
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      button,
+      .toggle {
+        background: linear-gradient(180deg, #2d4678, #243a62);
+        color: var(--text);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 9px;
+        padding: 8px 10px;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          transform 90ms ease,
+          filter 90ms ease;
+      }
+
+      button:hover,
+      .toggle:hover {
+        filter: brightness(1.08);
+      }
+
+      button:active,
+      .toggle:active {
+        transform: translateY(1px);
+      }
+
+      .row {
+        margin-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+      }
+
+      .status {
+        margin-top: 10px;
+        min-height: 44px;
+        border-radius: 9px;
+        padding: 10px;
+        font-size: 0.92rem;
+        background: var(--panel-2);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        color: var(--muted);
+        white-space: pre-wrap;
+      }
+
+      .status.ok {
+        color: #dbffea;
+        border-color: rgba(46, 204, 113, 0.4);
+      }
+
+      .status.warn {
+        color: #fff3da;
+        border-color: rgba(255, 179, 71, 0.45);
+      }
+
+      .status.err {
+        color: #ffe1e1;
+        border-color: rgba(255, 107, 107, 0.45);
+      }
+
+      .history {
+        margin-top: 10px;
+        font-size: 0.88rem;
+        color: var(--muted);
+        max-height: 100px;
+        overflow: auto;
+        line-height: 1.35;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 8px;
+        padding: 8px;
+        background: rgba(0, 0, 0, 0.15);
+      }
+
+      .solver-root {
+        display: none;
+        margin-top: 10px;
+      }
+
+      .solver-root.active {
+        display: block;
+      }
+
+      .palette {
+        display: flex;
+        gap: 8px;
+        margin: 8px 0 12px;
+        flex-wrap: wrap;
+      }
+
+      .swatch {
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        border: 2px solid rgba(255, 255, 255, 0.55);
+        cursor: pointer;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      }
+
+      .swatch.active {
+        outline: 2px solid #fff;
+        outline-offset: 2px;
+      }
+
+      .solver-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+        align-items: start;
+      }
+
+      .face-input-wrap {
+        background: rgba(0, 0, 0, 0.16);
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        border-radius: 10px;
+        padding: 8px;
+      }
+
+      .face-label {
+        font-size: 0.86rem;
+        color: var(--muted);
+        margin-bottom: 6px;
+        text-align: center;
+        font-weight: 700;
+        letter-spacing: 0.35px;
+      }
+
+      .face-input {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4px;
+      }
+
+      .input-sticker {
+        width: 100%;
+        aspect-ratio: 1;
+        border-radius: 6px;
+        border: 2px solid rgba(0, 0, 0, 0.65);
+        cursor: pointer;
+      }
+
+      .input-sticker.center {
+        cursor: not-allowed;
+        opacity: 0.95;
+      }
+
+      .solver-actions {
+        margin-top: 12px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .solution {
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 9px;
+        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        font-size: 0.9rem;
+        line-height: 1.4;
+        max-height: 210px;
+        overflow: auto;
+        white-space: pre-wrap;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(100, 164, 255, 0.2);
+        border: 1px solid rgba(100, 164, 255, 0.45);
+        color: #dceaff;
+        font-size: 0.85rem;
+        font-weight: 700;
+      }
+
+      @media (max-width: 980px) {
+        .app {
+          grid-template-columns: 1fr;
+        }
+
+        .controls {
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .solver-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <section class="panel">
+        <h1 class="title">Rubik's Cube 3D Game</h1>
+        <p class="sub">
+          Drag to orbit view • Use move buttons for turns • Scramble and solve
+        </p>
+
+        <div class="scene-wrap" id="sceneWrap">
+          <div class="scene">
+            <div class="cube" id="cube3d"></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <span class="pill" id="modeBadge">Mode: Game</span>
+          <button id="resetBtn">Reset Cube</button>
+          <button id="scrambleBtn">Scramble</button>
+          <button id="undoBtn">Undo</button>
+          <button id="solverToggle">Solver Mode</button>
+        </div>
+
+        <div class="controls" id="moveControls"></div>
+        <div class="status" id="gameStatus">Ready.</div>
+        <div class="history" id="moveHistory">Move history: (none)</div>
+      </section>
+
+      <section class="panel">
+        <h2 class="title">Solver Input</h2>
+        <p class="sub">
+          Tap stickers to cycle colors (drag to paint many) • Right-click cycles
+          backward • Centers are locked.
+        </p>
+
+        <div class="solver-root" id="solverRoot">
+          <div class="scene-wrap solver-scene-wrap" id="solverSceneWrap">
+            <div class="scene solver-scene">
+              <div class="cube" id="solverCube3d"></div>
+            </div>
+          </div>
+
+          <div class="solver-grid" id="solverGrid"></div>
+
+          <div class="solver-actions">
+            <button id="solverResetBtn">Reset Input</button>
+            <button id="loadGameStateBtn">Load Game State</button>
+            <button id="applyInputBtn">Apply Input To Game</button>
+            <button id="validateBtn">Validate State</button>
+            <button id="solveBtn">Solve</button>
+          </div>
+
+          <div class="status" id="solverStatus">Solver mode is active.</div>
+          <div class="solution" id="solutionText">
+            No solution computed yet.
+          </div>
+        </div>
+
+        <div class="status" id="solverHint">
+          Enable Solver Mode to edit sticker colors.
+        </div>
+      </section>
+    </div>
+
+    <script>
+      (() => {
+        "use strict";
+
+        // -----------------------------
+        // Core cube constants
+        // -----------------------------
+        const FACES = ["U", "R", "F", "D", "L", "B"];
+        const FACE_START = { U: 0, R: 9, F: 18, D: 27, L: 36, B: 45 };
+        const FACE_COLORS = {
+          U: "#ffffff",
+          R: "#e74c3c",
+          F: "#2ecc71",
+          D: "#f1c40f",
+          L: "#e67e22",
+          B: "#3498db",
+        };
+        const FACE_NAMES = {
+          U: "Up",
+          R: "Right",
+          F: "Front",
+          D: "Down",
+          L: "Left",
+          B: "Back",
+        };
+        const MOVE_LIST = [
+          "U",
+          "U'",
+          "U2",
+          "R",
+          "R'",
+          "R2",
+          "F",
+          "F'",
+          "F2",
+          "D",
+          "D'",
+          "D2",
+          "L",
+          "L'",
+          "L2",
+          "B",
+          "B'",
+          "B2",
+        ];
+        const AXIS_BY_FACE = {
+          U: "y",
+          D: "y",
+          R: "x",
+          L: "x",
+          F: "z",
+          B: "z",
+        };
+
+        // -----------------------------
+        // Utility helpers
+        // -----------------------------
+        const solvedFacelets = () =>
+          FACES.flatMap((face) => Array(9).fill(face));
+        const cloneArray = (arr) => arr.slice();
+
+        function permutationsParity(perm) {
+          let parity = 0;
+          const seen = Array(perm.length).fill(false);
+          for (let i = 0; i < perm.length; i += 1) {
+            if (seen[i]) continue;
+            let cycleLength = 0;
+            let j = i;
+            while (!seen[j]) {
+              seen[j] = true;
+              j = perm[j];
+              cycleLength += 1;
+            }
+            if (cycleLength > 0) parity ^= (cycleLength + 1) % 2;
+          }
+          return parity;
+        }
+
+        function inverseMove(move) {
+          if (move.endsWith("2")) return move;
+          if (move.endsWith("'")) return move[0];
+          return `${move}'`;
+        }
+
+        function simplifyMoves(moves) {
+          const out = [];
+          const toTurns = (m) =>
+            m.endsWith("2") ? 2 : m.endsWith("'") ? 3 : 1;
+          const fromTurns = (face, turns) => {
+            const t = ((turns % 4) + 4) % 4;
+            if (t === 0) return null;
+            if (t === 1) return face;
+            if (t === 2) return `${face}2`;
+            return `${face}'`;
+          };
+
+          for (const m of moves) {
+            if (out.length === 0) {
+              out.push(m);
+              continue;
+            }
+            const prev = out[out.length - 1];
+            if (prev[0] !== m[0]) {
+              out.push(m);
+              continue;
+            }
+            out.pop();
+            const merged = fromTurns(m[0], toTurns(prev) + toTurns(m));
+            if (merged) out.push(merged);
+          }
+          return out;
+        }
+
+        // -----------------------------
+        // Sticker geometry + move permutation generation
+        // -----------------------------
+        function faceStickerMeta(face, row, col, index) {
+          let pos;
+          let normal;
+          switch (face) {
+            case "U":
+              pos = { x: col - 1, y: 1, z: row - 1 };
+              normal = { x: 0, y: 1, z: 0 };
+              break;
+            case "D":
+              pos = { x: col - 1, y: -1, z: 1 - row };
+              normal = { x: 0, y: -1, z: 0 };
+              break;
+            case "F":
+              pos = { x: col - 1, y: 1 - row, z: 1 };
+              normal = { x: 0, y: 0, z: 1 };
+              break;
+            case "B":
+              pos = { x: 1 - col, y: 1 - row, z: -1 };
+              normal = { x: 0, y: 0, z: -1 };
+              break;
+            case "R":
+              pos = { x: 1, y: 1 - row, z: 1 - col };
+              normal = { x: 1, y: 0, z: 0 };
+              break;
+            case "L":
+              pos = { x: -1, y: 1 - row, z: col - 1 };
+              normal = { x: -1, y: 0, z: 0 };
+              break;
+            default:
+              throw new Error(`Unknown face: ${face}`);
+          }
+          return { face, row, col, index, pos, normal };
+        }
+
+        function vecKey(v) {
+          return `${v.x},${v.y},${v.z}`;
+        }
+
+        function stickerKey(meta) {
+          return `${vecKey(meta.pos)}|${vecKey(meta.normal)}`;
+        }
+
+        function rotateVec(v, axis, angleDeg) {
+          const t = (((angleDeg / 90) % 4) + 4) % 4;
+          let x = v.x;
+          let y = v.y;
+          let z = v.z;
+          for (let k = 0; k < t; k += 1) {
+            if (axis === "x") {
+              [y, z] = [-z, y];
+            } else if (axis === "y") {
+              [x, z] = [z, -x];
+            } else {
+              [x, y] = [-y, x];
+            }
+          }
+          return { x, y, z };
+        }
+
+        const stickers = [];
+        for (const face of FACES) {
+          const start = FACE_START[face];
+          for (let i = 0; i < 9; i += 1) {
+            const row = Math.floor(i / 3);
+            const col = i % 3;
+            stickers.push(faceStickerMeta(face, row, col, start + i));
+          }
+        }
+
+        const indexByStickerKey = new Map(
+          stickers.map((s) => [stickerKey(s), s.index]),
+        );
+
+        function quarterTurnAngle(face) {
+          const layer = face === "U" || face === "R" || face === "F" ? 1 : -1;
+          if (face === "U" || face === "D") return 90 * layer;
+          if (face === "R" || face === "L") return -90 * layer;
+          return -90 * layer;
+        }
+
+        function moveAxis(face) {
+          return AXIS_BY_FACE[face];
+        }
+
+        function moveLayer(face) {
+          return face === "U" || face === "R" || face === "F" ? 1 : -1;
+        }
+
+        function buildQuarterPermutation(face) {
+          const axis = moveAxis(face);
+          const layer = moveLayer(face);
+          const angle = quarterTurnAngle(face);
+
+          const oldToNew = Array(54);
+          for (const s of stickers) {
+            const coord = s.pos[axis];
+            if (coord !== layer) {
+              oldToNew[s.index] = s.index;
+              continue;
+            }
+            const newPos = rotateVec(s.pos, axis, angle);
+            const newNormal = rotateVec(s.normal, axis, angle);
+            const target = indexByStickerKey.get(
+              `${vecKey(newPos)}|${vecKey(newNormal)}`,
+            );
+            oldToNew[s.index] = target;
+          }
+          return oldToNew;
+        }
+
+        function applyPermutation(state, oldToNew) {
+          const next = cloneArray(state);
+          for (let oldIndex = 0; oldIndex < 54; oldIndex += 1) {
+            next[oldToNew[oldIndex]] = state[oldIndex];
+          }
+          return next;
+        }
+
+        const quarterPerm = {
+          U: buildQuarterPermutation("U"),
+          R: buildQuarterPermutation("R"),
+          F: buildQuarterPermutation("F"),
+          D: buildQuarterPermutation("D"),
+          L: buildQuarterPermutation("L"),
+          B: buildQuarterPermutation("B"),
+        };
+
+        const movePerm = {};
+        for (const face of FACES) {
+          movePerm[face] = quarterPerm[face];
+          movePerm[`${face}2`] = composePerm(
+            quarterPerm[face],
+            quarterPerm[face],
+          );
+          movePerm[`${face}'`] = composePerm(
+            movePerm[`${face}2`],
+            quarterPerm[face],
+          );
+        }
+
+        function composePerm(a, b) {
+          const out = Array(54);
+          for (let i = 0; i < 54; i += 1) {
+            out[i] = b[a[i]];
+          }
+          return out;
+        }
+
+        // -----------------------------
+        // Cubie extraction for validation and solving
+        // -----------------------------
+        const solved = solvedFacelets();
+
+        const cornerFacelet = [
+          [8, 9, 20],
+          [6, 18, 38],
+          [0, 36, 47],
+          [2, 45, 11],
+          [29, 26, 15],
+          [27, 44, 24],
+          [33, 53, 42],
+          [35, 17, 51],
+        ];
+
+        const cornerColor = [
+          ["U", "R", "F"],
+          ["U", "F", "L"],
+          ["U", "L", "B"],
+          ["U", "B", "R"],
+          ["D", "F", "R"],
+          ["D", "L", "F"],
+          ["D", "B", "L"],
+          ["D", "R", "B"],
+        ];
+
+        const edgeFacelet = [
+          [5, 10],
+          [7, 19],
+          [3, 37],
+          [1, 46],
+          [32, 16],
+          [28, 25],
+          [30, 43],
+          [34, 52],
+          [23, 12],
+          [21, 41],
+          [50, 39],
+          [48, 14],
+        ];
+
+        const edgeColor = [
+          ["U", "R"],
+          ["U", "F"],
+          ["U", "L"],
+          ["U", "B"],
+          ["D", "R"],
+          ["D", "F"],
+          ["D", "L"],
+          ["D", "B"],
+          ["F", "R"],
+          ["F", "L"],
+          ["B", "L"],
+          ["B", "R"],
+        ];
+
+        function decodeCubieState(facelets) {
+          const cp = Array(8);
+          const co = Array(8);
+          const ep = Array(12);
+          const eo = Array(12);
+
+          for (let i = 0; i < 8; i += 1) {
+            let ori;
+            for (ori = 0; ori < 3; ori += 1) {
+              const c = facelets[cornerFacelet[i][ori]];
+              if (c === "U" || c === "D") break;
+            }
+            if (ori === 3) return null;
+
+            const col1 = facelets[cornerFacelet[i][(ori + 1) % 3]];
+            const col2 = facelets[cornerFacelet[i][(ori + 2) % 3]];
+
+            let found = -1;
+            for (let j = 0; j < 8; j += 1) {
+              if (col1 === cornerColor[j][1] && col2 === cornerColor[j][2]) {
+                found = j;
+                break;
+              }
+            }
+            if (found === -1) return null;
+
+            cp[i] = found;
+            co[i] = ori % 3;
+          }
+
+          for (let i = 0; i < 12; i += 1) {
+            let found = -1;
+            for (let j = 0; j < 12; j += 1) {
+              if (
+                facelets[edgeFacelet[i][0]] === edgeColor[j][0] &&
+                facelets[edgeFacelet[i][1]] === edgeColor[j][1]
+              ) {
+                found = j;
+                ep[i] = found;
+                eo[i] = 0;
+                break;
+              }
+
+              if (
+                facelets[edgeFacelet[i][0]] === edgeColor[j][1] &&
+                facelets[edgeFacelet[i][1]] === edgeColor[j][0]
+              ) {
+                found = j;
+                ep[i] = found;
+                eo[i] = 1;
+                break;
+              }
+            }
+            if (found === -1) return null;
+          }
+
+          return { cp, co, ep, eo };
+        }
+
+        function isSolvedCubie(c) {
+          for (let i = 0; i < 8; i += 1) {
+            if (c.cp[i] !== i || c.co[i] !== 0) return false;
+          }
+          for (let i = 0; i < 12; i += 1) {
+            if (c.ep[i] !== i || c.eo[i] !== 0) return false;
+          }
+          return true;
+        }
+
+        function validateFacelets(facelets) {
+          const counts = { U: 0, R: 0, F: 0, D: 0, L: 0, B: 0 };
+          for (const c of facelets) {
+            if (!(c in counts)) {
+              return {
+                ok: false,
+                reason: `Invalid color token found: ${String(c)}`,
+              };
+            }
+            counts[c] += 1;
+          }
+
+          for (const f of FACES) {
+            if (counts[f] !== 9) {
+              return {
+                ok: false,
+                reason: `Face color ${f} must appear 9 times (found ${counts[f]}).`,
+              };
+            }
+          }
+
+          const cubie = decodeCubieState(facelets);
+          if (!cubie) {
+            return {
+              ok: false,
+              reason:
+                "This sticker arrangement cannot map to valid corner/edge pieces.",
+            };
+          }
+
+          const cornerSet = new Set(cubie.cp);
+          const edgeSet = new Set(cubie.ep);
+          if (cornerSet.size !== 8 || edgeSet.size !== 12) {
+            return {
+              ok: false,
+              reason: "Duplicate or missing pieces detected.",
+            };
+          }
+
+          const coSum = cubie.co.reduce((a, b) => a + b, 0) % 3;
+          if (coSum !== 0) {
+            return {
+              ok: false,
+              reason: "Corner orientation parity is invalid.",
+            };
+          }
+
+          const eoSum = cubie.eo.reduce((a, b) => a + b, 0) % 2;
+          if (eoSum !== 0) {
+            return { ok: false, reason: "Edge orientation parity is invalid." };
+          }
+
+          const cornerParity = permutationsParity(cubie.cp);
+          const edgeParity = permutationsParity(cubie.ep);
+          if (cornerParity !== edgeParity) {
+            return {
+              ok: false,
+              reason: "Permutation parity mismatch between corners and edges.",
+            };
+          }
+
+          return { ok: true, cubie };
+        }
+
+        // -----------------------------
+        // Cubie move effects derived from sticker permutations
+        // -----------------------------
+        function identityCubie() {
+          return {
+            cp: [0, 1, 2, 3, 4, 5, 6, 7],
+            co: [0, 0, 0, 0, 0, 0, 0, 0],
+            ep: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+            eo: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          };
+        }
+
+        function buildBaseMoveEffects() {
+          const out = {};
+          for (const face of FACES) {
+            const moved = applyPermutation(solved, movePerm[face]);
+            const cubie = decodeCubieState(moved);
+            out[face] = cubie;
+          }
+          return out;
+        }
+
+        const baseEffects = buildBaseMoveEffects();
+
+        function applyCubieEffect(state, effect) {
+          const next = identityCubie();
+          for (let p = 0; p < 8; p += 1) {
+            const src = effect.cp[p];
+            next.cp[p] = state.cp[src];
+            next.co[p] = (state.co[src] + effect.co[p]) % 3;
+          }
+          for (let p = 0; p < 12; p += 1) {
+            const src = effect.ep[p];
+            next.ep[p] = state.ep[src];
+            next.eo[p] = state.eo[src] ^ effect.eo[p];
+          }
+          return next;
+        }
+
+        function composeCubieEffect(a, b) {
+          return applyCubieEffect(a, b);
+        }
+
+        const moveEffects = {};
+        for (const face of FACES) {
+          const q = baseEffects[face];
+          const h = composeCubieEffect(q, q);
+          const p = composeCubieEffect(h, q);
+          moveEffects[face] = q;
+          moveEffects[`${face}2`] = h;
+          moveEffects[`${face}'`] = p;
+        }
+
+        // -----------------------------
+        // Heuristic tables for EO and CO
+        // -----------------------------
+        const eoDist = new Int16Array(1 << 12).fill(-1);
+        const coDist = new Int16Array(3 ** 8).fill(-1);
+        let heuristicsReady = false;
+
+        function encodeEO(eo) {
+          let v = 0;
+          for (let i = 0; i < 12; i += 1) {
+            v |= (eo[i] & 1) << i;
+          }
+          return v;
+        }
+
+        function decodeEO(code) {
+          const eo = Array(12);
+          for (let i = 0; i < 12; i += 1) eo[i] = (code >> i) & 1;
+          return eo;
+        }
+
+        function encodeCO(co) {
+          let v = 0;
+          for (let i = 0; i < 8; i += 1) v = v * 3 + (co[i] % 3);
+          return v;
+        }
+
+        function decodeCO(code) {
+          const co = Array(8);
+          for (let i = 7; i >= 0; i -= 1) {
+            co[i] = code % 3;
+            code = Math.floor(code / 3);
+          }
+          return co;
+        }
+
+        function ensureHeuristics() {
+          if (heuristicsReady) return;
+
+          const allMoves = MOVE_LIST;
+
+          const eoTrans = Array.from({ length: 1 << 12 }, () =>
+            Array(allMoves.length),
+          );
+          const coTrans = Array.from({ length: 3 ** 8 }, () =>
+            Array(allMoves.length),
+          );
+
+          for (let code = 0; code < 1 << 12; code += 1) {
+            const eo = decodeEO(code);
+            for (let m = 0; m < allMoves.length; m += 1) {
+              const eff = moveEffects[allMoves[m]];
+              const next = Array(12);
+              for (let p = 0; p < 12; p += 1) {
+                const src = eff.ep[p];
+                next[p] = eo[src] ^ eff.eo[p];
+              }
+              eoTrans[code][m] = encodeEO(next);
+            }
+          }
+
+          for (let code = 0; code < 3 ** 8; code += 1) {
+            const co = decodeCO(code);
+            for (let m = 0; m < allMoves.length; m += 1) {
+              const eff = moveEffects[allMoves[m]];
+              const next = Array(8);
+              for (let p = 0; p < 8; p += 1) {
+                const src = eff.cp[p];
+                next[p] = (co[src] + eff.co[p]) % 3;
+              }
+              coTrans[code][m] = encodeCO(next);
+            }
+          }
+
+          const eoStart = encodeEO(Array(12).fill(0));
+          const coStart = encodeCO(Array(8).fill(0));
+          eoDist[eoStart] = 0;
+          coDist[coStart] = 0;
+
+          const queueEO = [eoStart];
+          for (let i = 0; i < queueEO.length; i += 1) {
+            const node = queueEO[i];
+            const d = eoDist[node];
+            for (let m = 0; m < allMoves.length; m += 1) {
+              const nxt = eoTrans[node][m];
+              if (eoDist[nxt] === -1) {
+                eoDist[nxt] = d + 1;
+                queueEO.push(nxt);
+              }
+            }
+          }
+
+          const queueCO = [coStart];
+          for (let i = 0; i < queueCO.length; i += 1) {
+            const node = queueCO[i];
+            const d = coDist[node];
+            for (let m = 0; m < allMoves.length; m += 1) {
+              const nxt = coTrans[node][m];
+              if (coDist[nxt] === -1) {
+                coDist[nxt] = d + 1;
+                queueCO.push(nxt);
+              }
+            }
+          }
+
+          heuristicsReady = true;
+        }
+
+        function heuristic(c) {
+          const hEO = eoDist[encodeEO(c.eo)];
+          const hCO = coDist[encodeCO(c.co)];
+
+          let wrongCorners = 0;
+          let wrongEdges = 0;
+          for (let i = 0; i < 8; i += 1) if (c.cp[i] !== i) wrongCorners += 1;
+          for (let i = 0; i < 12; i += 1) if (c.ep[i] !== i) wrongEdges += 1;
+          const hPerm = Math.max(
+            Math.ceil(wrongCorners / 4),
+            Math.ceil(wrongEdges / 4),
+          );
+
+          return Math.max(hEO, hCO, hPerm);
+        }
+
+        function stateKey(c) {
+          return `${c.cp.join("")}|${c.co.join("")}|${c.ep.join("")}|${c.eo.join("")}`;
+        }
+
+        function canFollowMove(prevMove, nextMove) {
+          if (!prevMove) return true;
+          const prevFace = prevMove[0];
+          const nextFace = nextMove[0];
+          if (prevFace === nextFace) return false;
+
+          const prevAxis = AXIS_BY_FACE[prevFace];
+          const nextAxis = AXIS_BY_FACE[nextFace];
+          if (prevAxis !== nextAxis) return true;
+
+          return prevFace < nextFace;
+        }
+
+        function solveOptimalIDA(startCubie, options = {}) {
+          ensureHeuristics();
+
+          const maxDepth = options.maxDepth ?? 24;
+          const timeoutMs = options.timeoutMs ?? 14000;
+          const deadline = performance.now() + timeoutMs;
+          const path = [];
+
+          if (isSolvedCubie(startCubie)) return [];
+
+          let bound = heuristic(startCubie);
+
+          function dfs(node, g, limit, prevMove, visited) {
+            const h = heuristic(node);
+            const f = g + h;
+            if (f > limit) return f;
+            if (isSolvedCubie(node)) return true;
+            if (performance.now() > deadline) return Number.POSITIVE_INFINITY;
+
+            const key = stateKey(node);
+            const bestSeen = visited.get(key);
+            if (bestSeen != null && bestSeen <= g) {
+              return Number.POSITIVE_INFINITY;
+            }
+            visited.set(key, g);
+
+            let min = Number.POSITIVE_INFINITY;
+            for (let i = 0; i < MOVE_LIST.length; i += 1) {
+              const move = MOVE_LIST[i];
+              if (!canFollowMove(prevMove, move)) continue;
+
+              const next = applyCubieEffect(node, moveEffects[move]);
+              path.push(move);
+              const result = dfs(next, g + 1, limit, move, visited);
+              if (result === true) return true;
+              if (result < min) min = result;
+              path.pop();
+            }
+            return min;
+          }
+
+          while (bound <= maxDepth) {
+            const visited = new Map();
+            const result = dfs(startCubie, 0, bound, null, visited);
+            if (result === true) return simplifyMoves(path.slice());
+            if (result === Number.POSITIVE_INFINITY) return null;
+            bound = result;
+          }
+          return null;
+        }
+
+        function solveFastBeam(startCubie, options = {}) {
+          ensureHeuristics();
+
+          const maxDepth = options.maxDepth ?? 30;
+          const beamWidth = options.beamWidth ?? 1400;
+          const timeoutMs = options.timeoutMs ?? 7000;
+          const deadline = performance.now() + timeoutMs;
+
+          if (isSolvedCubie(startCubie)) return [];
+
+          let frontier = [
+            {
+              state: startCubie,
+              path: [],
+              lastMove: null,
+              score: heuristic(startCubie),
+            },
+          ];
+
+          for (let depth = 0; depth < maxDepth; depth += 1) {
+            if (performance.now() > deadline) return null;
+
+            const nextLayer = [];
+            const bestByKey = new Map();
+
+            for (const node of frontier) {
+              for (let i = 0; i < MOVE_LIST.length; i += 1) {
+                const move = MOVE_LIST[i];
+                if (!canFollowMove(node.lastMove, move)) continue;
+
+                const nextState = applyCubieEffect(
+                  node.state,
+                  moveEffects[move],
+                );
+                const nextPath = node.path.concat(move);
+
+                if (isSolvedCubie(nextState)) {
+                  return simplifyMoves(nextPath);
+                }
+
+                const h = heuristic(nextState);
+                const score = nextPath.length + h;
+                const key = stateKey(nextState);
+                const prevBest = bestByKey.get(key);
+
+                if (prevBest && prevBest.score <= score) continue;
+
+                const candidate = {
+                  state: nextState,
+                  path: nextPath,
+                  lastMove: move,
+                  score,
+                };
+                bestByKey.set(key, candidate);
+              }
+            }
+
+            for (const value of bestByKey.values()) nextLayer.push(value);
+            nextLayer.sort(
+              (a, b) => a.score - b.score || a.path.length - b.path.length,
+            );
+            frontier = nextLayer.slice(0, beamWidth);
+
+            if (!frontier.length) return null;
+          }
+
+          return null;
+        }
+
+        // -----------------------------
+        // UI setup
+        // -----------------------------
+        const cube3d = document.getElementById("cube3d");
+        const solverCube3d = document.getElementById("solverCube3d");
+        const sceneWrap = document.getElementById("sceneWrap");
+        const solverSceneWrap = document.getElementById("solverSceneWrap");
+        const moveControls = document.getElementById("moveControls");
+        const moveHistoryEl = document.getElementById("moveHistory");
+        const gameStatusEl = document.getElementById("gameStatus");
+        const solverStatusEl = document.getElementById("solverStatus");
+        const solutionTextEl = document.getElementById("solutionText");
+        const solverHintEl = document.getElementById("solverHint");
+        const solverRoot = document.getElementById("solverRoot");
+        const modeBadge = document.getElementById("modeBadge");
+        const solverToggleBtn = document.getElementById("solverToggle");
+        const solverGridEl = document.getElementById("solverGrid");
+
+        let gameFacelets = solvedFacelets();
+        let moveHistory = [];
+        let solverFacelets = solvedFacelets();
+        let solverMode = false;
+        let viewRotX = -28;
+        let viewRotY = 38;
+        let solverViewRotX = -22;
+        let solverViewRotY = 32;
+        let solverPaintActive = false;
+        let solverPaintDir = 1;
+
+        const COLOR_ORDER = ["U", "R", "F", "D", "L", "B"];
+        const faceBaseTransform = {};
+        const solverFaceBaseTransform = {};
+        let gameQueue = Promise.resolve();
+
+        const faceDom = {};
+        const solverFaceDom = {};
+        const stickerDomByIndex = new Map();
+        const solverSticker3dDom = new Map();
+        const solverStickerDom = new Map();
+
+        function createFaceDom(face, stickerMap) {
+          const faceEl = document.createElement("div");
+          faceEl.className = "face";
+          faceEl.dataset.face = face;
+          const base = FACE_START[face];
+          for (let i = 0; i < 9; i += 1) {
+            const st = document.createElement("div");
+            st.className = "sticker";
+            st.dataset.index = String(base + i);
+            faceEl.appendChild(st);
+            stickerMap.set(base + i, st);
+          }
+          return faceEl;
+        }
+
+        function placeFaces3D(faceMap, baseMap) {
+          const t = "translateZ(75px)";
+          baseMap.U = `rotateX(90deg) ${t}`;
+          baseMap.D = `rotateX(-90deg) ${t}`;
+          baseMap.F = `rotateY(0deg) ${t}`;
+          baseMap.B = `rotateY(180deg) ${t}`;
+          baseMap.R = `rotateY(90deg) ${t}`;
+          baseMap.L = `rotateY(-90deg) ${t}`;
+
+          FACES.forEach((face) => {
+            faceMap[face].style.transform = baseMap[face];
+          });
+        }
+
+        function setupCubeDom() {
+          FACES.forEach((face) => {
+            const el = createFaceDom(face, stickerDomByIndex);
+            faceDom[face] = el;
+            cube3d.appendChild(el);
+          });
+          placeFaces3D(faceDom, faceBaseTransform);
+        }
+
+        function setupSolverCubeDom() {
+          FACES.forEach((face) => {
+            const el = createFaceDom(face, solverSticker3dDom);
+            solverFaceDom[face] = el;
+            solverCube3d.appendChild(el);
+          });
+          placeFaces3D(solverFaceDom, solverFaceBaseTransform);
+        }
+
+        function renderGameCube() {
+          for (let i = 0; i < 54; i += 1) {
+            const st = stickerDomByIndex.get(i);
+            if (!st) continue;
+            st.style.background = FACE_COLORS[gameFacelets[i]];
+          }
+          cube3d.style.transform = `rotateX(${viewRotX}deg) rotateY(${viewRotY}deg)`;
+        }
+
+        function renderSolverCube() {
+          for (let i = 0; i < 54; i += 1) {
+            const st = solverSticker3dDom.get(i);
+            if (!st) continue;
+            st.style.background = FACE_COLORS[solverFacelets[i]];
+          }
+          solverCube3d.style.transform = `rotateX(${solverViewRotX}deg) rotateY(${solverViewRotY}deg)`;
+        }
+
+        function setStatus(el, msg, kind = "") {
+          el.textContent = msg;
+          el.className = `status${kind ? ` ${kind}` : ""}`;
+        }
+
+        function updateHistoryView() {
+          moveHistoryEl.textContent = moveHistory.length
+            ? `Move history (${moveHistory.length}): ${moveHistory.join(" ")}`
+            : "Move history: (none)";
+        }
+
+        function isSolvedFacelets(facelets) {
+          for (const face of FACES) {
+            const start = FACE_START[face];
+            const c = facelets[start];
+            for (let i = start; i < start + 9; i += 1)
+              if (facelets[i] !== c) return false;
+          }
+          return true;
+        }
+
+        function applyGameMove(move, record = true, updateStatus = true) {
+          gameFacelets = applyPermutation(gameFacelets, movePerm[move]);
+          if (record) moveHistory.push(move);
+          renderGameCube();
+          updateHistoryView();
+
+          if (!updateStatus) return;
+
+          if (isSolvedFacelets(gameFacelets)) {
+            setStatus(gameStatusEl, "Cube solved. Nice!", "ok");
+          } else {
+            setStatus(gameStatusEl, `Applied move: ${move}`, "");
+          }
+        }
+
+        function queueGameAction(action) {
+          gameQueue = gameQueue
+            .then(() => action())
+            .catch((err) => {
+              setStatus(
+                gameStatusEl,
+                `Action failed: ${err?.message || "Unknown error"}`,
+                "err",
+              );
+            });
+          return gameQueue;
+        }
+
+        function moveQuarterCount(move) {
+          if (move.endsWith("2")) return 2;
+          if (move.endsWith("'")) return -1;
+          return 1;
+        }
+
+        function faceTurnAngle(move) {
+          return quarterTurnAngle(move[0]) * moveQuarterCount(move);
+        }
+
+        function animateFaceTurn(move) {
+          const face = move[0];
+          const faceEl = faceDom[face];
+          const base = faceBaseTransform[face];
+          const angle = faceTurnAngle(move);
+          const duration = move.endsWith("2") ? 260 : 180;
+
+          return new Promise((resolve) => {
+            if (!faceEl || !base || typeof faceEl.animate !== "function") {
+              resolve();
+              return;
+            }
+
+            const animation = faceEl.animate(
+              [
+                { transform: `${base} rotateZ(0deg)` },
+                { transform: `${base} rotateZ(${angle}deg)` },
+              ],
+              {
+                duration,
+                easing: "cubic-bezier(0.2, 0.75, 0.25, 1)",
+              },
+            );
+
+            const done = () => {
+              faceEl.style.transform = base;
+              resolve();
+            };
+
+            animation.onfinish = done;
+            animation.oncancel = done;
+          });
+        }
+
+        async function applyGameMoveAnimated(
+          move,
+          { record = true, animate = true, updateStatus = true } = {},
+        ) {
+          if (animate) {
+            await animateFaceTurn(move);
+          }
+          applyGameMove(move, record, updateStatus);
+        }
+
+        function setupMoveButtons() {
+          MOVE_LIST.forEach((move) => {
+            const btn = document.createElement("button");
+            btn.textContent = move;
+            btn.addEventListener("click", () => {
+              queueGameAction(() => applyGameMoveAnimated(move));
+            });
+            moveControls.appendChild(btn);
+          });
+        }
+
+        function randomScramble(length = 20) {
+          const seq = [];
+          const suffixes = ["", "'", "2"];
+          let prevFace = null;
+          for (let i = 0; i < length; i += 1) {
+            let face;
+            do {
+              face = FACES[Math.floor(Math.random() * FACES.length)];
+            } while (face === prevFace);
+            prevFace = face;
+            const suffix =
+              suffixes[Math.floor(Math.random() * suffixes.length)];
+            seq.push(`${face}${suffix}`);
+          }
+          return seq;
+        }
+
+        function setupOrbitControls(container, onDrag) {
+          let dragging = false;
+          let lastX = 0;
+          let lastY = 0;
+
+          const onDown = (x, y) => {
+            dragging = true;
+            lastX = x;
+            lastY = y;
+          };
+          const onMove = (x, y) => {
+            if (!dragging) return;
+            const dx = x - lastX;
+            const dy = y - lastY;
+            lastX = x;
+            lastY = y;
+            onDrag(dx, dy);
+          };
+          const onUp = () => {
+            dragging = false;
+          };
+
+          container.addEventListener("pointerdown", (e) => {
+            container.setPointerCapture(e.pointerId);
+            onDown(e.clientX, e.clientY);
+          });
+          container.addEventListener("pointermove", (e) =>
+            onMove(e.clientX, e.clientY),
+          );
+          container.addEventListener("pointerup", onUp);
+          container.addEventListener("pointercancel", onUp);
+        }
+
+        function cycleColor(current, dir) {
+          const index = COLOR_ORDER.indexOf(current);
+          const nextIndex =
+            (index + dir + COLOR_ORDER.length) % COLOR_ORDER.length;
+          return COLOR_ORDER[nextIndex];
+        }
+
+        function paintSolverSticker(index, dir = 1) {
+          const next = cycleColor(solverFacelets[index], dir);
+          solverFacelets[index] = next;
+          const cell = solverStickerDom.get(index);
+          if (cell) cell.style.background = FACE_COLORS[next];
+          const preview = solverSticker3dDom.get(index);
+          if (preview) preview.style.background = FACE_COLORS[next];
+        }
+
+        // -----------------------------
+        // Solver mode UI
+        // -----------------------------
+
+        function createSolverFace(face) {
+          const wrap = document.createElement("div");
+          wrap.className = "face-input-wrap";
+          const title = document.createElement("div");
+          title.className = "face-label";
+          title.textContent = `${FACE_NAMES[face]} (${face})`;
+          const grid = document.createElement("div");
+          grid.className = "face-input";
+
+          const start = FACE_START[face];
+          for (let i = 0; i < 9; i += 1) {
+            const idx = start + i;
+            const cell = document.createElement("button");
+            cell.className = "input-sticker";
+            if (i === 4) cell.classList.add("center");
+            cell.style.background = FACE_COLORS[solverFacelets[idx]];
+            cell.title =
+              i === 4
+                ? "Center sticker (fixed)"
+                : "Tap to cycle • Right-click to reverse • Drag to paint";
+
+            cell.addEventListener("pointerdown", (event) => {
+              if (i === 4) return;
+              event.preventDefault();
+              solverPaintDir = event.button === 2 ? -1 : 1;
+              solverPaintActive = true;
+              paintSolverSticker(idx, solverPaintDir);
+            });
+
+            cell.addEventListener("pointerenter", () => {
+              if (i === 4 || !solverPaintActive) return;
+              paintSolverSticker(idx, solverPaintDir);
+            });
+
+            solverStickerDom.set(idx, cell);
+            grid.appendChild(cell);
+          }
+
+          wrap.appendChild(title);
+          wrap.appendChild(grid);
+          return wrap;
+        }
+
+        function renderSolverInput() {
+          solverGridEl.innerHTML = "";
+          solverStickerDom.clear();
+          solverGridEl.oncontextmenu = (e) => e.preventDefault();
+          FACES.forEach((face) =>
+            solverGridEl.appendChild(createSolverFace(face)),
+          );
+        }
+
+        function syncSolverFromGame() {
+          solverFacelets = cloneArray(gameFacelets);
+          for (let i = 0; i < 54; i += 1) {
+            const el = solverStickerDom.get(i);
+            if (el) el.style.background = FACE_COLORS[solverFacelets[i]];
+            const preview = solverSticker3dDom.get(i);
+            if (preview)
+              preview.style.background = FACE_COLORS[solverFacelets[i]];
+          }
+        }
+
+        function applySolverToGame() {
+          const v = validateFacelets(solverFacelets);
+          if (!v.ok) {
+            setStatus(solverStatusEl, `Cannot apply input: ${v.reason}`, "err");
+            return;
+          }
+          gameFacelets = cloneArray(solverFacelets);
+          moveHistory = [];
+          renderGameCube();
+          updateHistoryView();
+          setStatus(gameStatusEl, "Applied solver input to game cube.", "ok");
+          setStatus(solverStatusEl, "Input applied to game cube.", "ok");
+        }
+
+        function toggleSolverMode() {
+          solverMode = !solverMode;
+          solverRoot.classList.toggle("active", solverMode);
+          solverHintEl.style.display = solverMode ? "none" : "block";
+          modeBadge.textContent = `Mode: ${solverMode ? "Solver" : "Game"}`;
+          solverToggleBtn.textContent = solverMode
+            ? "Back To Game"
+            : "Solver Mode";
+          if (solverMode) renderSolverCube();
+        }
+
+        // -----------------------------
+        // Action buttons
+        // -----------------------------
+        document.getElementById("resetBtn").addEventListener("click", () => {
+          gameFacelets = solvedFacelets();
+          moveHistory = [];
+          renderGameCube();
+          updateHistoryView();
+          setStatus(gameStatusEl, "Cube reset to solved state.", "ok");
+        });
+
+        document.getElementById("scrambleBtn").addEventListener("click", () => {
+          queueGameAction(async () => {
+            const seq = randomScramble(20);
+            setStatus(
+              gameStatusEl,
+              `Scrambling... (${seq.length} moves)`,
+              "warn",
+            );
+            for (const m of seq) {
+              await applyGameMoveAnimated(m, { updateStatus: false });
+            }
+            setStatus(
+              gameStatusEl,
+              `Scrambled with ${seq.length} random moves:\n${seq.join(" ")}`,
+              "warn",
+            );
+          });
+        });
+
+        document.getElementById("undoBtn").addEventListener("click", () => {
+          queueGameAction(async () => {
+            if (!moveHistory.length) {
+              setStatus(gameStatusEl, "No moves to undo.", "warn");
+              return;
+            }
+            const last = moveHistory.pop();
+            await applyGameMoveAnimated(inverseMove(last), {
+              record: false,
+              updateStatus: false,
+            });
+            setStatus(gameStatusEl, `Undid move: ${last}`, "");
+          });
+        });
+
+        solverToggleBtn.addEventListener("click", toggleSolverMode);
+
+        document
+          .getElementById("solverResetBtn")
+          .addEventListener("click", () => {
+            solverFacelets = solvedFacelets();
+            renderSolverInput();
+            setStatus(solverStatusEl, "Solver input reset.", "ok");
+          });
+
+        document
+          .getElementById("loadGameStateBtn")
+          .addEventListener("click", () => {
+            syncSolverFromGame();
+            setStatus(
+              solverStatusEl,
+              "Loaded current game cube into solver input.",
+              "ok",
+            );
+          });
+
+        document
+          .getElementById("applyInputBtn")
+          .addEventListener("click", applySolverToGame);
+
+        document.getElementById("validateBtn").addEventListener("click", () => {
+          const v = validateFacelets(solverFacelets);
+          if (!v.ok) {
+            setStatus(solverStatusEl, `Invalid cube state: ${v.reason}`, "err");
+            return;
+          }
+          setStatus(solverStatusEl, "Cube state is valid and solvable.", "ok");
+        });
+
+        document.getElementById("solveBtn").addEventListener("click", () => {
+          const v = validateFacelets(solverFacelets);
+          if (!v.ok) {
+            setStatus(solverStatusEl, `Invalid cube state: ${v.reason}`, "err");
+            solutionTextEl.textContent =
+              "Fix the cube input colors before solving.";
+            return;
+          }
+
+          setStatus(
+            solverStatusEl,
+            "Solving... trying optimal search first, then fast fallback if needed.",
+            "warn",
+          );
+          solutionTextEl.textContent = "Computing solution...";
+
+          setTimeout(() => {
+            const t0 = performance.now();
+            const optimal = solveOptimalIDA(v.cubie, {
+              maxDepth: 24,
+              timeoutMs: 9000,
+            });
+            const t1 = performance.now();
+
+            let solution = optimal;
+            let mode = "optimal";
+
+            if (!solution) {
+              solution = solveFastBeam(v.cubie, {
+                maxDepth: 34,
+                beamWidth: 1600,
+                timeoutMs: 7000,
+              });
+              mode = "fallback";
+            }
+
+            const elapsed = ((performance.now() - t0) / 1000).toFixed(2);
+            const optimalElapsed = ((t1 - t0) / 1000).toFixed(2);
+
+            if (!solution) {
+              setStatus(
+                solverStatusEl,
+                `Solver timed out without finding a solution (elapsed ${elapsed}s). Try Validate State and recheck input colors.`,
+                "warn",
+              );
+              solutionTextEl.textContent =
+                "No solution returned within current limits.";
+              return;
+            }
+
+            const steps = solution.map((m, i) => `${i + 1}. ${m}`).join("\n");
+            if (mode === "optimal") {
+              setStatus(
+                solverStatusEl,
+                `Solved optimally in ${solution.length} moves (elapsed ${elapsed}s).`,
+                "ok",
+              );
+              solutionTextEl.textContent = `Minimum moves: ${solution.length}\n\nSequence:\n${solution.join(" ")}\n\nStep-by-step:\n${steps}`;
+            } else {
+              setStatus(
+                solverStatusEl,
+                `Solved with fast fallback in ${solution.length} moves (optimal search timed out at ${optimalElapsed}s, total ${elapsed}s).`,
+                "ok",
+              );
+              solutionTextEl.textContent = `Solution found (fast fallback): ${solution.length} moves\n\nSequence:\n${solution.join(" ")}\n\nStep-by-step:\n${steps}`;
+            }
+          }, 20);
+        });
+
+        // -----------------------------
+        // Keyboard shortcuts
+        // -----------------------------
+        window.addEventListener("keydown", (e) => {
+          if (e.repeat) return;
+          const key = e.key.toUpperCase();
+          if (!"URFDLB".includes(key)) return;
+          queueGameAction(() =>
+            applyGameMoveAnimated(e.shiftKey ? `${key}'` : key),
+          );
+        });
+
+        window.addEventListener("pointerup", () => {
+          solverPaintActive = false;
+        });
+
+        window.addEventListener("pointercancel", () => {
+          solverPaintActive = false;
+        });
+
+        // -----------------------------
+        // Initialize
+        // -----------------------------
+        setupCubeDom();
+        setupSolverCubeDom();
+        setupMoveButtons();
+        setupOrbitControls(sceneWrap, (dx, dy) => {
+          viewRotY += dx * 0.35;
+          viewRotX -= dy * 0.35;
+          viewRotX = Math.max(-88, Math.min(88, viewRotX));
+          renderGameCube();
+        });
+        setupOrbitControls(solverSceneWrap, (dx, dy) => {
+          solverViewRotY += dx * 0.35;
+          solverViewRotX -= dy * 0.35;
+          solverViewRotX = Math.max(-88, Math.min(88, solverViewRotX));
+          renderSolverCube();
+        });
+        renderSolverInput();
+        renderGameCube();
+        renderSolverCube();
+        updateHistoryView();
+        setStatus(
+          gameStatusEl,
+          "Ready. Drag cube to rotate camera. Use controls to play.",
+          "ok",
+        );
+      })();
+    </script>
+  </body>
+</html>
