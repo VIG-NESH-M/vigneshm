@@ -1,0 +1,2922 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#2563eb" />
+    <meta
+      name="description"
+      content="Interactive Java Backend Engineering Roadmap — DSA, Java, Spring, Microservices, HLD/LLD, DevOps, Architecture. Tracks progress, quizzes, notes, and a 16-week study plan."
+    />
+    <title>Java Backend Roadmap</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☕</text></svg>"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                50: "#eff6ff",
+                100: "#dbeafe",
+                200: "#bfdbfe",
+                500: "#3b82f6",
+                600: "#2563eb",
+                700: "#1d4ed8",
+                800: "#1e40af",
+                900: "#1e3a8a",
+              },
+            },
+            maxHeight: {
+              "90vh": "90vh",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html,
+      body {
+        font-family:
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+      }
+      body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      .card-done {
+        opacity: 0.55;
+      }
+      .quiz-opt-correct {
+        background: #d1fae5 !important;
+        border-color: #059669 !important;
+        color: #065f46 !important;
+      }
+      .quiz-opt-wrong {
+        background: #fee2e2 !important;
+        border-color: #dc2626 !important;
+        color: #7f1d1d !important;
+      }
+      .phase-bar-fill {
+        transition: width 0.5s ease;
+      }
+      .card-hover {
+        transition:
+          transform 0.15s ease,
+          box-shadow 0.15s ease;
+      }
+      @media (hover: hover) {
+        .card-hover:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px -6px rgba(0, 0, 0, 0.08);
+        }
+      }
+      .tab-active {
+        border-bottom-color: #2563eb !important;
+        color: #2563eb !important;
+      }
+      .chip-active {
+        background: #2563eb !important;
+        color: #fff !important;
+        border-color: #2563eb !important;
+      }
+      :focus-visible {
+        outline: 2px solid #2563eb;
+        outline-offset: 2px;
+      }
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 9999px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+      .modal-backdrop {
+        background: rgba(15, 23, 42, 0.5);
+        backdrop-filter: blur(2px);
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(6px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-fade-in {
+        animation: fadeIn 0.18s ease-out;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.001ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.001ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+      .kbd {
+        display: inline-block;
+        padding: 1px 5px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 10px;
+        line-height: 14px;
+        color: #334155;
+        background: #f1f5f9;
+        border: 1px solid #cbd5e1;
+        border-bottom-width: 2px;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+
+  <body class="min-h-screen bg-gray-50 text-gray-900">
+    <a
+      href="#view-roadmap"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-white focus:text-blue-700 focus:px-3 focus:py-2 focus:rounded focus:shadow"
+      >Skip to content</a
+    >
+
+    <div id="app">
+      <!-- ============ TOP BAR ============ -->
+      <header
+        class="sticky top-0 z-20 bg-white/95 backdrop-blur border-b border-gray-200 px-3 py-2.5"
+      >
+        <div class="max-w-6xl mx-auto">
+          <div class="flex flex-wrap items-center gap-2">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold text-gray-900 truncate">
+                Java Backend Roadmap
+              </p>
+              <p class="text-xs text-gray-400 hidden sm:block">
+                Full-stack engineering curriculum
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              <span
+                class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-medium border border-blue-100"
+              >
+                <span id="tb-done">0</span>/<span id="tb-total">0</span> done
+              </span>
+              <span
+                class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-amber-50 text-amber-700 text-xs font-medium border border-amber-100"
+              >
+                <span id="tb-star">0</span> starred
+              </span>
+              <span
+                class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs font-medium border border-green-100"
+              >
+                <span id="tb-pct">0</span>% done
+              </span>
+            </div>
+          </div>
+
+          <!-- overall progress bar -->
+          <div
+            class="mt-2 h-1 bg-gray-100 rounded-full overflow-hidden"
+            role="progressbar"
+            aria-label="Overall progress"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          >
+            <div
+              id="tb-bar"
+              class="h-full bg-blue-500 rounded-full phase-bar-fill"
+              style="width: 0%"
+            ></div>
+          </div>
+
+          <!-- TABS -->
+          <nav
+            class="flex gap-0 mt-2 overflow-x-auto -mb-px"
+            role="tablist"
+            aria-label="Views"
+          >
+            <button
+              type="button"
+              role="tab"
+              aria-selected="true"
+              data-tab="roadmap"
+              class="tab-btn tab-active px-3 py-1.5 text-xs font-medium whitespace-nowrap border-b-2 border-transparent transition-colors"
+            >
+              Roadmap
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected="false"
+              data-tab="progress"
+              class="tab-btn px-3 py-1.5 text-xs font-medium whitespace-nowrap border-b-2 border-transparent text-gray-500 hover:text-gray-700 transition-colors"
+            >
+              Progress
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected="false"
+              data-tab="quiz"
+              class="tab-btn px-3 py-1.5 text-xs font-medium whitespace-nowrap border-b-2 border-transparent text-gray-500 hover:text-gray-700 transition-colors"
+            >
+              Quiz
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected="false"
+              data-tab="notes"
+              class="tab-btn px-3 py-1.5 text-xs font-medium whitespace-nowrap border-b-2 border-transparent text-gray-500 hover:text-gray-700 transition-colors"
+            >
+              Notes
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected="false"
+              data-tab="planner"
+              class="tab-btn px-3 py-1.5 text-xs font-medium whitespace-nowrap border-b-2 border-transparent text-gray-500 hover:text-gray-700 transition-colors"
+            >
+              Study Plan
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected="false"
+              data-tab="resources"
+              class="tab-btn px-3 py-1.5 text-xs font-medium whitespace-nowrap border-b-2 border-transparent text-gray-500 hover:text-gray-700 transition-colors"
+            >
+              Resources
+            </button>
+          </nav>
+        </div>
+      </header>
+
+      <main class="max-w-6xl mx-auto px-3 py-4">
+        <!-- ========== ROADMAP VIEW ========== -->
+        <section
+          id="view-roadmap"
+          class="view-panel"
+          role="tabpanel"
+          aria-label="Roadmap"
+        >
+          <div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-3">
+            <input
+              id="search"
+              type="search"
+              placeholder="Search topics, subtopics…"
+              autocomplete="off"
+              class="flex-1 h-10 px-3 text-sm border border-gray-200 rounded-lg bg-white focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-200"
+            />
+            <div class="relative w-full sm:w-44">
+              <select
+                id="sort-sel"
+                aria-label="Sort roadmap"
+                class="h-10 w-full appearance-none pl-3 pr-10 text-sm border border-gray-200 rounded-lg bg-white focus:outline-none focus:border-blue-400 text-gray-700"
+              >
+                <option value="default">Default order</option>
+                <option value="alpha">A–Z</option>
+                <option value="starred">Starred first</option>
+                <option value="done">Done first</option>
+                <option value="todo">Todo first</option>
+              </select>
+              <span
+                class="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-500"
+                aria-hidden="true"
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M5 7.5L10 12.5L15 7.5"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
+          <div id="tag-chips" class="flex flex-wrap gap-1.5 mb-4"></div>
+          <div id="roadmap-root" class="space-y-4"></div>
+          <div
+            id="empty-msg"
+            class="hidden text-center py-12 text-sm text-gray-400"
+          >
+            No topics match your search.
+          </div>
+        </section>
+
+        <!-- ========== PROGRESS VIEW ========== -->
+        <section
+          id="view-progress"
+          class="view-panel hidden"
+          role="tabpanel"
+          aria-label="Progress"
+        >
+          <div
+            class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 mb-6"
+          >
+            <div class="bg-white border border-gray-100 rounded-xl p-4">
+              <div class="text-2xl font-semibold text-gray-900" id="st-pct">
+                0%
+              </div>
+              <div class="text-xs text-gray-400 mt-0.5">Overall progress</div>
+            </div>
+            <div class="bg-white border border-gray-100 rounded-xl p-4">
+              <div class="text-2xl font-semibold text-gray-900" id="st-done">
+                0
+              </div>
+              <div class="text-xs text-gray-400 mt-0.5">Topics completed</div>
+            </div>
+            <div class="bg-white border border-gray-100 rounded-xl p-4">
+              <div class="text-2xl font-semibold text-gray-900" id="st-rem">
+                0
+              </div>
+              <div class="text-xs text-gray-400 mt-0.5">Remaining</div>
+            </div>
+            <div class="bg-white border border-gray-100 rounded-xl p-4">
+              <div class="text-2xl font-semibold text-gray-900" id="st-star">
+                0
+              </div>
+              <div class="text-xs text-gray-400 mt-0.5">Starred</div>
+            </div>
+            <div class="bg-white border border-gray-100 rounded-xl p-4">
+              <div class="text-2xl font-semibold text-gray-900" id="st-notes">
+                0
+              </div>
+              <div class="text-xs text-gray-400 mt-0.5">Notes saved</div>
+            </div>
+            <div class="bg-white border border-gray-100 rounded-xl p-4">
+              <div class="text-2xl font-semibold text-gray-900" id="st-phases">
+                0
+              </div>
+              <div class="text-xs text-gray-400 mt-0.5">Phases</div>
+            </div>
+          </div>
+
+          <p
+            class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3"
+          >
+            Phase breakdown
+          </p>
+          <div
+            class="bg-white border border-gray-100 rounded-xl p-4 space-y-4"
+            id="phase-breakdown"
+          ></div>
+
+          <div class="mt-4 flex gap-2 flex-wrap">
+            <button
+              type="button"
+              id="btn-reset"
+              class="px-4 py-2 text-xs border border-red-200 text-red-600 rounded-lg hover:bg-red-50 transition-colors"
+            >
+              Reset all progress
+            </button>
+            <button
+              type="button"
+              id="btn-advice"
+              class="px-4 py-2 text-xs border border-blue-200 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors"
+            >
+              Get AI advice ↗
+            </button>
+            <button
+              type="button"
+              id="btn-export"
+              class="px-4 py-2 text-xs border border-gray-200 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+            >
+              Export data
+            </button>
+            <label
+              class="px-4 py-2 text-xs border border-gray-200 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer"
+            >
+              Import data
+              <input
+                type="file"
+                id="import-file"
+                accept="application/json,.json"
+                class="hidden"
+              />
+            </label>
+          </div>
+        </section>
+
+        <!-- ========== QUIZ VIEW ========== -->
+        <section
+          id="view-quiz"
+          class="view-panel hidden"
+          role="tabpanel"
+          aria-label="Quiz"
+        >
+          <div class="flex flex-wrap gap-2 mb-4 items-center">
+            <select
+              id="quiz-cat"
+              aria-label="Quiz category"
+              class="px-3 py-2 text-sm border border-gray-200 rounded-lg bg-white focus:outline-none text-gray-700"
+            >
+              <option value="all">All topics</option>
+              <option value="DSA">DSA</option>
+              <option value="Java">Java</option>
+              <option value="Spring">Spring</option>
+              <option value="Security">Security</option>
+              <option value="DB">Databases</option>
+              <option value="Micro">Microservices</option>
+              <option value="HLD">HLD</option>
+              <option value="LLD">LLD</option>
+              <option value="Test">Testing</option>
+              <option value="DevOps">DevOps</option>
+              <option value="Arch">Architecture</option>
+            </select>
+            <button
+              type="button"
+              id="btn-new-quiz"
+              class="px-4 py-2 text-xs border border-gray-200 bg-white rounded-lg hover:bg-gray-50 text-gray-700 transition-colors"
+            >
+              New quiz ↻
+            </button>
+            <span class="text-xs text-gray-400">
+              Score: <span id="q-score">0</span> correct
+            </span>
+            <span class="text-xs text-gray-400 hidden sm:inline-block ml-auto">
+              Shortcuts: <span class="kbd">1</span>–<span class="kbd">4</span>
+              answer · <span class="kbd">Enter</span> next ·
+              <span class="kbd">R</span> restart
+            </span>
+          </div>
+          <div
+            id="quiz-area"
+            class="bg-white border border-gray-100 rounded-xl p-5 max-w-xl"
+          ></div>
+        </section>
+
+        <!-- ========== NOTES VIEW ========== -->
+        <section
+          id="view-notes"
+          class="view-panel hidden"
+          role="tabpanel"
+          aria-label="Notes"
+        >
+          <div class="bg-white border border-gray-100 rounded-xl p-4 mb-4">
+            <p
+              class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3"
+            >
+              Add a note
+            </p>
+            <select
+              id="note-topic"
+              aria-label="Note topic"
+              class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg bg-white focus:outline-none focus:border-blue-400 mb-2 text-gray-700"
+            ></select>
+            <textarea
+              id="note-body"
+              rows="3"
+              placeholder="Notes, code snippets, questions…"
+              aria-label="Note content"
+              class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg bg-white focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-100 resize-y font-mono text-gray-800"
+            ></textarea>
+            <div class="flex gap-2 mt-2 items-center flex-wrap">
+              <button
+                type="button"
+                id="btn-save-note"
+                class="px-4 py-2 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Save note
+              </button>
+              <span class="text-xs text-gray-400"
+                ><span class="kbd">Ctrl</span>+<span class="kbd">Enter</span> to
+                save</span
+              >
+              <span
+                id="note-status"
+                class="text-xs text-green-600"
+                role="status"
+                aria-live="polite"
+              ></span>
+            </div>
+          </div>
+          <div id="notes-list" class="space-y-2"></div>
+        </section>
+
+        <!-- ========== PLANNER VIEW ========== -->
+        <section
+          id="view-planner"
+          class="view-panel hidden"
+          role="tabpanel"
+          aria-label="Study plan"
+        >
+          <p class="text-xs text-gray-400 mb-4">
+            16-week structured study plan — from DSA foundations to architecture
+            mastery.
+          </p>
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3"
+            id="planner-grid"
+          ></div>
+        </section>
+
+        <!-- ========== RESOURCES VIEW ========== -->
+        <section
+          id="view-resources"
+          class="view-panel hidden"
+          role="tabpanel"
+          aria-label="Resources"
+        >
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"
+            id="res-grid"
+          ></div>
+        </section>
+      </main>
+
+      <footer
+        class="max-w-6xl mx-auto px-3 pb-8 pt-2 text-center text-xs text-gray-400"
+      >
+        Progress is saved to your browser (localStorage) — clearing site data
+        will reset it. Use
+        <span class="text-gray-500">Export data</span> to keep a backup.
+      </footer>
+    </div>
+
+    <!-- ========== AI PROMPT MODAL ========== -->
+    <div
+      id="prompt-modal"
+      class="hidden fixed inset-0 z-50 items-center justify-center p-4 modal-backdrop"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="prompt-modal-title"
+    >
+      <div
+        class="bg-white rounded-2xl w-full max-w-lg shadow-xl overflow-hidden animate-fade-in max-h-90vh flex flex-col"
+      >
+        <div
+          class="px-5 py-3 border-b border-gray-100 flex items-center justify-between flex-shrink-0"
+        >
+          <h3
+            id="prompt-modal-title"
+            class="text-sm font-semibold text-gray-800"
+          >
+            AI prompt
+          </h3>
+          <button
+            type="button"
+            id="btn-close-modal"
+            class="text-gray-400 hover:text-gray-600 text-xl leading-none px-1"
+            aria-label="Close dialog"
+          >
+            &times;
+          </button>
+        </div>
+        <div class="p-5 space-y-3 overflow-y-auto">
+          <p class="text-xs text-gray-500">
+            Copy this prompt or open it directly in your favourite AI assistant.
+          </p>
+          <textarea
+            id="prompt-text"
+            rows="6"
+            aria-label="Prompt text"
+            class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg bg-gray-50 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-100 resize-y font-mono text-gray-800"
+          ></textarea>
+          <div class="flex flex-wrap gap-2 items-center">
+            <button
+              type="button"
+              id="btn-copy-prompt"
+              class="px-4 py-2 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              Copy prompt
+            </button>
+            <a
+              id="open-chatgpt"
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-4 py-2 text-xs border border-gray-200 rounded-lg hover:bg-gray-50 text-gray-700 transition-colors"
+              >ChatGPT ↗</a
+            >
+            <a
+              id="open-gemini"
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-4 py-2 text-xs border border-gray-200 rounded-lg hover:bg-gray-50 text-gray-700 transition-colors"
+              >Gemini ↗</a
+            >
+            <a
+              id="open-claude"
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-4 py-2 text-xs border border-gray-200 rounded-lg hover:bg-gray-50 text-gray-700 transition-colors"
+              >Claude ↗</a
+            >
+            <span
+              id="copy-status"
+              class="text-xs text-green-600"
+              role="status"
+              aria-live="polite"
+            ></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast -->
+    <div
+      id="toast"
+      class="hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-40 px-4 py-2 text-xs bg-gray-900 text-white rounded-lg shadow-lg animate-fade-in"
+      role="status"
+      aria-live="polite"
+    ></div>
+
+    <script>
+      "use strict";
+      (function () {
+        /* ==========================================================
+           CONSTANTS
+           ========================================================== */
+        const STORAGE_KEY = "jbr_v4";
+        const QUIZ_SIZE = 10;
+        const COPY_FEEDBACK_MS = 2000;
+        const SEARCH_DEBOUNCE_MS = 120;
+        const TOAST_MS = 2200;
+
+        /* ==========================================================
+           DATA
+           ========================================================== */
+        const PHASES = Object.freeze([
+          {
+            id: "dsa",
+            label: "DSA & Problem Solving",
+            short: "DSA",
+            color: "#3b82f6",
+            bg: "#eff6ff",
+            border: "#bfdbfe",
+            titleColor: "#1e3a8a",
+            subColor: "#1d4ed8",
+            cards: [
+              {
+                t: "Arrays & Strings",
+                tag: "DSA",
+                items: [
+                  "Two pointers, sliding window",
+                  "Prefix sums, difference arrays",
+                  "Kadane's algorithm (max subarray)",
+                  "Anagram, palindrome, pattern matching",
+                  "Matrix traversal, spiral order",
+                  "Dutch national flag problem",
+                ],
+              },
+              {
+                t: "Linked Lists",
+                tag: "DSA",
+                items: [
+                  "Singly, doubly, circular LL",
+                  "Reverse, merge, detect cycle",
+                  "Floyd's cycle detection",
+                  "LRU cache with HashMap + DLL",
+                  "Merge k sorted lists",
+                  "Add two numbers (LL math)",
+                ],
+              },
+              {
+                t: "Stacks & Queues",
+                tag: "DSA",
+                items: [
+                  "Monotonic stack: next greater element",
+                  "Min stack, max stack design",
+                  "Implement queue using two stacks",
+                  "Deque, sliding window maximum",
+                  "Valid parentheses, calculator",
+                  "BFS using queue",
+                ],
+              },
+              {
+                t: "Trees & BST",
+                tag: "DSA",
+                items: [
+                  "Inorder, preorder, postorder DFS",
+                  "Level-order BFS traversal",
+                  "Height, diameter, LCA of tree",
+                  "BST: insert, delete, search, validate",
+                  "Serialize & deserialize binary tree",
+                  "Trie (prefix tree) build & search",
+                ],
+              },
+              {
+                t: "Heaps & Graphs",
+                tag: "DSA",
+                items: [
+                  "Min/max heap, priority queue",
+                  "Top-K elements pattern",
+                  "Dijkstra, BFS, DFS traversal",
+                  "Topological sort (Kahn's algorithm)",
+                  "Union-Find disjoint set",
+                  "Bellman-Ford, Floyd-Warshall",
+                ],
+              },
+              {
+                t: "Dynamic Programming",
+                tag: "DSA",
+                items: [
+                  "Memoization vs tabulation",
+                  "0/1 knapsack, unbounded knapsack",
+                  "Longest common subsequence (LCS)",
+                  "Coin change, edit distance",
+                  "Matrix chain multiplication",
+                  "DP on trees, intervals, bitmask",
+                ],
+              },
+              {
+                t: "Sorting & Searching",
+                tag: "DSA",
+                items: [
+                  "Quicksort, mergesort, heapsort",
+                  "Binary search on answer pattern",
+                  "Search in rotated sorted array",
+                  "Counting sort, radix sort",
+                  "K-th largest element (quickselect)",
+                  "Merge intervals, meeting rooms",
+                ],
+              },
+              {
+                t: "Backtracking",
+                tag: "DSA",
+                items: [
+                  "N-Queens, Sudoku solver",
+                  "Subset sum, all permutations",
+                  "Word search in grid",
+                  "Letter combinations (phone)",
+                  "Combination sum variants",
+                  "Pruning strategies, memoization",
+                ],
+              },
+            ],
+          },
+          {
+            id: "java",
+            label: "Java Core",
+            short: "Java",
+            color: "#0284c7",
+            bg: "#f0f9ff",
+            border: "#bae6fd",
+            titleColor: "#0c4a6e",
+            subColor: "#0369a1",
+            cards: [
+              {
+                t: "Java Fundamentals",
+                tag: "Java",
+                items: [
+                  "Primitives vs wrappers, autoboxing",
+                  "Control flow, switch expressions (14+)",
+                  "Arrays, varargs, StringBuilder",
+                  "Pass-by-value semantics",
+                  "String pool, interning, immutability",
+                  "Static vs instance, initialization blocks",
+                ],
+              },
+              {
+                t: "OOP Concepts",
+                tag: "Java",
+                items: [
+                  "Classes, constructors, this/super",
+                  "Inheritance, method overriding",
+                  "Polymorphism, dynamic dispatch",
+                  "Interfaces vs abstract classes",
+                  "Encapsulation, access modifiers",
+                  "Composition over inheritance pattern",
+                ],
+              },
+              {
+                t: "Collections & Generics",
+                tag: "Java",
+                items: [
+                  "List, Set, Map, Queue, Deque APIs",
+                  "ArrayList vs LinkedList tradeoffs",
+                  "HashMap internals: hash, buckets, load",
+                  "TreeMap, LinkedHashMap, PriorityQueue",
+                  "Generics, upper/lower bounded wildcards",
+                  "Fail-fast vs fail-safe iterators",
+                ],
+              },
+              {
+                t: "Exception Handling",
+                tag: "Java",
+                items: [
+                  "Checked vs unchecked exceptions",
+                  "try-catch-finally, try-with-resources",
+                  "Custom exception class hierarchy",
+                  "Multi-catch, exception chaining",
+                  "Best practices: wrap, translate, log",
+                  "StackOverflowError, OutOfMemoryError",
+                ],
+              },
+              {
+                t: "Java 8–21 Features",
+                tag: "Java",
+                items: [
+                  "Lambda expressions, functional interfaces",
+                  "Stream API: map, filter, reduce, collect",
+                  "Optional: orElse, flatMap, ifPresent",
+                  "Method references (4 types)",
+                  "Records, sealed classes (Java 17)",
+                  "Pattern matching, virtual threads (21)",
+                ],
+              },
+              {
+                t: "Concurrency & Threads",
+                tag: "Java",
+                items: [
+                  "Thread lifecycle, Runnable, Callable",
+                  "synchronized, volatile, happens-before",
+                  "ReentrantLock, ReadWriteLock, StampedLock",
+                  "ExecutorService, thread pools, ForkJoin",
+                  "CompletableFuture async chaining",
+                  "Virtual threads (Project Loom, Java 21)",
+                ],
+              },
+              {
+                t: "JVM & Memory",
+                tag: "Java",
+                items: [
+                  "Heap: Eden, Survivor, Old generation",
+                  "GC algorithms: G1, ZGC, Shenandoah",
+                  "Class loading: bootstrap, ext, app loader",
+                  "JIT compilation, tiered compilation",
+                  "Memory leaks, heap dump + MAT analysis",
+                  "Metaspace, off-heap, direct buffer",
+                ],
+              },
+              {
+                t: "I/O & NIO",
+                tag: "Java",
+                items: [
+                  "InputStream/OutputStream hierarchy",
+                  "BufferedReader, Scanner, PrintWriter",
+                  "NIO: Channel, Buffer, Selector non-blocking",
+                  "Files, Path, Files utility class methods",
+                  "WatchService for file system events",
+                  "Java Serialization vs JSON (Jackson)",
+                ],
+              },
+            ],
+          },
+          {
+            id: "spring",
+            label: "Spring Boot",
+            short: "Spring",
+            color: "#16a34a",
+            bg: "#f0fdf4",
+            border: "#bbf7d0",
+            titleColor: "#14532d",
+            subColor: "#15803d",
+            cards: [
+              {
+                t: "Spring Core & IoC",
+                tag: "Spring",
+                items: [
+                  "IoC container, BeanFactory vs ApplicationContext",
+                  "Constructor vs setter vs field injection",
+                  "@Component, @Service, @Repository, @Controller",
+                  "Bean scopes: singleton, prototype, request, session",
+                  "@Conditional, @Profile, @ConditionalOnProperty",
+                  "@Lazy, @Primary, @Qualifier for disambiguation",
+                ],
+              },
+              {
+                t: "Spring Boot Basics",
+                tag: "Spring",
+                items: [
+                  "@SpringBootApplication: 3 annotations in 1",
+                  "Auto-configuration: spring.factories, conditions",
+                  "application.yml: profiles, nested properties",
+                  "@ConfigurationProperties + @EnableConfigurationProperties",
+                  "Externalized config priority order",
+                  "CommandLineRunner, ApplicationRunner, startup events",
+                ],
+              },
+              {
+                t: "Spring MVC & REST",
+                tag: "Spring",
+                items: [
+                  "DispatcherServlet, HandlerMapping, HandlerAdapter",
+                  "@RestController, @RequestMapping, HTTP method mappings",
+                  "@PathVariable, @RequestParam, @RequestHeader, @RequestBody",
+                  "ResponseEntity, HttpStatus, @ResponseStatus",
+                  "Content negotiation: JSON, XML, custom",
+                  "CORS: @CrossOrigin, global WebMvcConfigurer config",
+                ],
+              },
+              {
+                t: "Spring Data JPA",
+                tag: "Spring",
+                items: [
+                  "@Entity, @Table, @Id, @GeneratedValue strategies",
+                  "JpaRepository, PagingAndSortingRepository, Specification",
+                  "Derived query methods naming convention",
+                  "@Query with JPQL and native SQL",
+                  "Relationships: @OneToMany, @ManyToMany, cascade, orphan",
+                  "Auditing: @CreatedDate, @LastModifiedBy, @EnableJpaAuditing",
+                ],
+              },
+              {
+                t: "Configuration & Events",
+                tag: "Spring",
+                items: [
+                  "@Bean, @Configuration, @Import, @ImportResource",
+                  "@Value, SpEL expressions in annotations",
+                  "BeanPostProcessor, BeanFactoryPostProcessor",
+                  "ApplicationEvent, @EventListener, @Async events",
+                  "Custom auto-configuration with spring.factories",
+                  "Actuator: health, info, metrics, custom endpoints",
+                ],
+              },
+              {
+                t: "WebFlux & Reactive",
+                tag: "Spring",
+                items: [
+                  "Reactive manifesto: responsive, resilient, elastic",
+                  "Mono and Flux: cold vs hot publishers",
+                  "Project Reactor operators: map, flatMap, zip, merge",
+                  "WebFlux functional routing vs @RestController",
+                  "R2DBC for reactive database access",
+                  "Backpressure strategies, schedulers, context propagation",
+                ],
+              },
+            ],
+          },
+          {
+            id: "security",
+            label: "Security & AOP",
+            short: "Security",
+            color: "#7c3aed",
+            bg: "#f5f3ff",
+            border: "#ddd6fe",
+            titleColor: "#3b0764",
+            subColor: "#5b21b6",
+            cards: [
+              {
+                t: "Spring Security",
+                tag: "Security",
+                items: [
+                  "SecurityFilterChain DSL (Spring Security 6)",
+                  "AuthenticationManager, AuthenticationProvider chain",
+                  "UserDetailsService, UserDetails, GrantedAuthority",
+                  "Session management: stateless, concurrent control",
+                  "CSRF protection: when to enable/disable",
+                  "CORS global config via SecurityFilterChain",
+                ],
+              },
+              {
+                t: "JWT & OAuth2",
+                tag: "Security",
+                items: [
+                  "JWT structure: base64(header).base64(payload).signature",
+                  "HS256 (symmetric) vs RS256 (asymmetric) signing",
+                  "Access token + refresh token rotation strategy",
+                  "OAuth2 authorization code + PKCE flow",
+                  "OpenID Connect (OIDC), ID token vs access token",
+                  "Keycloak, Auth0, Spring Authorization Server",
+                ],
+              },
+              {
+                t: "AOP & Aspects",
+                tag: "Security",
+                items: [
+                  "@Aspect, @Pointcut expression language",
+                  "@Before, @After, @Around, @AfterReturning, @AfterThrowing",
+                  "JoinPoint, ProceedingJoinPoint in Around advice",
+                  "Logging, auditing, performance tracking via AOP",
+                  "@PreAuthorize, @PostAuthorize method security",
+                  "Custom annotations backed by AOP advice",
+                ],
+              },
+              {
+                t: "Transactions",
+                tag: "Spring",
+                items: [
+                  "@Transactional: readOnly, timeout, isolation, propagation",
+                  "Propagation: REQUIRED, REQUIRES_NEW, NESTED, SUPPORTS",
+                  "Isolation: READ_UNCOMMITTED → SERIALIZABLE tradeoffs",
+                  "Rollback rules: rollbackFor, noRollbackFor",
+                  "Programmatic: TransactionTemplate, PlatformTransactionManager",
+                  "Common pitfall: self-invocation bypasses proxy",
+                ],
+              },
+              {
+                t: "Validation & Errors",
+                tag: "Spring",
+                items: [
+                  "@Valid vs @Validated (group support difference)",
+                  "@NotNull, @NotBlank, @Size, @Pattern, @Email, @Min/@Max",
+                  "@ControllerAdvice + @ExceptionHandler global handling",
+                  "Custom constraint annotation + ConstraintValidator",
+                  "Problem Details for HTTP APIs (RFC 7807)",
+                  "Structured error response DTO: status, code, message, path",
+                ],
+              },
+              {
+                t: "OWASP & API Security",
+                tag: "Security",
+                items: [
+                  "OWASP Top 10 API: broken auth, BOLA, injection",
+                  "SQL injection prevention: parameterized queries",
+                  "XSS: output encoding, CSP headers",
+                  "Rate limiting: bucket4j, resilience4j, API gateway",
+                  "Secrets management: Vault, AWS Secrets Manager",
+                  "HTTPS, TLS 1.3, HSTS, certificate pinning",
+                ],
+              },
+            ],
+          },
+          {
+            id: "db",
+            label: "Databases & Caching",
+            short: "DB",
+            color: "#d97706",
+            bg: "#fffbeb",
+            border: "#fde68a",
+            titleColor: "#451a03",
+            subColor: "#92400e",
+            cards: [
+              {
+                t: "SQL Deep Dive",
+                tag: "DB",
+                items: [
+                  "Joins: inner, left, right, full outer, cross, self",
+                  "Window functions: ROW_NUMBER, RANK, DENSE_RANK, LAG/LEAD",
+                  "CTEs, recursive CTEs for hierarchical data",
+                  "Aggregate functions, GROUP BY, HAVING clause",
+                  "Subqueries vs JOINs: performance considerations",
+                  "Stored procedures, functions, triggers, views",
+                ],
+              },
+              {
+                t: "Indexing & Query Perf",
+                tag: "DB",
+                items: [
+                  "B-tree index internals, hash indexes",
+                  "Composite index: column order matters",
+                  "Index selectivity, cardinality, covering index",
+                  "EXPLAIN / EXPLAIN ANALYZE reading",
+                  "Slow query log, pg_stat_statements",
+                  "Partial indexes, expression indexes, GIN/GiST (PG)",
+                ],
+              },
+              {
+                t: "ACID & Locking",
+                tag: "DB",
+                items: [
+                  "Atomicity, Consistency, Isolation, Durability",
+                  "Read phenomena: dirty read, non-repeatable, phantom",
+                  "Isolation levels: RC, RR, SERIALIZABLE",
+                  "Optimistic (version check) vs pessimistic (SELECT FOR UPDATE)",
+                  "Deadlock detection, prevention, retry logic",
+                  "MVCC in PostgreSQL: tuple visibility, vacuum",
+                ],
+              },
+              {
+                t: "Hibernate & ORM",
+                tag: "DB",
+                items: [
+                  "Session vs EntityManager lifecycle, states",
+                  "Lazy vs eager loading: when each causes issues",
+                  "N+1 problem: detect with Hibernate statistics",
+                  "Fix N+1: JOIN FETCH, @BatchSize, @EntityGraph",
+                  "First-level (session) and second-level (EhCache/Redis) cache",
+                  "@Inheritance: SINGLE_TABLE, JOINED, TABLE_PER_CLASS",
+                ],
+              },
+              {
+                t: "Redis & Caching",
+                tag: "DB",
+                items: [
+                  "Redis data types: String, Hash, List, Set, Sorted Set",
+                  "@Cacheable, @CacheEvict, @CachePut, @Caching",
+                  "Eviction policies: LRU, LFU, allkeys-lru, volatile-lru",
+                  "TTL, key expiry patterns, key naming conventions",
+                  "Cache stampede: mutex lock, probabilistic refresh",
+                  "Redisson: distributed locks, rate limiter, semaphore",
+                ],
+              },
+              {
+                t: "NoSQL & Migrations",
+                tag: "DB",
+                items: [
+                  "MongoDB: BSON documents, collections, ObjectId",
+                  "Aggregation pipeline: $match, $group, $lookup, $project",
+                  "Schema design: embedding vs referencing tradeoffs",
+                  "When to choose NoSQL: schema flexibility, scale, speed",
+                  "Flyway: versioned V1__init.sql, undo scripts",
+                  "Liquibase: XML/YAML changesets, contexts, labels",
+                ],
+              },
+            ],
+          },
+          {
+            id: "micro",
+            label: "Microservices & Messaging",
+            short: "Micro",
+            color: "#dc2626",
+            bg: "#fef2f2",
+            border: "#fecaca",
+            titleColor: "#450a0a",
+            subColor: "#7f1d1d",
+            cards: [
+              {
+                t: "Kafka Deep Dive",
+                tag: "Micro",
+                items: [
+                  "Broker, topic, partition, offset, segment",
+                  "Producer config: acks=all, retries, idempotence enable",
+                  "Consumer groups, partition assignment, rebalancing",
+                  "@KafkaListener, @KafkaHandler, error handlers",
+                  "Exactly-once semantics: transactions + idempotent producer",
+                  "Schema Registry with Avro/Protobuf: schema evolution",
+                ],
+              },
+              {
+                t: "RabbitMQ",
+                tag: "Micro",
+                items: [
+                  "AMQP protocol: exchanges, queues, bindings, routing keys",
+                  "Exchange types: direct, fanout, topic, headers",
+                  "Dead letter exchange (DLX) for failed messages",
+                  "Message TTL, queue max-length, priority queues",
+                  "Publisher confirms + consumer acknowledgements",
+                  "Spring AMQP: @RabbitListener, RabbitTemplate, MessageConverter",
+                ],
+              },
+              {
+                t: "Spring Cloud",
+                tag: "Micro",
+                items: [
+                  "Eureka: service registration, heartbeat, self-preservation",
+                  "Spring Cloud Gateway: routes, predicates, filters",
+                  "Config Server: Git backend, encryption, refresh",
+                  "OpenFeign: @FeignClient, interceptors, error decoder",
+                  "Resilience4j: circuit breaker, retry, rate limiter, bulkhead",
+                  "Client-side load balancing with Spring Cloud LoadBalancer",
+                ],
+              },
+              {
+                t: "REST API Design",
+                tag: "Micro",
+                items: [
+                  "RESTful conventions: nouns not verbs, plural resources",
+                  "Versioning: URI path, Accept header, custom header",
+                  "Pagination: page+size (offset) vs cursor (keyset)",
+                  "OpenAPI 3.0 / Swagger: annotations, springdoc-openapi",
+                  "Idempotency-Key header for safe retries",
+                  "HATEOAS: HAL, Spring HATEOAS, hypermedia links",
+                ],
+              },
+              {
+                t: "Distributed Patterns",
+                tag: "Micro",
+                items: [
+                  "Saga pattern: choreography (events) vs orchestration",
+                  "Outbox pattern: transactional event publishing",
+                  "API Gateway: auth, rate limit, routing, aggregation",
+                  "BFF (Backend for Frontend): mobile vs web API",
+                  "Event sourcing: append-only log, event replay",
+                  "CQRS: separate command and query responsibility",
+                ],
+              },
+              {
+                t: "Distributed Systems",
+                tag: "Micro",
+                items: [
+                  "CAP theorem: consistency vs availability during partition",
+                  "BASE: basically available, soft state, eventual consistency",
+                  "Consistent hashing for data partitioning",
+                  "Leader election: ZooKeeper, etcd, Raft algorithm",
+                  "Two-phase commit (2PC) and its limitations",
+                  "Idempotency, at-least-once vs exactly-once delivery",
+                ],
+              },
+            ],
+          },
+          {
+            id: "hld",
+            label: "High-Level Design (HLD)",
+            short: "HLD",
+            color: "#059669",
+            bg: "#ecfdf5",
+            border: "#a7f3d0",
+            titleColor: "#022c22",
+            subColor: "#065f46",
+            cards: [
+              {
+                t: "HLD Framework",
+                tag: "HLD",
+                items: [
+                  "Step 1: Clarify functional & non-functional requirements",
+                  "Step 2: Capacity estimation — QPS, storage, bandwidth",
+                  "Step 3: High-level component design diagram",
+                  "Step 4: Deep dive critical components",
+                  "Step 5: Identify and resolve bottlenecks",
+                  "Step 6: Trade-off discussion and justification",
+                ],
+              },
+              {
+                t: "Scalability",
+                tag: "HLD",
+                items: [
+                  "Horizontal scaling: stateless, sticky sessions trade-off",
+                  "Load balancing: Round Robin, Least Conn, IP hash",
+                  "Database sharding: range, hash, directory-based",
+                  "Read replicas: replication lag, eventual consistency",
+                  "CDN: push vs pull, cache invalidation strategies",
+                  "Auto-scaling: CPU/memory triggers, predictive scaling",
+                ],
+              },
+              {
+                t: "Availability & Reliability",
+                tag: "HLD",
+                items: [
+                  "Availability: 99.9% (8.7h/yr), 99.99% (52m/yr) downtime",
+                  "Redundancy: active-active vs active-passive failover",
+                  "Health checks: ping, deep health, dependency check",
+                  "Circuit breaker pattern preventing cascade failure",
+                  "Chaos engineering: kill random instances, inject latency",
+                  "Bulkhead: isolate failures to prevent full system outage",
+                ],
+              },
+              {
+                t: "Storage Design",
+                tag: "HLD",
+                items: [
+                  "SQL vs NoSQL decision matrix (8 dimensions)",
+                  "Object storage (S3): blob store, CDN origin, presigned URLs",
+                  "Time-series DB (InfluxDB, TimescaleDB) for metrics",
+                  "Search (Elasticsearch): inverted index, full-text, geo",
+                  "Data warehouse (Redshift, BigQuery) vs data lake (S3+Athena)",
+                  "Graph DB (Neo4j) for social networks, recommendations",
+                ],
+              },
+              {
+                t: "System Design Examples",
+                tag: "HLD",
+                items: [
+                  "URL shortener: hashing, redirect, analytics",
+                  "Twitter feed: fanout-on-write vs fanout-on-read",
+                  "Uber: geohashing, matching, real-time location",
+                  "YouTube: video upload pipeline, adaptive streaming",
+                  "Payment system: idempotency, double-spend prevention",
+                  "Notification system: push, email, SMS, fan-out",
+                ],
+              },
+              {
+                t: "More Design Examples",
+                tag: "HLD",
+                items: [
+                  "WhatsApp: WebSocket, message queue, delivery receipts",
+                  "Google Drive: chunked upload, sync, conflict resolution",
+                  "Rate limiter: token bucket, leaky bucket, sliding window",
+                  "Distributed cache: consistent hashing, replication",
+                  "Search autocomplete: trie vs inverted index, ranking",
+                  "Hotel booking: seat reservation, ACID, distributed lock",
+                ],
+              },
+            ],
+          },
+          {
+            id: "lld",
+            label: "Low-Level Design (LLD)",
+            short: "LLD",
+            color: "#be185d",
+            bg: "#fdf2f8",
+            border: "#fbcfe8",
+            titleColor: "#500724",
+            subColor: "#831843",
+            cards: [
+              {
+                t: "Creational Patterns",
+                tag: "LLD",
+                items: [
+                  "Singleton: DCL, enum singleton, initialization-on-demand",
+                  "Factory Method: creator abstraction, open for extension",
+                  "Abstract Factory: family of related objects",
+                  "Builder: fluent API, @Builder (Lombok), immutable objects",
+                  "Prototype: cloneable, deep vs shallow copy",
+                  "Object Pool: DB connections, thread pools, expensive objects",
+                ],
+              },
+              {
+                t: "Structural Patterns",
+                tag: "LLD",
+                items: [
+                  "Adapter: convert incompatible interfaces, legacy integration",
+                  "Decorator: dynamic behavior wrapping, I/O streams example",
+                  "Proxy: virtual (lazy load), protection, remote, cache proxy",
+                  "Facade: simplify subsystem, Spring's JdbcTemplate",
+                  "Composite: tree structures, file system, UI components",
+                  "Flyweight: shared state, immutable, String interning example",
+                ],
+              },
+              {
+                t: "Behavioral Patterns",
+                tag: "LLD",
+                items: [
+                  "Strategy: interchangeable algorithms, payment methods",
+                  "Observer: event bus, Spring ApplicationEvent, Kafka",
+                  "Command: undo/redo, task queue, @Scheduled jobs",
+                  "Chain of Responsibility: Spring Security filter chain",
+                  "Template Method: skeleton algorithm, JdbcTemplate",
+                  "State: order status machine, ticket workflow",
+                ],
+              },
+              {
+                t: "SOLID & Clean Code",
+                tag: "LLD",
+                items: [
+                  "SRP: one class, one reason to change, cohesion",
+                  "OCP: open for extension (Strategy), closed for modification",
+                  "LSP: subtypes must not break parent contract",
+                  "ISP: lean interfaces, @Repository vs @CrudRepository",
+                  "DIP: depend on abstractions, inject via constructor",
+                  "Clean Code: naming, small methods, no magic numbers",
+                ],
+              },
+              {
+                t: "LLD Design Exercises",
+                tag: "LLD",
+                items: [
+                  "Parking lot: multi-level, vehicle types, pricing strategy",
+                  "Elevator system: scheduling algorithm, state machine",
+                  "Library management: books, members, fine calculation",
+                  "Chess game: board, pieces, move validation, check detection",
+                  "ATM machine: authentication, transaction, cash dispense",
+                  "Food ordering: menu, cart, order, delivery tracking",
+                ],
+              },
+              {
+                t: "Clean Architecture",
+                tag: "LLD",
+                items: [
+                  "Hexagonal architecture: ports and adapters pattern",
+                  "Domain layer: entities (with identity), value objects",
+                  "Application layer: use cases, input/output ports",
+                  "Infrastructure layer: JPA repos, REST controllers, adapters",
+                  "Dependency rule: outer layers depend on inner layers only",
+                  "Anti-corruption layer (ACL) for legacy system integration",
+                ],
+              },
+            ],
+          },
+          {
+            id: "testing",
+            label: "Testing & Quality",
+            short: "Test",
+            color: "#0891b2",
+            bg: "#ecfeff",
+            border: "#a5f3fc",
+            titleColor: "#083344",
+            subColor: "#0e7490",
+            cards: [
+              {
+                t: "Unit Testing",
+                tag: "Test",
+                items: [
+                  "JUnit 5: @Test, @ParameterizedTest, @RepeatedTest",
+                  "Mockito: @Mock, @InjectMocks, @Spy, @Captor",
+                  "Stubbing: when/thenReturn, doReturn, doThrow",
+                  "Assertions: assertEquals, assertThrows, assertAll",
+                  "Test lifecycle: @BeforeEach, @AfterAll, @TestMethodOrder",
+                  "GWT naming: should_ReturnX_When_Y pattern",
+                ],
+              },
+              {
+                t: "Spring Testing",
+                tag: "Test",
+                items: [
+                  "@SpringBootTest: webEnvironment RANDOM_PORT / MOCK",
+                  "@WebMvcTest: slice test, auto-configured MockMvc",
+                  "@DataJpaTest: H2, @Sql scripts, TestEntityManager",
+                  "@MockBean vs @SpyBean in Spring context",
+                  "TestRestTemplate vs WebTestClient for integration",
+                  "@DynamicPropertySource for Testcontainers properties",
+                ],
+              },
+              {
+                t: "Advanced Testing",
+                tag: "Test",
+                items: [
+                  "Testcontainers: real PostgreSQL, Kafka, Redis in Docker",
+                  "RestAssured: BDD-style API testing, JsonPath assertions",
+                  "WireMock: stub external HTTP services, verify calls",
+                  "Spring Cloud Contract: CDC, stub runner in tests",
+                  "Mutation testing with PITest: kill mutants",
+                  "ArchUnit: enforce architecture rules in tests",
+                ],
+              },
+              {
+                t: "TDD & Code Quality",
+                tag: "Test",
+                items: [
+                  "Red-Green-Refactor cycle discipline",
+                  "Test pyramid: 70% unit, 20% integration, 10% E2E",
+                  "JaCoCo: line, branch, instruction coverage gates",
+                  "SonarQube: quality gate, technical debt, code smells",
+                  "SpotBugs, Checkstyle, PMD static analysis",
+                  "Conventional commits, PR review checklist",
+                ],
+              },
+              {
+                t: "Performance Testing",
+                tag: "Test",
+                items: [
+                  "JMeter: thread groups, ramp-up, think time, assertions",
+                  "Gatling: Scala DSL, simulation, scenarios, reports",
+                  "K6: JS-based, threshold assertions, CI integration",
+                  "Baseline vs load vs stress vs soak testing",
+                  "JVM profiling: async-profiler, Java Flight Recorder (JFR)",
+                  "GC tuning: GC log analysis, GCViewer, heap sizing",
+                ],
+              },
+            ],
+          },
+          {
+            id: "devops",
+            label: "DevOps & Infrastructure",
+            short: "DevOps",
+            color: "#65a30d",
+            bg: "#f7fee7",
+            border: "#d9f99d",
+            titleColor: "#1a2e05",
+            subColor: "#3f6212",
+            cards: [
+              {
+                t: "Docker",
+                tag: "DevOps",
+                items: [
+                  "Dockerfile: FROM, RUN, COPY, ENTRYPOINT, CMD",
+                  "Multi-stage build: JDK build stage → JRE runtime stage",
+                  "Image layer caching: order instructions for max cache reuse",
+                  "Docker Compose: service dependencies, health checks, networks",
+                  "Distroless / Alpine base images for minimal attack surface",
+                  "Container image scanning: Trivy, Snyk, Docker Scout",
+                ],
+              },
+              {
+                t: "Kubernetes",
+                tag: "DevOps",
+                items: [
+                  "Pods, ReplicaSet, Deployment, StatefulSet, DaemonSet",
+                  "Services: ClusterIP, NodePort, LoadBalancer, ExternalName",
+                  "ConfigMap for config, Secret for sensitive values (base64)",
+                  "Liveness probe (restart), readiness (traffic), startup probe",
+                  "HPA: CPU/memory metrics, custom metrics (KEDA)",
+                  "Namespaces, RBAC (Role, ClusterRole, Binding), NetworkPolicy",
+                ],
+              },
+              {
+                t: "CI/CD Pipelines",
+                tag: "DevOps",
+                items: [
+                  "GitHub Actions: workflow, jobs, steps, matrix strategy",
+                  "Jenkins: declarative Jenkinsfile, shared libraries",
+                  "Maven lifecycle: validate, compile, test, package, verify, install",
+                  "Gradle: tasks, plugins, build scan, incremental build",
+                  "Artifact registry: Nexus, JFrog Artifactory, GitHub Packages",
+                  "Deployment strategies: rolling, blue-green, canary, recreate",
+                ],
+              },
+              {
+                t: "GitOps & IaC",
+                tag: "DevOps",
+                items: [
+                  "GitOps: Git as single source of truth for infra",
+                  "ArgoCD: sync Kubernetes manifests from Git automatically",
+                  "Helm: chart structure, values.yaml, templates, hooks",
+                  "Terraform: providers, resources, state, modules, workspaces",
+                  "Ansible: playbooks, roles, inventory, idempotent tasks",
+                  "Cloud: AWS EC2, ECS, EKS, RDS, S3, CloudFront, Route53",
+                ],
+              },
+              {
+                t: "Observability",
+                tag: "DevOps",
+                items: [
+                  "Three pillars: logs, metrics, traces",
+                  "Spring Boot Actuator: /health, /metrics, /info, /env",
+                  "Micrometer: @Timed, @Counted, custom meters",
+                  "Prometheus scraping + Grafana dashboards + alerting rules",
+                  "ELK Stack: structured JSON logs, Logstash pipeline, Kibana",
+                  "OpenTelemetry: unified SDK, Jaeger / Zipkin for traces",
+                ],
+              },
+              {
+                t: "DevSecOps",
+                tag: "DevOps",
+                items: [
+                  "SAST: SonarQube in CI, Semgrep rules, CodeQL",
+                  "DAST: OWASP ZAP automated scanning in pipeline",
+                  "Dependency scanning: Dependabot, Snyk, OWASP Dependency-Check",
+                  "Secrets scanning: GitLeaks, truffleHog in pre-commit hooks",
+                  "Service mesh: Istio mTLS, traffic policies, Envoy sidecar",
+                  "Zero-trust networking: no implicit trust, verify every request",
+                ],
+              },
+            ],
+          },
+          {
+            id: "arch",
+            label: "Architecture & Mastery",
+            short: "Arch",
+            color: "#9333ea",
+            bg: "#faf5ff",
+            border: "#e9d5ff",
+            titleColor: "#3b0764",
+            subColor: "#6b21a8",
+            cards: [
+              {
+                t: "Microservices Patterns",
+                tag: "Arch",
+                items: [
+                  "Strangler Fig: incrementally replace monolith",
+                  "API Gateway: entry point, aggregation, auth, throttle",
+                  "BFF (Backend for Frontend): tailored APIs per client",
+                  "Sidecar: proxy, log shipping, config alongside service",
+                  "Service mesh (Istio): mTLS, traffic management, observability",
+                  "Bulkhead: thread pool isolation per downstream service",
+                ],
+              },
+              {
+                t: "Event-Driven Architecture",
+                tag: "Arch",
+                items: [
+                  "Event sourcing: store events not current state",
+                  "Event store: append-only, temporal queries, replay",
+                  "CQRS: write side (commands) vs read side (projections)",
+                  "Eventual consistency: compensating transactions",
+                  "Idempotent consumers: deduplication with event ID",
+                  "Schema evolution: backward/forward compatibility strategies",
+                ],
+              },
+              {
+                t: "Domain-Driven Design",
+                tag: "Arch",
+                items: [
+                  "Strategic DDD: bounded contexts, context maps",
+                  "Ubiquitous language: shared vocabulary with domain experts",
+                  "Tactical DDD: entities, value objects, aggregates",
+                  "Domain events as first-class citizens",
+                  "Domain services for cross-aggregate logic",
+                  "Repository pattern abstracts persistence from domain",
+                ],
+              },
+              {
+                t: "SRE & Reliability",
+                tag: "Arch",
+                items: [
+                  "Error budget: 1 - SLO = budget for risk-taking",
+                  "Toil: manual, repetitive, automatable operational work",
+                  "Incident management: detection, response, resolution",
+                  "Blameless post-mortems: 5 whys, timeline, action items",
+                  "On-call: escalation policy, runbooks, alert fatigue reduction",
+                  "Capacity planning: trend analysis, load forecasting, headroom",
+                ],
+              },
+              {
+                t: "Interview Mastery",
+                tag: "Arch",
+                items: [
+                  "System design framework: 45-minute structure",
+                  "STAR method: Situation, Task, Action, Result",
+                  "Top 50 Spring Boot interview questions",
+                  "JVM & concurrency tricky questions",
+                  "DSA: patterns cheat sheet (10 core patterns)",
+                  "Mock interviews: practice HLD + LLD + coding",
+                ],
+              },
+              {
+                t: "Career Growth",
+                tag: "Arch",
+                items: [
+                  "RFC / ADR: architecture decision records",
+                  "Code review: constructive, specific, kind feedback",
+                  "Tech lead skills: estimation, delegation, roadmapping",
+                  "Contributing to open source Java/Spring projects",
+                  "Reading: DDIA, Clean Code, Designing APIs, SRE Book",
+                  "Engineering blog: document learnings publicly",
+                ],
+              },
+            ],
+          },
+        ]);
+
+        const QUIZ_BANK = Object.freeze([
+          {
+            q: "What is the time complexity of HashMap.get() in the average case?",
+            opts: ["O(n)", "O(log n)", "O(1)", "O(n²)"],
+            ans: 2,
+            tag: "Java",
+            exp: "HashMap uses hashing for average O(1) lookup. Worst case O(n) if all keys collide. Java 8+ converts buckets to balanced trees when size > 8, giving O(log n) worst case.",
+          },
+          {
+            q: "Which GC algorithm is the default in Java 11+?",
+            opts: ["Serial GC", "Parallel GC", "G1 GC", "ZGC"],
+            ans: 2,
+            tag: "Java",
+            exp: "G1 (Garbage First) became the default GC from Java 9. ZGC is available with -XX:+UseZGC but not default.",
+          },
+          {
+            q: "What does @Transactional propagation REQUIRES_NEW do?",
+            opts: [
+              "Joins existing transaction",
+              "Suspends current and starts new",
+              "Throws exception if no transaction",
+              "Runs without any transaction",
+            ],
+            ans: 1,
+            tag: "Spring",
+            exp: "REQUIRES_NEW always creates a new transaction, suspending the current one if it exists. The two transactions are completely independent.",
+          },
+          {
+            q: "In Kafka, message ordering is guaranteed at which level?",
+            opts: [
+              "Topic level",
+              "Partition level",
+              "Broker level",
+              "Consumer group level",
+            ],
+            ans: 1,
+            tag: "Micro",
+            exp: "Kafka guarantees ordering only within a single partition. Messages sent to different partitions of the same topic have no ordering guarantee.",
+          },
+          {
+            q: "What is the N+1 query problem?",
+            opts: [
+              "Running N queries for N records",
+              "1 query fetches list + N more for each related entity",
+              "Using N joins in one query",
+              "Query timeout after N seconds",
+            ],
+            ans: 1,
+            tag: "DB",
+            exp: "N+1: 1 query fetches parent records, then N individual queries fire for each record's lazy-loaded relationship. Fix with JOIN FETCH or @BatchSize.",
+          },
+          {
+            q: "Which HTTP method is idempotent AND should not change server state?",
+            opts: ["POST", "PUT", "GET", "PATCH"],
+            ans: 2,
+            tag: "Micro",
+            exp: "GET is both safe (no server state change) and idempotent. PUT is idempotent but changes state. POST is neither. PATCH is neither by default.",
+          },
+          {
+            q: "CAP theorem states you cannot have all three simultaneously. Which is always guaranteed in distributed systems?",
+            opts: [
+              "Consistency",
+              "Availability",
+              "Partition Tolerance",
+              "None of the above",
+            ],
+            ans: 2,
+            tag: "HLD",
+            exp: "Network partitions always happen in distributed systems. Partition Tolerance is therefore non-negotiable. You must choose between Consistency (CP) or Availability (AP) during a partition.",
+          },
+          {
+            q: "What does the Circuit Breaker pattern do when in OPEN state?",
+            opts: [
+              "Encrypts all requests",
+              "Immediately fails requests without calling downstream",
+              "Retries the request 3 times",
+              "Routes traffic to backup service",
+            ],
+            ans: 1,
+            tag: "Micro",
+            exp: "In OPEN state, the circuit breaker fast-fails all requests without attempting to call the downstream service. After a timeout, it transitions to HALF-OPEN to test recovery.",
+          },
+          {
+            q: "What is the purpose of the Outbox Pattern?",
+            opts: [
+              "Cache database results",
+              "Ensure atomic DB write + event publish",
+              "Encrypt event payloads",
+              "Batch HTTP API requests",
+            ],
+            ans: 1,
+            tag: "Micro",
+            exp: "Outbox Pattern: write business data AND event to the outbox table in one transaction. A relay process then publishes the event, guaranteeing atomicity without distributed transactions.",
+          },
+          {
+            q: "In Spring Security, what is the difference between @Secured and @PreAuthorize?",
+            opts: [
+              "No difference",
+              "@PreAuthorize supports SpEL expressions, @Secured only allows role strings",
+              "@Secured supports SpEL, @PreAuthorize does not",
+              "@Secured is for methods, @PreAuthorize for classes",
+            ],
+            ans: 1,
+            tag: "Security",
+            exp: "@PreAuthorize supports SpEL such as hasRole('ADMIN') and #user.id == authentication.name. @Secured only accepts role strings like @Secured('ROLE_ADMIN').",
+          },
+          {
+            q: "What is the difference between @Mock and @Spy in Mockito?",
+            opts: [
+              "No difference",
+              "@Mock creates full mock (stubs all), @Spy wraps real object",
+              "@Spy creates full mock, @Mock wraps real object",
+              "@Mock is for interfaces only",
+            ],
+            ans: 1,
+            tag: "Test",
+            exp: "@Mock: fully mocked, all methods return defaults. @Spy: wraps real object — only methods you stub are overridden; unstubbed methods call real implementation.",
+          },
+          {
+            q: "Which isolation level prevents phantom reads?",
+            opts: [
+              "READ UNCOMMITTED",
+              "READ COMMITTED",
+              "REPEATABLE READ",
+              "SERIALIZABLE",
+            ],
+            ans: 3,
+            tag: "DB",
+            exp: "SERIALIZABLE prevents all anomalies including phantom reads (new rows inserted by other transactions appearing in repeated range queries). It's the strictest level.",
+          },
+          {
+            q: "In K8s, what is the difference between liveness and readiness probes?",
+            opts: [
+              "They are the same",
+              "Liveness → restart container; Readiness → stop sending traffic",
+              "Readiness → restart container; Liveness → stop sending traffic",
+              "Both stop traffic but only liveness restarts",
+            ],
+            ans: 1,
+            tag: "DevOps",
+            exp: "Liveness probe: if it fails, kubelet restarts the container. Readiness probe: if it fails, the pod is removed from Service endpoints (no traffic) but not restarted.",
+          },
+          {
+            q: "What is virtual dispatch (dynamic dispatch) in Java?",
+            opts: [
+              "Calling static methods",
+              "JVM resolves method call at runtime based on actual object type",
+              "JVM resolves method call at compile time",
+              "Calling methods via reflection",
+            ],
+            ans: 1,
+            tag: "Java",
+            exp: "Dynamic dispatch: the JVM determines which method implementation to call at runtime based on the actual object type, not the declared reference type. This enables polymorphism.",
+          },
+          {
+            q: "In the Saga pattern, what is the difference between choreography and orchestration?",
+            opts: [
+              "No difference",
+              "Choreography: services react to events; Orchestration: central coordinator directs services",
+              "Orchestration: services react to events; Choreography: central coordinator directs",
+              "Choreography is only for read operations",
+            ],
+            ans: 1,
+            tag: "Arch",
+            exp: "Choreography: each service publishes events and others react — decoupled but harder to track. Orchestration: a central saga orchestrator tells each service what to do — easier to reason about but introduces coupling.",
+          },
+        ]);
+
+        const PLANNER = Object.freeze([
+          {
+            w: "Week 1–2",
+            phase: "DSA",
+            color: "#3b82f6",
+            topics: [
+              "Arrays, Strings: two pointers, sliding window",
+              "Linked Lists: reverse, cycle detection, LRU",
+              "LeetCode Easy: 20 problems daily",
+            ],
+          },
+          {
+            w: "Week 3",
+            phase: "DSA",
+            color: "#3b82f6",
+            topics: [
+              "Stacks, Queues, monotonic stack",
+              "Trees: DFS/BFS, height, LCA, BST ops",
+              "LeetCode Medium Trees: 10 problems",
+            ],
+          },
+          {
+            w: "Week 4",
+            phase: "DSA",
+            color: "#3b82f6",
+            topics: [
+              "Graphs: Dijkstra, topological sort, Union-Find",
+              "Heaps: top-K, merge k sorted lists",
+              "LeetCode Medium Graphs: 10 problems",
+            ],
+          },
+          {
+            w: "Week 5",
+            phase: "DSA",
+            color: "#3b82f6",
+            topics: [
+              "Dynamic Programming: memoization, tabulation",
+              "Knapsack, LCS, coin change, edit distance",
+              "LeetCode DP: 15 problems, focus patterns",
+            ],
+          },
+          {
+            w: "Week 6",
+            phase: "Java",
+            color: "#0284c7",
+            topics: [
+              "Java Core: OOP, Collections, Generics",
+              "Exception handling, Java 8–21 features",
+              "Streams, Optional, Lambda deep dive",
+            ],
+          },
+          {
+            w: "Week 7",
+            phase: "Java",
+            color: "#0284c7",
+            topics: [
+              "Concurrency: threads, locks, ExecutorService",
+              "CompletableFuture async patterns",
+              "JVM internals, GC, heap dump analysis",
+            ],
+          },
+          {
+            w: "Week 8",
+            phase: "Spring",
+            color: "#16a34a",
+            topics: [
+              "Spring Core, IoC, DI, bean lifecycle",
+              "Spring Boot auto-config, profiles, Actuator",
+              "Spring MVC REST + Spring Data JPA",
+            ],
+          },
+          {
+            w: "Week 9",
+            phase: "Security",
+            color: "#7c3aed",
+            topics: [
+              "Spring Security 6, JWT, OAuth2/OIDC",
+              "Transactions, AOP, validation",
+              "OWASP Top 10 API security",
+            ],
+          },
+          {
+            w: "Week 10",
+            phase: "DB",
+            color: "#d97706",
+            topics: [
+              "SQL deep dive: window functions, CTEs",
+              "PostgreSQL indexing, EXPLAIN ANALYZE",
+              "Redis caching, Hibernate N+1 fix",
+            ],
+          },
+          {
+            w: "Week 11",
+            phase: "Micro",
+            color: "#dc2626",
+            topics: [
+              "Kafka producers, consumers, EOS",
+              "Spring Cloud: Gateway, Eureka, Feign",
+              "Saga, Outbox, CQRS patterns",
+            ],
+          },
+          {
+            w: "Week 12",
+            phase: "HLD",
+            color: "#059669",
+            topics: [
+              "HLD framework: requirements to bottlenecks",
+              "Design URL shortener, Twitter feed, Uber",
+              "Scalability: sharding, CDN, caching arch",
+            ],
+          },
+          {
+            w: "Week 13",
+            phase: "LLD",
+            color: "#be185d",
+            topics: [
+              "Creational + Structural design patterns",
+              "Behavioral patterns + SOLID principles",
+              "LLD: Parking lot, Chess, ATM exercises",
+            ],
+          },
+          {
+            w: "Week 14",
+            phase: "Test",
+            color: "#0891b2",
+            topics: [
+              "Unit testing: JUnit 5, Mockito TDD",
+              "Integration: @SpringBootTest, Testcontainers",
+              "Performance: JMeter, Gatling, profiling",
+            ],
+          },
+          {
+            w: "Week 15",
+            phase: "DevOps",
+            color: "#65a30d",
+            topics: [
+              "Docker multi-stage, K8s deployments + HPA",
+              "GitHub Actions CI/CD, ArgoCD GitOps",
+              "Observability: Prometheus, Grafana, OTEL",
+            ],
+          },
+          {
+            w: "Week 16",
+            phase: "Arch",
+            color: "#9333ea",
+            topics: [
+              "Event sourcing, CQRS, DDD, SRE",
+              "Mock system design interviews (3 sessions)",
+              "Final review: top 50 interview Q&A",
+            ],
+          },
+        ]);
+
+        const RESOURCES = Object.freeze([
+          {
+            type: "book",
+            typeColor: "bg-blue-100 text-blue-800",
+            title: "Designing Data-Intensive Applications",
+            author: "Martin Kleppmann",
+            desc: "The definitive resource on distributed systems, databases, replication, and consistency.",
+          },
+          {
+            type: "book",
+            typeColor: "bg-blue-100 text-blue-800",
+            title: "Effective Java (3rd Ed)",
+            author: "Joshua Bloch",
+            desc: "Essential Java best practices covering generics, lambdas, concurrency, and API design.",
+          },
+          {
+            type: "book",
+            typeColor: "bg-blue-100 text-blue-800",
+            title: "Clean Code",
+            author: "Robert C. Martin",
+            desc: "Timeless principles for writing readable, maintainable object-oriented code.",
+          },
+          {
+            type: "book",
+            typeColor: "bg-blue-100 text-blue-800",
+            title: "Java Concurrency in Practice",
+            author: "Brian Goetz",
+            desc: "Deep dive into Java threading, locks, concurrent data structures, and the Java memory model.",
+          },
+          {
+            type: "course",
+            typeColor: "bg-green-100 text-green-800",
+            title: "Grokking System Design Interview",
+            author: "Educative.io",
+            desc: "Structured HLD prep with 20+ canonical system design problems with detailed solutions.",
+          },
+          {
+            type: "course",
+            typeColor: "bg-green-100 text-green-800",
+            title: "Spring Boot Masterclass",
+            author: "Udemy (Amigos Code)",
+            desc: "Comprehensive Spring Boot: REST APIs, JPA, Security, Microservices, Docker end-to-end.",
+          },
+          {
+            type: "practice",
+            typeColor: "bg-purple-100 text-purple-800",
+            title: "NeetCode 150",
+            author: "LeetCode / NeetCode.io",
+            desc: "Curated 150 DSA problems by pattern — the best structured interview prep list.",
+          },
+          {
+            type: "practice",
+            typeColor: "bg-purple-100 text-purple-800",
+            title: "Spring Official Guides",
+            author: "spring.io/guides",
+            desc: "Official hands-on guides for every Spring module: Data JPA, Security, Cloud, WebFlux.",
+          },
+          {
+            type: "tool",
+            typeColor: "bg-amber-100 text-amber-800",
+            title: "IntelliJ IDEA Ultimate",
+            author: "JetBrains",
+            desc: "Best Java IDE: Spring Boot support, built-in profiler, database tools, HTTP client.",
+          },
+          {
+            type: "tool",
+            typeColor: "bg-amber-100 text-amber-800",
+            title: "Docker Desktop + K9s",
+            author: "Docker / K9s",
+            desc: "Local container dev environment. K9s provides interactive terminal Kubernetes dashboard.",
+          },
+          {
+            type: "tool",
+            typeColor: "bg-amber-100 text-amber-800",
+            title: "Postman / Bruno",
+            author: "Postman / Bruno",
+            desc: "REST API testing, collection management, environment variables, and automated test scripts.",
+          },
+          {
+            type: "tool",
+            typeColor: "bg-amber-100 text-amber-800",
+            title: "DBeaver + pgAdmin",
+            author: "DBeaver / pgAdmin",
+            desc: "Universal DB GUI for query analysis, schema visualization, and query plan inspection.",
+          },
+        ]);
+
+        /* ==========================================================
+           STATE
+           ========================================================== */
+        const defaultState = () => ({
+          done: {},
+          starred: {},
+          notes: [],
+          collapsed: {},
+        });
+        let S = defaultState();
+        let activeTag = "All";
+        let quiz = {
+          pool: [],
+          idx: 0,
+          score: 0,
+          answered: false,
+          started: false,
+        };
+        const totalCards = PHASES.reduce((a, p) => a + p.cards.length, 0);
+        const totalPhases = PHASES.length;
+
+        /* ==========================================================
+           STORAGE
+           ========================================================== */
+        function save() {
+          try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(S));
+          } catch (err) {
+            console.warn("[roadmap] save failed:", err);
+          }
+        }
+        function load() {
+          try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) return;
+            const parsed = JSON.parse(raw);
+            if (parsed && typeof parsed === "object") {
+              S = Object.assign(defaultState(), parsed);
+              if (!S.done || typeof S.done !== "object") S.done = {};
+              if (!S.starred || typeof S.starred !== "object") S.starred = {};
+              if (!Array.isArray(S.notes)) S.notes = [];
+              if (!S.collapsed || typeof S.collapsed !== "object")
+                S.collapsed = {};
+            }
+          } catch (err) {
+            console.warn("[roadmap] load failed, using defaults:", err);
+          }
+        }
+
+        /* ==========================================================
+           DOM HELPERS
+           ========================================================== */
+        const $ = (id) => document.getElementById(id);
+        const $$ = (sel, root) => (root || document).querySelectorAll(sel);
+
+        function escapeHtml(s) {
+          return String(s)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#39;");
+        }
+        function cKey(pid, t) {
+          return pid + "|" + t;
+        }
+        function countDone() {
+          return Object.values(S.done).filter(Boolean).length;
+        }
+        function countStarred() {
+          return Object.values(S.starred).filter(Boolean).length;
+        }
+        function pctOf(n, d) {
+          return d > 0 ? Math.round((n / d) * 100) : 0;
+        }
+        function debounce(fn, ms) {
+          let t;
+          return function (...args) {
+            clearTimeout(t);
+            t = setTimeout(() => fn.apply(this, args), ms);
+          };
+        }
+        function showToast(msg) {
+          const el = $("toast");
+          el.textContent = msg;
+          el.classList.remove("hidden");
+          clearTimeout(showToast._t);
+          showToast._t = setTimeout(() => el.classList.add("hidden"), TOAST_MS);
+        }
+
+        /* ==========================================================
+           TOP BAR
+           ========================================================== */
+        function updateTopbar() {
+          const d = countDone();
+          const pct = pctOf(d, totalCards);
+          $("tb-done").textContent = d;
+          $("tb-total").textContent = totalCards;
+          $("tb-star").textContent = countStarred();
+          $("tb-pct").textContent = pct;
+          const bar = $("tb-bar");
+          bar.style.width = pct + "%";
+          bar.parentElement.setAttribute("aria-valuenow", String(pct));
+        }
+
+        /* ==========================================================
+           TABS
+           ========================================================== */
+        function switchTab(id) {
+          $$(".view-panel").forEach((v) => v.classList.add("hidden"));
+          $$(".tab-btn").forEach((t) => {
+            t.classList.remove("tab-active", "text-blue-600");
+            t.classList.add("text-gray-500");
+            t.setAttribute("aria-selected", "false");
+          });
+          const view = $("view-" + id);
+          if (view) view.classList.remove("hidden");
+          const btn = document.querySelector(`.tab-btn[data-tab="${id}"]`);
+          if (btn) {
+            btn.classList.add("tab-active", "text-blue-600");
+            btn.classList.remove("text-gray-500");
+            btn.setAttribute("aria-selected", "true");
+          }
+          if (id === "progress") renderProgress();
+          if (id === "quiz" && !quiz.started) startQuiz();
+          if (id === "notes") renderNotes();
+          if (id === "planner") renderPlanner();
+          if (id === "resources") renderResources();
+        }
+
+        /* ==========================================================
+           TAG CHIPS
+           ========================================================== */
+        function chipClass(active) {
+          return (
+            "px-2.5 py-1 text-xs border rounded-full transition-colors whitespace-nowrap " +
+            (active
+              ? "chip-active border-blue-600"
+              : "border-gray-200 text-gray-500 hover:border-gray-400 hover:text-gray-700")
+          );
+        }
+        function buildTagChips() {
+          const tags = [
+            "All",
+            ...new Set(PHASES.flatMap((p) => p.cards.map((c) => c.tag))),
+          ];
+          const wrap = $("tag-chips");
+          wrap.innerHTML = "";
+          tags.forEach((t) => {
+            const b = document.createElement("button");
+            b.type = "button";
+            b.textContent = t;
+            b.dataset.tag = t;
+            b.className = chipClass(t === activeTag);
+            b.setAttribute("aria-pressed", String(t === activeTag));
+            b.addEventListener("click", () => {
+              activeTag = t;
+              $$("button", wrap).forEach((btn) => {
+                const on = btn.dataset.tag === activeTag;
+                btn.className = chipClass(on);
+                btn.setAttribute("aria-pressed", String(on));
+              });
+              applyFilters();
+            });
+            wrap.appendChild(b);
+          });
+        }
+
+        /* ==========================================================
+           ROADMAP
+           ========================================================== */
+        function buildRoadmap() {
+          const root = $("roadmap-root");
+          root.innerHTML = "";
+          PHASES.forEach((phase, pi) => {
+            const sec = document.createElement("div");
+            sec.className =
+              "bg-white border border-gray-100 rounded-xl overflow-hidden";
+            sec.dataset.phase = phase.id;
+            const doneCnt = phase.cards.filter(
+              (c) => S.done[cKey(phase.id, c.t)],
+            ).length;
+            const pct = pctOf(doneCnt, phase.cards.length);
+            const isCol = !!S.collapsed[phase.id];
+
+            const header = document.createElement("div");
+            header.className =
+              "flex items-center gap-2.5 px-4 py-3 cursor-pointer select-none hover:bg-gray-50 transition-colors border-b border-gray-100";
+            header.setAttribute("role", "button");
+            header.setAttribute("tabindex", "0");
+            header.setAttribute("aria-expanded", String(!isCol));
+            header.innerHTML = `
+              <div class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:${phase.color}"></div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="text-xs font-semibold text-gray-700">Phase ${pi + 1}</span>
+                  <span class="text-xs font-medium text-gray-500 truncate">${escapeHtml(phase.label)}</span>
+                  <span class="text-xs px-1.5 py-0.5 rounded-md font-medium" style="background:${phase.bg};color:${phase.subColor}">${escapeHtml(phase.short)}</span>
+                </div>
+                <div class="flex items-center gap-2 mt-1.5">
+                  <div class="flex-1 h-1 bg-gray-100 rounded-full overflow-hidden max-w-32">
+                    <div class="h-full rounded-full phase-bar-fill" id="pb-${phase.id}" style="background:${phase.color};width:${pct}%"></div>
+                  </div>
+                  <span class="text-xs text-gray-400">${doneCnt}/${phase.cards.length}</span>
+                </div>
+              </div>
+              <span class="text-gray-300 text-xs flex-shrink-0" id="pci-${phase.id}" aria-hidden="true">${isCol ? "▸" : "▾"}</span>
+            `;
+            const toggle = () => togglePhase(phase.id);
+            header.addEventListener("click", toggle);
+            header.addEventListener("keydown", (e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                toggle();
+              }
+            });
+            sec.appendChild(header);
+
+            const grid = document.createElement("div");
+            grid.id = "pcw-" + phase.id;
+            grid.className =
+              "p-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2.5" +
+              (isCol ? " hidden" : "");
+
+            phase.cards.forEach((card) => {
+              const key = cKey(phase.id, card.t);
+              const isDone = !!S.done[key];
+              const isStar = !!S.starred[key];
+              const c = document.createElement("div");
+              c.className =
+                "card-hover cursor-default rounded-lg p-3 border relative flex flex-col gap-1.5 h-full" +
+                (isDone ? " card-done" : "");
+              c.style.cssText = `background:${phase.bg};border-color:${phase.border}`;
+              c.dataset.tag = card.tag;
+              c.dataset.text = (
+                card.t +
+                " " +
+                card.items.join(" ")
+              ).toLowerCase();
+              c.dataset.key = key;
+              c.dataset.phase = phase.id;
+              c.dataset.title = card.t;
+
+              c.innerHTML = `
+                ${isStar ? `<div class="absolute top-2 right-2 text-amber-400 text-xs" aria-hidden="true">★</div>` : ""}
+                <div class="flex items-start gap-2">
+                  <button type="button" data-action="toggle-done" class="flex-shrink-0 mt-0.5 w-4 h-4 rounded border flex items-center justify-center transition-colors hover:opacity-75" style="border-color:${phase.subColor};background:${isDone ? phase.subColor : "transparent"}" aria-label="${isDone ? "Mark as not done" : "Mark as done"}" aria-pressed="${isDone}">
+                    ${isDone ? `<svg width="10" height="8" viewBox="0 0 10 8" fill="none" aria-hidden="true"><path d="M1 4L3.5 6.5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>` : ""}
+                  </button>
+                  <div class="flex-1 min-w-0">
+                    <div class="text-xs font-semibold leading-tight mb-0.5" style="color:${phase.titleColor}">${escapeHtml(card.t)}</div>
+                    <span class="text-xs px-1.5 py-0.5 rounded font-medium" style="background:${phase.border};color:${phase.subColor}">${escapeHtml(card.tag)}</span>
+                  </div>
+                </div>
+                <ul class="space-y-0.5 mt-0.5 flex-1">
+                  ${card.items.map((i) => `<li class="text-xs leading-relaxed" style="color:${phase.subColor}"><span class="opacity-50">·</span> ${escapeHtml(i)}</li>`).join("")}
+                </ul>
+                <div class="flex gap-1.5 mt-auto pt-1.5 border-t" style="border-color:${phase.border}">
+                  <button type="button" data-action="deep-dive" class="flex-1 text-xs px-2 py-1 rounded border transition-colors hover:opacity-75" style="border-color:${phase.subColor};color:${phase.subColor}">Deep dive ↗</button>
+                  <button type="button" data-action="toggle-star" class="text-xs px-2 py-1 rounded border transition-colors hover:opacity-75" style="border-color:${phase.subColor};color:${isStar ? "#f59e0b" : phase.subColor}" aria-label="${isStar ? "Remove star" : "Add star"}" aria-pressed="${isStar}">${isStar ? "★" : "☆"}</button>
+                  <button type="button" data-action="quick-note" class="text-xs px-2 py-1 rounded border transition-colors hover:opacity-75" style="border-color:${phase.subColor};color:${phase.subColor}">Note</button>
+                </div>
+              `;
+
+              c.querySelector('[data-action="toggle-done"]').addEventListener(
+                "click",
+                (e) => {
+                  e.stopPropagation();
+                  toggleDone(key, phase.id);
+                },
+              );
+              c.querySelector('[data-action="toggle-star"]').addEventListener(
+                "click",
+                (e) => {
+                  e.stopPropagation();
+                  toggleStar(key);
+                },
+              );
+              c.querySelector('[data-action="deep-dive"]').addEventListener(
+                "click",
+                (e) => {
+                  e.stopPropagation();
+                  askDeepDive(card.t, card.items, phase.short);
+                },
+              );
+              c.querySelector('[data-action="quick-note"]').addEventListener(
+                "click",
+                (e) => {
+                  e.stopPropagation();
+                  quickNote(card.t);
+                },
+              );
+
+              grid.appendChild(c);
+            });
+
+            sec.appendChild(grid);
+            root.appendChild(sec);
+          });
+        }
+
+        function togglePhase(id) {
+          S.collapsed[id] = !S.collapsed[id];
+          save();
+          const w = $("pcw-" + id);
+          const i = $("pci-" + id);
+          if (!w || !i) return;
+          if (S.collapsed[id]) {
+            w.classList.add("hidden");
+            i.textContent = "▸";
+          } else {
+            w.classList.remove("hidden");
+            i.textContent = "▾";
+          }
+          const header = w.previousElementSibling;
+          if (header)
+            header.setAttribute("aria-expanded", String(!S.collapsed[id]));
+        }
+
+        function toggleDone(key, pid) {
+          S.done[key] = !S.done[key];
+          save();
+          buildRoadmap();
+          applyFilters();
+          updateTopbar();
+          updatePhaseBar(pid);
+        }
+
+        function toggleStar(key) {
+          S.starred[key] = !S.starred[key];
+          save();
+          buildRoadmap();
+          applyFilters();
+          updateTopbar();
+        }
+
+        function askDeepDive(title, items, tag) {
+          sendPrompt(
+            `Give me a comprehensive deep dive on "${title}" (${tag}). Cover every subtopic in detail: ${items.join("; ")}. Include Java code examples, Spring Boot integration where applicable, common pitfalls, interview questions, and best practices.`,
+          );
+        }
+
+        function quickNote(title) {
+          switchTab("notes");
+          const sel = $("note-topic");
+          for (let i = 0; i < sel.options.length; i++) {
+            if (sel.options[i].value === title) {
+              sel.selectedIndex = i;
+              break;
+            }
+          }
+          $("note-body").focus();
+        }
+
+        function updatePhaseBar(pid) {
+          const phase = PHASES.find((p) => p.id === pid);
+          if (!phase) return;
+          const d = phase.cards.filter((c) => S.done[cKey(pid, c.t)]).length;
+          const bar = $("pb-" + pid);
+          if (bar) bar.style.width = pctOf(d, phase.cards.length) + "%";
+        }
+
+        /* ==========================================================
+           FILTERS
+           ========================================================== */
+        function applyFilters() {
+          const q = $("search").value.toLowerCase().trim();
+          const sort = $("sort-sel").value;
+          let vis = 0;
+          $$(".card-hover").forEach((c) => {
+            const tagOk = activeTag === "All" || c.dataset.tag === activeTag;
+            const txtOk = !q || c.dataset.text.includes(q);
+            const show = tagOk && txtOk;
+            c.style.display = show ? "flex" : "none";
+            if (show) vis++;
+          });
+          $$("#roadmap-root > [data-phase]").forEach((sec) => {
+            const anyVisible = Array.from($$(".card-hover", sec)).some(
+              (c) => c.style.display !== "none",
+            );
+            sec.style.display = anyVisible ? "" : "none";
+          });
+          const hasFilter = q || activeTag !== "All";
+          $("empty-msg").classList.toggle("hidden", vis > 0 || !hasFilter);
+
+          if (sort !== "default") {
+            PHASES.forEach((ph) => {
+              const grid = $("pcw-" + ph.id);
+              if (!grid) return;
+              const cards = Array.from($$(".card-hover", grid));
+              cards.sort((a, b) => {
+                if (sort === "alpha")
+                  return a.dataset.title.localeCompare(b.dataset.title);
+                const A = a.dataset.key;
+                const B = b.dataset.key;
+                if (sort === "done")
+                  return (S.done[B] ? 1 : 0) - (S.done[A] ? 1 : 0);
+                if (sort === "todo")
+                  return (S.done[A] ? 1 : 0) - (S.done[B] ? 1 : 0);
+                if (sort === "starred")
+                  return (S.starred[B] ? 1 : 0) - (S.starred[A] ? 1 : 0);
+                return 0;
+              });
+              cards.forEach((c) => grid.appendChild(c));
+            });
+          }
+        }
+
+        /* ==========================================================
+           PROGRESS
+           ========================================================== */
+        function renderProgress() {
+          const d = countDone();
+          const pct = pctOf(d, totalCards);
+          $("st-pct").textContent = pct + "%";
+          $("st-done").textContent = d;
+          $("st-rem").textContent = totalCards - d;
+          $("st-star").textContent = countStarred();
+          $("st-notes").textContent = S.notes.length;
+          $("st-phases").textContent = totalPhases;
+          $("phase-breakdown").innerHTML = PHASES.map((ph) => {
+            const done = ph.cards.filter(
+              (c) => S.done[cKey(ph.id, c.t)],
+            ).length;
+            const p = pctOf(done, ph.cards.length);
+            return `<div class="flex items-center gap-3">
+                <div class="w-2 h-2 rounded-full flex-shrink-0" style="background:${ph.color}"></div>
+                <div class="text-xs text-gray-600 w-28 sm:w-40 truncate flex-shrink-0">${escapeHtml(ph.label)}</div>
+                <div class="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                  <div class="h-full rounded-full phase-bar-fill" style="background:${ph.color};width:${p}%"></div>
+                </div>
+                <div class="text-xs text-gray-400 w-10 text-right flex-shrink-0">${done}/${ph.cards.length}</div>
+              </div>`;
+          }).join("");
+        }
+
+        function resetProgress() {
+          if (
+            !confirm(
+              "Reset all progress? Completed topics and stars will be cleared. Notes are kept.",
+            )
+          )
+            return;
+          S.done = {};
+          S.starred = {};
+          save();
+          buildRoadmap();
+          applyFilters();
+          updateTopbar();
+          renderProgress();
+          showToast("Progress reset");
+        }
+
+        function promptAdvice() {
+          const d = countDone();
+          const pct = pctOf(d, totalCards);
+          sendPrompt(
+            `I have completed ${pct}% (${d}/${totalCards}) of my Java backend roadmap. Give me specific advice on what to focus on next and how to improve — mention concrete topics, projects to build, and interview prep milestones.`,
+          );
+        }
+
+        function exportData() {
+          const payload = {
+            version: 1,
+            exportedAt: new Date().toISOString(),
+            data: S,
+          };
+          const blob = new Blob([JSON.stringify(payload, null, 2)], {
+            type: "application/json",
+          });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          const stamp = new Date().toISOString().slice(0, 10);
+          a.download = `java-roadmap-${stamp}.json`;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          URL.revokeObjectURL(url);
+          showToast("Exported backup");
+        }
+
+        function importData(file) {
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = () => {
+            try {
+              const parsed = JSON.parse(String(reader.result || ""));
+              const data = parsed && parsed.data ? parsed.data : parsed;
+              if (!data || typeof data !== "object")
+                throw new Error("Invalid file");
+              if (
+                !confirm(
+                  "Import will replace your current progress, stars, notes and collapsed state. Continue?",
+                )
+              )
+                return;
+              S = Object.assign(defaultState(), data);
+              save();
+              buildRoadmap();
+              applyFilters();
+              updateTopbar();
+              renderProgress();
+              showToast("Data imported");
+            } catch (err) {
+              console.error(err);
+              alert("Could not import file: " + err.message);
+            }
+          };
+          reader.readAsText(file);
+        }
+
+        /* ==========================================================
+           QUIZ
+           ========================================================== */
+        function startQuiz() {
+          const cat = $("quiz-cat").value;
+          const pool =
+            cat === "all" ? QUIZ_BANK : QUIZ_BANK.filter((q) => q.tag === cat);
+          if (!pool.length) {
+            $("quiz-area").innerHTML = `
+              <div class="text-center py-6 space-y-3">
+                <p class="text-sm text-gray-600">No questions for this category yet.</p>
+                <button type="button" id="btn-try-all" class="px-4 py-2 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">Try all topics</button>
+              </div>`;
+            $("btn-try-all").addEventListener("click", () => {
+              $("quiz-cat").value = "all";
+              startQuiz();
+            });
+            quiz.started = true;
+            return;
+          }
+          quiz.pool = pool
+            .slice()
+            .sort(() => Math.random() - 0.5)
+            .slice(0, Math.min(QUIZ_SIZE, pool.length));
+          quiz.idx = 0;
+          quiz.score = 0;
+          quiz.answered = false;
+          quiz.started = true;
+          $("q-score").textContent = "0";
+          renderQ();
+        }
+
+        function renderQ() {
+          const area = $("quiz-area");
+          if (quiz.idx >= quiz.pool.length) {
+            const pct = pctOf(quiz.score, quiz.pool.length);
+            area.innerHTML = `<div class="space-y-4">
+                <div class="grid grid-cols-3 gap-3">
+                  <div class="text-center p-3 bg-green-50 rounded-lg border border-green-100"><div class="text-2xl font-semibold text-green-700">${quiz.score}</div><div class="text-xs text-green-600">Correct</div></div>
+                  <div class="text-center p-3 bg-red-50 rounded-lg border border-red-100"><div class="text-2xl font-semibold text-red-700">${quiz.pool.length - quiz.score}</div><div class="text-xs text-red-600">Wrong</div></div>
+                  <div class="text-center p-3 bg-blue-50 rounded-lg border border-blue-100"><div class="text-2xl font-semibold text-blue-700">${pct}%</div><div class="text-xs text-blue-600">Score</div></div>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                  <button type="button" id="btn-quiz-again" class="px-4 py-2 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">New quiz ↻</button>
+                  <button type="button" id="btn-quiz-plan" class="px-4 py-2 text-xs border border-blue-200 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors">Get personalized plan ↗</button>
+                </div>
+              </div>`;
+            $("btn-quiz-again").addEventListener("click", startQuiz);
+            $("btn-quiz-plan").addEventListener("click", () => {
+              sendPrompt(
+                `I scored ${pct}% on a Java backend quiz (${quiz.score}/${quiz.pool.length} correct). Based on my performance, give me a personalized weak-area study plan for the next 2 weeks.`,
+              );
+            });
+            return;
+          }
+
+          quiz.answered = false;
+          const q = quiz.pool[quiz.idx];
+          const progressPct = pctOf(quiz.idx, quiz.pool.length);
+          area.innerHTML = `<div class="space-y-3">
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-xs text-gray-400">Question ${quiz.idx + 1} of ${quiz.pool.length}</span>
+                <span class="text-xs px-2 py-0.5 bg-gray-100 rounded-full text-gray-500">${escapeHtml(q.tag)}</span>
+              </div>
+              <div class="w-full bg-gray-100 rounded-full h-1 mb-3" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${progressPct}"><div class="bg-blue-500 h-1 rounded-full transition-all" style="width:${progressPct}%"></div></div>
+              <p class="text-sm font-medium text-gray-800 leading-relaxed">${escapeHtml(q.q)}</p>
+              <div class="space-y-2" id="quiz-opts" role="radiogroup" aria-label="Answer options">
+                ${q.opts
+                  .map(
+                    (o, i) =>
+                      `<button type="button" class="quiz-opt w-full text-left px-3 py-2.5 text-xs border border-gray-200 rounded-lg hover:bg-gray-50 hover:border-gray-300 transition-colors text-gray-700" data-opt="${i}" role="radio" aria-checked="false">${String.fromCharCode(65 + i)}. ${escapeHtml(o)}</button>`,
+                  )
+                  .join("")}
+              </div>
+            </div>`;
+          $$(".quiz-opt", area).forEach((btn) => {
+            btn.addEventListener("click", () =>
+              answerQ(parseInt(btn.dataset.opt, 10)),
+            );
+          });
+        }
+
+        function answerQ(i) {
+          if (quiz.answered) return;
+          if (quiz.idx >= quiz.pool.length) return;
+          quiz.answered = true;
+          const q = quiz.pool[quiz.idx];
+          $$(".quiz-opt").forEach((o, idx) => {
+            o.disabled = true;
+            o.setAttribute("aria-checked", String(idx === i));
+            if (idx === q.ans) o.classList.add("quiz-opt-correct");
+            else if (idx === i) o.classList.add("quiz-opt-wrong");
+          });
+          if (i === q.ans) {
+            quiz.score++;
+            $("q-score").textContent = quiz.score;
+          }
+          const extra = document.createElement("div");
+          extra.innerHTML = `
+            <div class="mt-3 p-3 bg-gray-50 border border-gray-100 rounded-lg text-xs text-gray-600 leading-relaxed">${escapeHtml(q.exp)}</div>
+            <div class="flex gap-2 mt-3">
+              <button type="button" id="btn-next-q" class="flex-1 py-2 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">${quiz.idx + 1 < quiz.pool.length ? "Next question →" : "See results →"}</button>
+              <button type="button" id="btn-explain-q" class="px-3 py-2 text-xs border border-gray-200 rounded-lg hover:bg-gray-50 text-gray-600 transition-colors">Explain ↗</button>
+            </div>`;
+          $("quiz-area").appendChild(extra);
+          $("btn-next-q").addEventListener("click", nextQ);
+          $("btn-explain-q").addEventListener("click", () => {
+            sendPrompt(
+              `Explain in depth with Java/Spring code examples: ${q.q}\n\nCover: core concept, why the correct answer is right, why the wrong options are wrong, and common interview follow-ups.`,
+            );
+          });
+        }
+
+        function nextQ() {
+          quiz.idx++;
+          renderQ();
+        }
+
+        function handleQuizKey(e) {
+          if ($("view-quiz").classList.contains("hidden")) return;
+          if (!$("prompt-modal").classList.contains("hidden")) return;
+          const ae = document.activeElement;
+          const tag = ae && ae.tagName;
+          if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+          if (e.key >= "1" && e.key <= "4") {
+            const idx = parseInt(e.key, 10) - 1;
+            const opts = $$(".quiz-opt");
+            if (opts[idx] && !opts[idx].disabled) {
+              e.preventDefault();
+              answerQ(idx);
+            }
+          } else if (e.key === "Enter") {
+            const next = $("btn-next-q");
+            if (next) {
+              e.preventDefault();
+              next.click();
+            }
+          } else if (e.key === "r" || e.key === "R") {
+            e.preventDefault();
+            startQuiz();
+          }
+        }
+
+        /* ==========================================================
+           NOTES
+           ========================================================== */
+        function buildNoteSel() {
+          const sel = $("note-topic");
+          sel.innerHTML = "";
+          PHASES.forEach((ph) => {
+            const og = document.createElement("optgroup");
+            og.label = ph.label;
+            ph.cards.forEach((c) => {
+              const o = document.createElement("option");
+              o.value = c.t;
+              o.textContent = c.t;
+              og.appendChild(o);
+            });
+            sel.appendChild(og);
+          });
+        }
+
+        function addNote() {
+          const topic = $("note-topic").value;
+          const body = $("note-body").value.trim();
+          if (!body) {
+            $("note-body").focus();
+            return;
+          }
+          S.notes.unshift({
+            topic,
+            body,
+            ts: new Date().toLocaleDateString(undefined, {
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
+            }),
+          });
+          $("note-body").value = "";
+          save();
+          const st = $("note-status");
+          st.textContent = "Saved!";
+          setTimeout(() => (st.textContent = ""), COPY_FEEDBACK_MS);
+          renderNotes();
+        }
+
+        function delNote(i) {
+          if (!confirm("Delete this note?")) return;
+          S.notes.splice(i, 1);
+          save();
+          renderNotes();
+        }
+
+        function renderNotes() {
+          const el = $("notes-list");
+          if (!S.notes.length) {
+            el.innerHTML = `<div class="text-center py-8 text-sm text-gray-400">No notes yet. Add your first note above.</div>`;
+            return;
+          }
+          el.innerHTML = "";
+          S.notes.forEach((n, i) => {
+            const card = document.createElement("div");
+            card.className = "bg-white border border-gray-100 rounded-xl p-3.5";
+            card.innerHTML = `
+              <div class="flex items-start justify-between gap-2 mb-1.5">
+                <div class="min-w-0">
+                  <span class="text-xs font-semibold text-gray-700 break-words">${escapeHtml(n.topic)}</span>
+                  <span class="ml-2 text-xs text-gray-300">${escapeHtml(n.ts)}</span>
+                </div>
+                <button type="button" class="text-xs text-gray-300 hover:text-red-500 transition-colors px-1 flex-shrink-0" aria-label="Delete note">✕</button>
+              </div>
+              <p class="text-xs text-gray-600 font-mono whitespace-pre-wrap leading-relaxed break-words">${escapeHtml(n.body)}</p>`;
+            card
+              .querySelector("button")
+              .addEventListener("click", () => delNote(i));
+            el.appendChild(card);
+          });
+        }
+
+        /* ==========================================================
+           PLANNER & RESOURCES
+           ========================================================== */
+        function renderPlanner() {
+          $("planner-grid").innerHTML = PLANNER.map(
+            (w) => `
+              <div class="bg-white border border-gray-100 rounded-xl p-3.5 hover:border-gray-200 transition-colors">
+                <div class="flex items-center gap-1.5 mb-2">
+                  <div class="w-2 h-2 rounded-full flex-shrink-0" style="background:${w.color}"></div>
+                  <span class="text-xs font-semibold text-gray-700">${escapeHtml(w.w)}</span>
+                  <span class="text-xs px-1.5 py-0.5 rounded font-medium ml-auto" style="background:${w.color}15;color:${w.color}">${escapeHtml(w.phase)}</span>
+                </div>
+                <ul class="space-y-1">
+                  ${w.topics.map((t) => `<li class="text-xs text-gray-500 flex gap-1"><span class="text-gray-300 flex-shrink-0">→</span><span>${escapeHtml(t)}</span></li>`).join("")}
+                </ul>
+              </div>`,
+          ).join("");
+        }
+
+        function renderResources() {
+          $("res-grid").innerHTML = RESOURCES.map(
+            (r) => `
+              <div class="bg-white border border-gray-100 rounded-xl p-3.5 hover:border-gray-200 transition-colors">
+                <span class="inline-block text-xs px-2 py-0.5 rounded-full font-medium mb-2 ${r.typeColor}">${escapeHtml(r.type)}</span>
+                <div class="text-sm font-semibold text-gray-800 mb-0.5">${escapeHtml(r.title)}</div>
+                <div class="text-xs text-gray-400 mb-1.5">${escapeHtml(r.author)}</div>
+                <p class="text-xs text-gray-500 leading-relaxed">${escapeHtml(r.desc)}</p>
+              </div>`,
+          ).join("");
+        }
+
+        /* ==========================================================
+           AI PROMPT MODAL
+           ========================================================== */
+        let lastFocusedBeforeModal = null;
+
+        function sendPrompt(text) {
+          const modal = $("prompt-modal");
+          lastFocusedBeforeModal = document.activeElement;
+          $("prompt-text").value = text;
+          const enc = encodeURIComponent(text);
+          $("open-chatgpt").href = "https://chatgpt.com/?q=" + enc;
+          $("open-gemini").href = "https://gemini.google.com/app?q=" + enc;
+          $("open-claude").href = "https://claude.ai/new?q=" + enc;
+          $("copy-status").textContent = "";
+          modal.classList.remove("hidden");
+          modal.classList.add("flex");
+          document.body.style.overflow = "hidden";
+          setTimeout(() => $("btn-copy-prompt").focus(), 50);
+        }
+
+        function closePromptModal() {
+          const modal = $("prompt-modal");
+          if (modal.classList.contains("hidden")) return;
+          modal.classList.add("hidden");
+          modal.classList.remove("flex");
+          document.body.style.overflow = "";
+          if (lastFocusedBeforeModal && lastFocusedBeforeModal.focus) {
+            try {
+              lastFocusedBeforeModal.focus();
+            } catch (_) {}
+          }
+        }
+
+        function copyPrompt() {
+          const text = $("prompt-text").value;
+          const markDone = () => {
+            const st = $("copy-status");
+            st.textContent = "Copied!";
+            setTimeout(() => (st.textContent = ""), COPY_FEEDBACK_MS);
+          };
+          const fallback = () => {
+            const ta = $("prompt-text");
+            ta.select();
+            try {
+              document.execCommand("copy");
+              markDone();
+            } catch (_) {
+              /* clipboard unavailable */
+            }
+          };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(markDone, fallback);
+          } else {
+            fallback();
+          }
+        }
+
+        /* ==========================================================
+           EVENT WIRING
+           ========================================================== */
+        function wireEvents() {
+          $$(".tab-btn").forEach((btn) => {
+            btn.addEventListener("click", () => switchTab(btn.dataset.tab));
+          });
+
+          $("search").addEventListener(
+            "input",
+            debounce(applyFilters, SEARCH_DEBOUNCE_MS),
+          );
+          $("sort-sel").addEventListener("change", applyFilters);
+
+          $("btn-reset").addEventListener("click", resetProgress);
+          $("btn-advice").addEventListener("click", promptAdvice);
+          $("btn-export").addEventListener("click", exportData);
+          $("import-file").addEventListener("change", (e) => {
+            const f = e.target.files && e.target.files[0];
+            importData(f);
+            e.target.value = "";
+          });
+
+          $("btn-new-quiz").addEventListener("click", startQuiz);
+          $("quiz-cat").addEventListener("change", startQuiz);
+
+          $("btn-save-note").addEventListener("click", addNote);
+          $("note-body").addEventListener("keydown", (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+              e.preventDefault();
+              addNote();
+            }
+          });
+
+          $("btn-close-modal").addEventListener("click", closePromptModal);
+          $("btn-copy-prompt").addEventListener("click", copyPrompt);
+          $("prompt-modal").addEventListener("click", (e) => {
+            if (e.target.id === "prompt-modal") closePromptModal();
+          });
+
+          document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") closePromptModal();
+            handleQuizKey(e);
+          });
+        }
+
+        /* ==========================================================
+           INIT
+           ========================================================== */
+        function init() {
+          load();
+          buildTagChips();
+          buildRoadmap();
+          buildNoteSel();
+          updateTopbar();
+          wireEvents();
+        }
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", init);
+        } else {
+          init();
+        }
+      })();
+    </script>
+  </body>
+</html>

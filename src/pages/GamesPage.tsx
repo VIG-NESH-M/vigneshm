@@ -11,6 +11,7 @@ import {
   Layers,
   Crown,
   Box,
+  BookOpen,
 } from "lucide-react";
 import { useDocumentTitle } from "@/hooks";
 import Navbar from "@/components/portfolio/Navbar";
@@ -52,10 +53,20 @@ const games = [
   {
     id: "rubiks-cube",
     name: "Rubik's Cube",
-    description: "3D Rubik's Cube with drag controls, scramble, and built-in solver",
+    description:
+      "3D Rubik's Cube with drag controls, scramble, and built-in solver",
     icon: Box,
     iconBg: "bg-gradient-to-br from-emerald-500 to-teal-600",
     href: "/rubiks-cube",
+  },
+  {
+    id: "java-roadmap",
+    name: "Java Backend Roadmap",
+    description:
+      "Interactive 16-week roadmap with progress tracker, quizzes, and notes",
+    icon: BookOpen,
+    iconBg: "bg-gradient-to-br from-sky-600 to-indigo-700",
+    href: "/java-roadmap",
   },
 ];
 
