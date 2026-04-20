@@ -12,6 +12,7 @@ import {
   Crown,
   Box,
   BookOpen,
+  Film,
 } from "lucide-react";
 import { useDocumentTitle } from "@/hooks";
 import Navbar from "@/components/portfolio/Navbar";
@@ -67,6 +68,15 @@ const games = [
     icon: BookOpen,
     iconBg: "bg-gradient-to-br from-sky-600 to-indigo-700",
     href: "/java-roadmap",
+  },
+  {
+    id: "reel-studio",
+    name: "Reel Studio",
+    description:
+      "250-day Instagram reel planner with searchable hooks and one-tap copy",
+    icon: Film,
+    iconBg: "bg-gradient-to-br from-rose-500 to-fuchsia-600",
+    href: "/reel-studio",
   },
 ];
 

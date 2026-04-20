@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a12">
+<meta name="description" content="Reel Studio — a 250-day Instagram reel plan with hooks, quotes, endings, and CTAs. One-tap copy, search, categories, and progress tracking.">
+<meta name="color-scheme" content="dark light">
+<meta property="og:title" content="Reel Studio — 250-Day Reel Plan">
+<meta property="og:description" content="500 ready-to-post reels. Categorized. Searchable. Copy-friendly.">
+<meta property="og:type" content="website">
+<title>Reel Studio — 250-Day Plan</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎬%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#0a0a12;
+  --bg-elev:rgba(255,255,255,.04);
+  --bg-card:rgba(20,20,30,.55);
+  --bg-input:rgba(255,255,255,.03);
+  --border:rgba(255,255,255,.08);
+  --border-strong:rgba(255,255,255,.16);
+  --text:#f5f5f7;
+  --text-dim:#a5a5b8;
+  --text-muted:#6b6b80;
+  --accent:#f43f5e;
+  --accent-2:#a855f7;
+  --accent-3:#3b82f6;
+  --success:#10b981;
+  --radius:18px;
+  --radius-sm:10px;
+  --shadow-lg:0 20px 60px rgba(0,0,0,.5);
+  --shadow-md:0 8px 24px rgba(0,0,0,.3);
+  --ring:0 0 0 3px rgba(168,85,247,.35);
+}
+[data-theme="light"]{
+  --bg:#f6f6fb;
+  --bg-elev:rgba(255,255,255,.85);
+  --bg-card:rgba(255,255,255,.78);
+  --bg-input:rgba(255,255,255,.9);
+  --border:rgba(10,10,30,.08);
+  --border-strong:rgba(10,10,30,.16);
+  --text:#0a0a14;
+  --text-dim:#52526b;
+  --text-muted:#8a8a9a;
+  --shadow-lg:0 14px 40px rgba(20,20,40,.08);
+  --shadow-md:0 6px 16px rgba(20,20,40,.06);
+  --ring:0 0 0 3px rgba(168,85,247,.25);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter","Segoe UI",system-ui,sans-serif;
+  background:var(--bg);color:var(--text);min-height:100vh;line-height:1.5;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  position:relative;overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(600px 500px at 15% 10%,rgba(244,63,94,.14),transparent 60%),
+    radial-gradient(700px 600px at 85% 5%,rgba(168,85,247,.13),transparent 60%),
+    radial-gradient(700px 700px at 50% 90%,rgba(59,130,246,.1),transparent 60%);
+}
+[data-theme="light"] body::before{opacity:.45}
+
+/* A11y: crisp focus rings everywhere */
+:focus{outline:none}
+:focus-visible{outline:none;box-shadow:var(--ring);border-color:var(--accent-2)!important}
+
+.container{max-width:1280px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+
+/* HERO */
+.hero{padding:56px 0 28px;text-align:center}
+.logo{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--text-dim);padding:7px 14px;border:1px solid var(--border);border-radius:999px;
+  margin-bottom:22px;background:var(--bg-elev);backdrop-filter:blur(12px);
+}
+.logo-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);
+  box-shadow:0 0 14px var(--accent);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(.85)}}
+.hero h1{
+  font-size:clamp(38px,7.5vw,68px);font-weight:800;letter-spacing:-.035em;line-height:1.04;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2),var(--accent-3),var(--accent-2),var(--accent));
+  background-size:280% 280%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:14px;
+  animation:gradShift 14s ease infinite;
+}
+@keyframes gradShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.hero .tagline{font-size:clamp(15px,1.8vw,17px);color:var(--text-dim);max-width:620px;margin:0 auto}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:36px 0 20px}
+.stat{
+  background:var(--bg-card);backdrop-filter:blur(14px);border:1px solid var(--border);
+  border-radius:var(--radius);padding:18px;text-align:left;
+  transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease;
+}
+.stat.action{cursor:pointer}
+.stat.action:hover{transform:translateY(-2px);border-color:var(--border-strong);box-shadow:var(--shadow-md)}
+.stat.action:focus-visible{transform:translateY(-2px)}
+.stat-label{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--text-muted);margin-bottom:6px;font-weight:600}
+.stat-value{font-size:28px;font-weight:700;letter-spacing:-.02em;display:flex;align-items:baseline;gap:6px}
+.stat-value .total{color:var(--text-muted);font-weight:500;font-size:18px}
+.stat-sub{font-size:12px;color:var(--text-dim);margin-top:4px}
+.progress-track{height:6px;background:rgba(255,255,255,.06);border-radius:999px;overflow:hidden;margin-top:10px}
+[data-theme="light"] .progress-track{background:rgba(10,10,30,.08)}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:999px;transition:width .5s cubic-bezier(.16,1,.3,1);width:0%}
+
+/* TODAY */
+.today{
+  background:linear-gradient(135deg,rgba(244,63,94,.08),rgba(168,85,247,.08) 50%,rgba(59,130,246,.08));
+  border:1px solid var(--border-strong);border-radius:var(--radius);
+  padding:20px;margin:8px 0 28px;backdrop-filter:blur(14px);
+  display:flex;flex-direction:column;gap:14px;
+}
+.today-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.today-left{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.today-pill{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  padding:5px 12px;border-radius:999px;background:var(--bg-elev);border:1px solid var(--border);color:var(--text-dim)}
+.today-title{font-size:22px;font-weight:800;letter-spacing:-.02em}
+.today-title .num{background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800}
+.today-meta{font-size:13px;color:var(--text-dim)}
+.today-actions{display:flex;gap:8px;flex-wrap:wrap}
+
+/* CONTROLS */
+.controls{
+  position:sticky;top:8px;z-index:20;
+  background:color-mix(in srgb,var(--bg) 82%,transparent);
+  backdrop-filter:blur(20px) saturate(140%);
+  -webkit-backdrop-filter:blur(20px) saturate(140%);
+  border:1px solid var(--border);border-radius:var(--radius);
+  padding:12px;margin:20px 0 28px;display:flex;flex-direction:column;gap:10px;
+}
+.search-wrap{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.search-input{
+  flex:1 1 240px;min-width:0;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius-sm);
+  padding:12px 14px 12px 42px;color:var(--text);font-size:15px;font-family:inherit;transition:border-color .2s,box-shadow .2s;
+  background-repeat:no-repeat;background-position:14px center;background-size:18px;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a5a5b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><path d='m21 21-4.3-4.3'/></svg>");
+}
+.search-input::placeholder{color:var(--text-muted)}
+.search-input:focus{outline:none;border-color:var(--accent-2);box-shadow:0 0 0 3px rgba(168,85,247,.18)}
+.search-kbd{
+  position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  font-size:11px;color:var(--text-muted);background:var(--bg-elev);padding:3px 7px;border-radius:6px;
+  border:1px solid var(--border);font-family:inherit;pointer-events:none;
+}
+.search-field{position:relative;flex:1 1 240px;min-width:0;display:flex}
+.search-field .search-input{flex:1}
+.toolbar-right{display:flex;gap:6px;flex-wrap:wrap}
+
+.icon-btn{
+  background:var(--bg-elev);border:1px solid var(--border);border-radius:var(--radius-sm);
+  padding:10px 12px;color:var(--text);cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;
+  display:inline-flex;align-items:center;gap:6px;transition:all .15s;
+}
+.icon-btn:hover{background:rgba(255,255,255,.08);transform:translateY(-1px);border-color:var(--border-strong)}
+[data-theme="light"] .icon-btn:hover{background:rgba(10,10,30,.05)}
+.icon-btn svg{width:16px;height:16px;flex-shrink:0}
+.icon-btn.icon-only{padding:10px;width:40px;justify-content:center}
+
+.filters{display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin;padding-bottom:2px;margin:-2px;
+  mask-image:linear-gradient(90deg,transparent 0,#000 8px,#000 calc(100% - 8px),transparent 100%);
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 8px,#000 calc(100% - 8px),transparent 100%);
+}
+.filters::-webkit-scrollbar{height:6px}
+.filters::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:3px}
+.chip{
+  background:var(--bg-elev);border:1px solid var(--border);border-radius:999px;
+  padding:8px 14px;font-size:13px;font-weight:500;color:var(--text-dim);
+  cursor:pointer;transition:all .15s;white-space:nowrap;font-family:inherit;flex-shrink:0;
+}
+.chip:hover{background:rgba(255,255,255,.08);color:var(--text)}
+[data-theme="light"] .chip:hover{background:rgba(10,10,30,.05)}
+.chip.active{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;border-color:transparent;box-shadow:0 4px 14px rgba(168,85,247,.3)}
+.chip-count{opacity:.7;font-weight:500;margin-left:6px;font-size:11px}
+
+/* DAYS */
+.days-grid{display:flex;flex-direction:column;gap:28px;padding-bottom:80px}
+.day{display:flex;flex-direction:column;gap:14px;scroll-margin-top:80px}
+.day.today-highlight{padding:8px;margin:-8px;border-radius:var(--radius);background:linear-gradient(135deg,rgba(244,63,94,.04),rgba(168,85,247,.04));border:1px dashed rgba(168,85,247,.4)}
+.day-header{display:flex;justify-content:space-between;align-items:center;padding:0 4px;gap:10px;flex-wrap:wrap}
+.day-title{display:inline-flex;align-items:center;gap:12px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-dim)}
+.day-number{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;font-size:12px;padding:5px 12px;border-radius:999px;font-weight:700;letter-spacing:.05em}
+.day-posted{color:var(--success);font-size:12px;font-weight:600;display:inline-flex;align-items:center;gap:4px}
+.day-actions{display:inline-flex;gap:6px;align-items:center}
+.day-copy-btn{
+  background:transparent;border:1px solid var(--border);border-radius:8px;
+  padding:6px 10px;font-size:11px;font-weight:600;color:var(--text-dim);
+  cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:5px;transition:all .15s;
+}
+.day-copy-btn:hover{background:var(--bg-elev);color:var(--text);border-color:var(--border-strong)}
+.day-copy-btn svg{width:12px;height:12px}
+
+.reels{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+.reel{
+  background:var(--bg-card);backdrop-filter:blur(14px);border:1px solid var(--border);
+  border-radius:var(--radius);padding:20px;display:flex;flex-direction:column;gap:12px;
+  transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease,opacity .25s ease;
+  position:relative;overflow:hidden;scroll-margin-top:100px;
+}
+.reel:hover{transform:translateY(-2px);border-color:var(--border-strong);box-shadow:var(--shadow-lg)}
+.reel.posted{opacity:.55}
+.reel.posted:hover{opacity:.85}
+.reel.posted .reel-top::before{
+  content:'POSTED';position:absolute;top:-6px;right:0;font-size:10px;font-weight:700;letter-spacing:.2em;
+  color:var(--success);background:rgba(16,185,129,.14);padding:4px 10px;border-radius:999px;border:1px solid rgba(16,185,129,.3);
+}
+
+.reel-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;position:relative}
+.reel-index{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted)}
+.reel-index::before{content:'🎬';font-size:14px}
+
+.tags{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;max-width:70%}
+.tag{font-size:10px;font-weight:700;padding:3px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:.05em;
+  background:rgba(168,85,247,.14);color:#d4b5ff;border:1px solid rgba(168,85,247,.28)}
+.tag.love{background:rgba(244,63,94,.14);color:#fda4bc;border-color:rgba(244,63,94,.28)}
+.tag.family{background:rgba(251,146,60,.14);color:#fed3a8;border-color:rgba(251,146,60,.28)}
+.tag.friendship{background:rgba(59,130,246,.14);color:#93c5fd;border-color:rgba(59,130,246,.28)}
+.tag.healing{background:rgba(16,185,129,.14);color:#86efac;border-color:rgba(16,185,129,.28)}
+.tag.motivation{background:rgba(234,179,8,.14);color:#fde047;border-color:rgba(234,179,8,.28)}
+.tag.attitude{background:rgba(139,92,246,.14);color:#c4b5fd;border-color:rgba(139,92,246,.28)}
+.tag.self-respect{background:rgba(236,72,153,.14);color:#f9a8d4;border-color:rgba(236,72,153,.28)}
+.tag.peace{background:rgba(6,182,212,.14);color:#67e8f9;border-color:rgba(6,182,212,.28)}
+.tag.mentions{background:rgba(34,197,94,.14);color:#86efac;border-color:rgba(34,197,94,.28)}
+.tag.wisdom{background:rgba(180,160,220,.14);color:#d4c9ef;border-color:rgba(180,160,220,.28)}
+[data-theme="light"] .tag{color:#3b2a5c}
+[data-theme="light"] .tag.love{color:#a1184c}
+[data-theme="light"] .tag.family{color:#8a3e00}
+[data-theme="light"] .tag.friendship{color:#1e3a8a}
+[data-theme="light"] .tag.healing{color:#065f46}
+[data-theme="light"] .tag.motivation{color:#854d0e}
+[data-theme="light"] .tag.attitude{color:#4c1d95}
+[data-theme="light"] .tag.self-respect{color:#831843}
+[data-theme="light"] .tag.peace{color:#155e75}
+[data-theme="light"] .tag.mentions{color:#166534}
+[data-theme="light"] .tag.wisdom{color:#4c1d95}
+
+.part{
+  display:flex;gap:10px;align-items:flex-start;
+  padding:10px 12px;background:rgba(255,255,255,.025);
+  border:1px solid var(--border);border-radius:var(--radius-sm);
+}
+[data-theme="light"] .part{background:rgba(10,10,30,.02)}
+.part-icon{font-size:15px;flex-shrink:0;margin-top:1px;line-height:1.2}
+.part-body{flex:1;min-width:0}
+.part-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--text-muted);margin-bottom:4px}
+.part-text{font-size:15px;color:var(--text);line-height:1.45;word-wrap:break-word;white-space:pre-wrap}
+.part.main .part-text{font-size:17px;font-weight:500;letter-spacing:-.01em}
+
+.copy-btn{
+  background:transparent;border:1px solid var(--border);border-radius:8px;
+  width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;
+  color:var(--text-dim);cursor:pointer;transition:all .15s;flex-shrink:0;padding:0;
+}
+.copy-btn:hover{background:var(--bg-elev);color:var(--text);border-color:rgba(168,85,247,.4)}
+.copy-btn.copied{background:rgba(16,185,129,.15);border-color:var(--success);color:var(--success)}
+.copy-btn svg{width:15px;height:15px}
+
+.reel-actions{display:flex;gap:8px;margin-top:4px;padding-top:12px;border-top:1px solid var(--border);flex-wrap:wrap}
+.action-btn{
+  flex:1 1 140px;min-width:120px;padding:11px 14px;border-radius:var(--radius-sm);
+  font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  transition:all .15s;border:1px solid var(--border);
+}
+.action-btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;border:none}
+.action-btn.primary:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(168,85,247,.35)}
+.action-btn.secondary{background:var(--bg-elev);color:var(--text)}
+.action-btn.secondary:hover{background:rgba(255,255,255,.08);border-color:var(--border-strong)}
+[data-theme="light"] .action-btn.secondary:hover{background:rgba(10,10,30,.05)}
+.action-btn.copied{background:var(--success)!important;color:#fff!important;border:none!important}
+.action-btn.posted{background:rgba(16,185,129,.14);color:var(--success);border-color:rgba(16,185,129,.35)}
+.action-btn svg{width:14px;height:14px}
+.action-btn.icon{flex:0 0 auto;min-width:0;padding:11px}
+
+/* TOAST */
+.toast{
+  position:fixed;bottom:24px;left:50%;
+  transform:translateX(-50%) translateY(120%);
+  background:var(--success);color:#fff;padding:12px 20px;border-radius:999px;
+  font-size:14px;font-weight:600;box-shadow:0 12px 30px rgba(0,0,0,.3);
+  transition:transform .3s cubic-bezier(.16,1,.3,1);z-index:100;
+  display:flex;align-items:center;gap:8px;max-width:90vw;
+}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast svg{width:16px;height:16px;flex-shrink:0}
+
+/* EMPTY */
+.empty{text-align:center;padding:60px 20px;color:var(--text-dim)}
+.empty-icon{font-size:42px;opacity:.6;margin-bottom:12px}
+.empty h3{font-size:22px;margin-bottom:8px;color:var(--text);letter-spacing:-.02em}
+
+/* LOAD MORE */
+.load-more-wrap{display:flex;justify-content:center;padding:10px 0 40px}
+.load-more-btn{
+  background:var(--bg-elev);border:1px solid var(--border-strong);border-radius:999px;
+  padding:12px 28px;color:var(--text);cursor:pointer;font-size:14px;font-weight:600;
+  font-family:inherit;transition:all .15s;
+}
+.load-more-btn:hover{background:rgba(255,255,255,.08);transform:translateY(-1px)}
+[data-theme="light"] .load-more-btn:hover{background:rgba(10,10,30,.05)}
+
+footer{text-align:center;padding:24px 20px 36px;color:var(--text-muted);font-size:13px;line-height:1.7}
+footer .kbd{font-size:11px;background:var(--bg-elev);padding:2px 7px;border-radius:5px;border:1px solid var(--border);font-family:inherit;color:var(--text-dim)}
+
+/* FAB - scroll to top */
+.fab{
+  position:fixed;bottom:24px;right:24px;width:46px;height:46px;border-radius:50%;
+  background:var(--bg-card);border:1px solid var(--border-strong);color:var(--text);
+  cursor:pointer;display:none;align-items:center;justify-content:center;
+  backdrop-filter:blur(14px);box-shadow:var(--shadow-md);z-index:50;
+  transition:transform .2s ease,opacity .2s ease,background .2s;padding:0;
+}
+.fab:hover{transform:translateY(-2px);background:var(--bg-elev)}
+.fab.show{display:inline-flex;animation:fabIn .25s ease}
+@keyframes fabIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.fab svg{width:18px;height:18px}
+
+/* MODAL */
+.modal-backdrop{
+  position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;
+  display:none;align-items:center;justify-content:center;padding:20px;
+  backdrop-filter:blur(6px);
+}
+[data-theme="light"] .modal-backdrop{background:rgba(10,10,30,.3)}
+.modal-backdrop.show{display:flex;animation:fadeIn .2s}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal{
+  background:var(--bg);border:1px solid var(--border-strong);border-radius:var(--radius);
+  padding:24px;max-width:420px;width:100%;box-shadow:var(--shadow-lg);
+  display:flex;flex-direction:column;gap:14px;
+}
+.modal h3{font-size:20px;font-weight:700;letter-spacing:-.02em}
+.modal p{color:var(--text-dim);font-size:14px}
+.modal-actions{display:flex;gap:8px;margin-top:4px;justify-content:flex-end;flex-wrap:wrap}
+
+@media (max-width:640px){
+  .hero{padding:36px 0 18px}
+  .reels{grid-template-columns:1fr}
+  .reel-actions .action-btn.primary{flex:1 1 100%}
+  .container{padding:0 14px}
+  .stat-value{font-size:22px}
+  .controls{top:0;border-radius:var(--radius);margin-top:12px}
+  .tag{font-size:9px}
+  .fab{bottom:20px;right:20px;width:42px;height:42px}
+  .today-title{font-size:18px}
+  .icon-btn span.lbl{display:none}
+  .icon-btn{padding:10px;min-width:40px;justify-content:center}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+
+@media print{
+  .controls,.fab,.reel-actions,.copy-btn,.day-actions,.toast,.modal-backdrop{display:none!important}
+  .reel{page-break-inside:avoid;break-inside:avoid;border:1px solid #ccc;box-shadow:none}
+  body::before{display:none}
+  .stat.action{display:none}
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="hero">
+    <div class="logo"><span class="logo-dot"></span> Reel Studio</div>
+    <h1>250-Day Reel Plan</h1>
+    <p class="tagline">Short quotes, hooks, and CTAs for your daily Instagram reels. One tap to copy, mark posted, and build the habit.</p>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-label">Days</div>
+        <div class="stat-value" id="daysTotal">250</div>
+        <div class="stat-sub">Ready-to-post plan</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Reels</div>
+        <div class="stat-value" id="reelsTotal">500</div>
+        <div class="stat-sub">Unique quotes</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Posted</div>
+        <div class="stat-value"><span id="postedCount">0</span><span class="total">/<span id="reelsTotalB">500</span></span></div>
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      </div>
+      <button type="button" class="stat action" id="randomBtn" aria-label="Pick a random unposted reel">
+        <div class="stat-label">Feeling stuck?</div>
+        <div class="stat-value" style="font-size:22px;gap:8px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:24px;height:24px"><rect x="2.5" y="2.5" width="19" height="19" rx="3"/><circle cx="7.5" cy="7.5" r="1.5" fill="currentColor"/><circle cx="16.5" cy="7.5" r="1.5" fill="currentColor"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><circle cx="7.5" cy="16.5" r="1.5" fill="currentColor"/><circle cx="16.5" cy="16.5" r="1.5" fill="currentColor"/></svg>
+          Random Reel
+        </div>
+        <div class="stat-sub">Jumps to an unposted one</div>
+      </button>
+    </div>
+  </header>
+
+  <section class="today" id="todayCard" hidden>
+    <div class="today-top">
+      <div class="today-left">
+        <span class="today-pill">Today</span>
+        <div>
+          <div class="today-title">Day <span class="num" id="todayNum">1</span></div>
+          <div class="today-meta" id="todayMeta"></div>
+        </div>
+      </div>
+      <div class="today-actions">
+        <button type="button" class="icon-btn" id="todayJumpBtn" aria-label="Scroll to today's reels">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+          <span class="lbl">Jump to day</span>
+        </button>
+        <button type="button" class="icon-btn" id="todayEditBtn" aria-label="Change start date">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 1 1 3 3L7 19l-4 1 1-4Z"/></svg>
+          <span class="lbl">Change</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="today" id="startCard" style="align-items:center">
+    <div class="today-top" style="justify-content:center;text-align:center;flex-direction:column">
+      <div>
+        <div class="today-title" style="margin-bottom:6px">Make this a daily habit</div>
+        <div class="today-meta">Set today as <strong>Day 1</strong> and the site will highlight your current day's reels at the top.</div>
+      </div>
+      <div class="today-actions">
+        <button type="button" class="action-btn primary" id="startPlanBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          Start plan today
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <div class="controls">
+    <div class="search-wrap">
+      <div class="search-field">
+        <input type="search" class="search-input" id="searchInput" placeholder="Search hooks, quotes, endings, CTAs..." aria-label="Search" autocomplete="off" />
+        <span class="search-kbd" id="searchKbd">/</span>
+      </div>
+      <div class="toolbar-right">
+        <button type="button" class="icon-btn" id="nextBtn" title="Jump to next unposted reel" aria-label="Jump to next unposted reel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          <span class="lbl">Next</span>
+        </button>
+        <button type="button" class="icon-btn icon-only" id="themeBtn" title="Toggle dark/light theme" aria-label="Toggle theme">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+        <button type="button" class="icon-btn icon-only" id="resetBtn" title="Reset posted progress" aria-label="Reset progress">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 3v6h6"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="filters" id="filters" role="tablist" aria-label="Filter by category"></div>
+  </div>
+
+  <div class="days-grid" id="daysGrid"></div>
+
+  <footer>
+    Made for your daily reel habit. Progress saves only in this browser.<br>
+    Shortcuts: <span class="kbd">/</span> search &middot; <span class="kbd">R</span> random &middot; <span class="kbd">N</span> next unposted
+  </footer>
+</div>
+
+<button type="button" class="fab" id="scrollTop" title="Scroll to top" aria-label="Scroll to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+</button>
+
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+  <span id="toastMsg">Copied!</span>
+</div>
+
+<div class="modal-backdrop" id="confirmModal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <h3 id="modalTitle">Reset progress?</h3>
+    <p id="modalBody">This will clear every reel you've marked as posted. This can't be undone.</p>
+    <div class="modal-actions">
+      <button type="button" class="action-btn secondary" data-modal-cancel>Cancel</button>
+      <button type="button" class="action-btn primary" data-modal-confirm>Reset</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const DATA = [{"day":1,"reels":[{"index":1,"hook":"If fake smiles hurt, read this.","quote":"Not everyone who smiles with you is happy for you.","ending":"That is why some smiles feel heavy.","cta":"Share this. Someone needs it.","tags":["healing","attitude"]},{"index":2,"hook":"If love feels hard, read this.","quote":"The right people never make love feel like begging.","ending":"Real love should feel safe, not tiring.","cta":"Send this to someone who needs it.","tags":["love","mentions"]}]},{"day":2,"reels":[{"index":1,"hook":"For the one choosing peace.","quote":"A peaceful heart is worth more than a crowded phone.","ending":"Peace will always beat fake attention.","cta":"Save this if it felt real.","tags":["love","attitude","self-respect","peace"]},{"index":2,"hook":"If only one person tried, read this.","quote":"Some bonds end because one soul kept carrying both.","ending":"One-sided love always gets tired.","cta":"Tag someone who will understand.","tags":["love","mentions"]}]},{"day":3,"reels":[{"index":1,"hook":"If they ignore your worth, read this.","quote":"If they ignore your worth, let distance explain it.","ending":"Some people learn only after loss.","cta":"Share this to your story.","tags":["self-respect"]},{"index":2,"hook":"Healing starts here.","quote":"Healing starts when you stop returning to what hurt.","ending":"Going back only reopens the pain.","cta":"Save this for your healing days.","tags":["healing"]}]},{"day":4,"reels":[{"index":1,"hook":"Tag your loyal friend.","quote":"A loyal friend protects your name in your absence.","ending":"Real friends stay real behind your back too.","cta":"Mention that friend now.","tags":["friendship","mentions"]},{"index":2,"hook":"For the one finally feeling calm.","quote":"You glow differently when your mind is finally quiet.","ending":"Peace changes your whole face.","cta":"Comment \"peace\" if you felt this.","tags":["peace"]}]},{"day":5,"reels":[{"index":1,"hook":"Stop chasing people like this.","quote":"Do not chase people who feel lucky without you.","ending":"If they do not value you, step back.","cta":"Send this to someone overthinking love.","tags":["self-respect","mentions"]},{"index":2,"hook":"For the one building in silence.","quote":"Your future needs discipline more than your excuses.","ending":"Dreams grow when excuses stop.","cta":"Save this for your grind season.","tags":["motivation","attitude"]}]},{"day":6,"reels":[{"index":1,"hook":"Some goodbyes teach a lot.","quote":"Sometimes the lesson is hidden inside the goodbye.","ending":"Not every ending is a loss.","cta":"Share this. Someone needs it.","tags":["healing"]},{"index":2,"hook":"For the one fighting silent battles.","quote":"The strongest people smile after surviving private storms.","ending":"Strength is often quiet.","cta":"Send this to a strong friend.","tags":["motivation","attitude","peace","mentions"]}]},{"day":7,"reels":[{"index":1,"hook":"Mention a real brother.","quote":"A brother by blood is easy; by loyalty is rare.","ending":"Real brotherhood is shown, not said.","cta":"Tag your brother if this is true.","tags":["family","friendship","mentions"]},{"index":2,"hook":"If they keep crossing lines, read this.","quote":"You cannot force respect out of careless hearts.","ending":"Respect cannot be begged for.","cta":"Save this if it hit hard.","tags":["love","attitude","self-respect"]}]},{"day":8,"reels":[{"index":1,"hook":"Send this to a good girl.","quote":"A girl deserves the kind of love that feels safe.","ending":"Safe love is the best kind of love.","cta":"Mention a girl who deserves better.","tags":["love","mentions"]},{"index":2,"hook":"Do not forget your parents.","quote":"Your parents hide pain just to keep you smiling.","ending":"Their love is deeper than their words.","cta":"Send this to your parents.","tags":["love","family","mentions"]}]},{"day":9,"reels":[{"index":1,"hook":"If they miss you late, read this.","quote":"Some people only miss you when access is gone.","ending":"Distance shows who really cared.","cta":"Share this to your story.","tags":["wisdom"]},{"index":2,"hook":"Growth feels lonely at first.","quote":"Growth looks lonely before it looks powerful.","ending":"Keep going through the lonely part.","cta":"Save this for later.","tags":["motivation"]}]},{"day":10,"reels":[{"index":1,"hook":"For men choosing peace.","quote":"A real man protects peace before proving pride.","ending":"Peace is stronger than ego.","cta":"Comment \"real\" if you agree.","tags":["peace"]},{"index":2,"hook":"Tag your sister.","quote":"Your sister may joke a lot, but she notices everything.","ending":"Sisters see more than they say.","cta":"Mention your sister now.","tags":["family","mentions"]}]},{"day":11,"reels":[{"index":1,"hook":"Peace starts here.","quote":"The heart rests when expectations finally leave.","ending":"Less expecting means less hurting.","cta":"Save this if you need peace.","tags":["love","healing","peace"]},{"index":2,"hook":"If effort was one-sided, read this.","quote":"If effort is one-sided, so is the truth.","ending":"Real care never feels one-sided for long.","cta":"Share this. Someone needs it.","tags":["motivation"]}]},{"day":12,"reels":[{"index":1,"hook":"Silence scares some people.","quote":"Your silence scares people who only understood your reactions.","ending":"Quiet is power when you heal.","cta":"Send this to someone healing.","tags":["healing","attitude","peace","mentions"]},{"index":2,"hook":"Wrong people can delay you.","quote":"The wrong circle can delay the right destiny.","ending":"Your circle shapes your life.","cta":"Save this for a reset.","tags":["friendship"]}]},{"day":13,"reels":[{"index":1,"hook":"Not every sorry means change.","quote":"Not every apology deserves another chance.","ending":"Sorry means little without change.","cta":"Share this to your story.","tags":["wisdom"]},{"index":2,"hook":"If love feels confusing, read this.","quote":"A boyfriend should feel like home, not confusion.","ending":"Love should calm you, not confuse you.","cta":"Send this to a girl who needs it.","tags":["love","peace","mentions"]}]},{"day":14,"reels":[{"index":1,"hook":"Healing changes your choices.","quote":"The more you heal, the less drama fits you.","ending":"Healing makes chaos feel too loud.","cta":"Save this for your healing journey.","tags":["healing"]},{"index":2,"hook":"Fake interest hurts too.","quote":"A late reply hurts less than fake interest.","ending":"Slow truth is better than fake care.","cta":"Comment \"facts\" if this is true.","tags":["healing","attitude","self-respect"]}]},{"day":15,"reels":[{"index":1,"hook":"Remember your mother today.","quote":"Your mother prayed for you before you knew fear.","ending":"Her love reached you before life did.","cta":"Send this to your mom.","tags":["love","family","mentions"]},{"index":2,"hook":"Never dim your light.","quote":"Never dim your light to keep insecure people comfortable.","ending":"Your light is not too much.","cta":"Share this with someone growing.","tags":["self-respect"]}]},{"day":16,"reels":[{"index":1,"hook":"Some friendships end quietly.","quote":"Some friendships end the moment jealousy enters quietly.","ending":"Jealousy kills many good bonds.","cta":"Save this if you learned this the hard way.","tags":["family","friendship","peace"]},{"index":2,"hook":"Protect your focus.","quote":"Protect your focus like your life depends on it.","ending":"Focus saves time and energy.","cta":"Comment \"focus\" if you needed this.","tags":["motivation"]}]},{"day":17,"reels":[{"index":1,"hook":"Fathers teach in quiet ways.","quote":"A good father teaches strength without raising his voice.","ending":"Real strength can be calm.","cta":"Send this to your father.","tags":["family","peace","mentions"]},{"index":2,"hook":"Let them laugh.","quote":"If they mock your dreams, dream louder in silence.","ending":"Results answer better than words.","cta":"Save this for your comeback.","tags":["motivation","attitude"]}]},{"day":18,"reels":[{"index":1,"hook":"Broken trust sounds loud.","quote":"Broken trust sounds louder than spoken lies.","ending":"Trust breaks deeper than words.","cta":"Share this. Someone needs it.","tags":["healing"]},{"index":2,"hook":"Stop watering dry places.","quote":"Stop watering places where your heart kept drying out.","ending":"Not everything deserves your care.","cta":"Save this for later.","tags":["love"]}]},{"day":19,"reels":[{"index":1,"hook":"Best revenge? Read this.","quote":"The best revenge is peace they cannot disturb.","ending":"Peace wins without speaking.","cta":"Comment \"peace\" if you agree.","tags":["peace"]},{"index":2,"hook":"Tag the real one.","quote":"A real one checks on you without needing a reason.","ending":"Real people care without being asked.","cta":"Mention that person now.","tags":["mentions"]}]},{"day":20,"reels":[{"index":1,"hook":"You deserve this kind of love.","quote":"You deserve people who celebrate your soft side too.","ending":"The right people love the real you.","cta":"Share this with someone kind.","tags":["love"]},{"index":2,"hook":"Delay is not always bad.","quote":"Not every delay is denial; sometimes it is protection.","ending":"Some delays save your future.","cta":"Save this if you needed hope.","tags":["wisdom"]}]},{"day":21,"reels":[{"index":1,"hook":"Loud love is not always real.","quote":"The loudest love is often the shortest one.","ending":"Real love does not need a show.","cta":"Share this. Someone needs it.","tags":["love"]},{"index":2,"hook":"Brothers show love like this.","quote":"Your brother may fight you, but he will fight for you.","ending":"Rough love is still love.","cta":"Tag your brother.","tags":["love","family","peace","mentions"]}]},{"day":22,"reels":[{"index":1,"hook":"Words can leave deep pain.","quote":"Some wounds come from words said casually.","ending":"Small words can leave big scars.","cta":"Save this if it felt personal.","tags":["healing"]},{"index":2,"hook":"Focus until excuses look weak.","quote":"Be so focused that excuses sound embarrassing.","ending":"Excuses fade when goals get strong.","cta":"Comment \"locked in\" if this is you.","tags":["motivation"]}]},{"day":23,"reels":[{"index":1,"hook":"Growing up changes your people.","quote":"The older you get, the smaller your circle becomes.","ending":"Peace grows when the circle gets smaller.","cta":"Share this to your story.","tags":["friendship","peace"]},{"index":2,"hook":"Feelings should not ruin your future.","quote":"Do not let temporary feelings ruin permanent dreams.","ending":"One bad feeling should not ruin a big goal.","cta":"Save this for a hard day.","tags":["motivation"]}]},{"day":24,"reels":[{"index":1,"hook":"She was never hard to love.","quote":"She is not hard to love; she is tired of pretending.","ending":"Tired hearts look distant, not cold.","cta":"Send this to a girl who needs it.","tags":["love","attitude","mentions"]},{"index":2,"hook":"Their view does not change your worth.","quote":"Your value does not drop because someone lacked vision.","ending":"Their eyes do not define your worth.","cta":"Share this. Someone needs it.","tags":["self-respect"]}]},{"day":25,"reels":[{"index":1,"hook":"Peace starts when control ends.","quote":"Peace arrives when people no longer control your mood.","ending":"Take your mood back.","cta":"Save this for your peace season.","tags":["peace"]},{"index":2,"hook":"A true friend notices this.","quote":"A true friend notices the pain behind your jokes.","ending":"Real friends hear what you hide.","cta":"Mention that friend.","tags":["friendship","mentions"]}]},{"day":26,"reels":[{"index":1,"hook":"If love confuses you daily, read this.","quote":"If love confuses you daily, it is not love.","ending":"Love should bring calm, not daily stress.","cta":"Share this with someone overthinking.","tags":["love","peace"]},{"index":2,"hook":"Quiet work still wins.","quote":"The mountain respects the person who keeps climbing quietly.","ending":"Slow steps still reach high places.","cta":"Save this for motivation.","tags":["peace"]}]},{"day":27,"reels":[{"index":1,"hook":"Some closed doors help you.","quote":"Some doors close because your heart outgrew the room.","ending":"What no longer fits must go.","cta":"Comment \"growth\" if you feel this.","tags":["love","motivation"]},{"index":2,"hook":"Missing them is not the answer.","quote":"You can miss someone and still choose yourself.","ending":"Missing them does not mean go back.","cta":"Save this if you needed it.","tags":["self-respect","peace"]}]},{"day":28,"reels":[{"index":1,"hook":"Wrong people do this.","quote":"The wrong people make you explain your worth.","ending":"The right people just see it.","cta":"Share this. Someone needs it.","tags":["self-respect"]},{"index":2,"hook":"Hard times show the real ones.","quote":"Hard times reveal who texted words and who showed up.","ending":"Presence says more than talk.","cta":"Tag someone who stayed.","tags":["mentions"]}]},{"day":29,"reels":[{"index":1,"hook":"Sisters love in quiet ways.","quote":"A sister's care is often hidden inside teasing.","ending":"Love can sound playful too.","cta":"Mention your sister.","tags":["love","family","peace","mentions"]},{"index":2,"hook":"Stay humble, but remember this.","quote":"Stay humble, but never forget what you survived.","ending":"Your scars built your strength.","cta":"Save this for your hard days.","tags":["healing"]}]},{"day":30,"reels":[{"index":1,"hook":"Distance says a lot.","quote":"They ignored your effort, then feared your distance.","ending":"Some people see value only when you step back.","cta":"Share this to your story.","tags":["motivation","self-respect"]},{"index":2,"hook":"Calm minds win.","quote":"A calm mind makes sharper decisions than an angry ego.","ending":"Calm beats ego every time.","cta":"Comment \"calm\" if you agree.","tags":["attitude","peace"]}]},{"day":31,"reels":[{"index":1,"hook":"Love should not drain you.","quote":"Love should heal your day, not exhaust your soul.","ending":"Love is not meant to feel heavy all the time.","cta":"Send this to someone who needs it.","tags":["love","healing","mentions"]},{"index":2,"hook":"Fathers do more than they say.","quote":"Your father may be silent, but his sacrifices are loud.","ending":"Quiet love can still be deep.","cta":"Send this to your father.","tags":["love","family","attitude","peace","mentions"]}]},{"day":32,"reels":[{"index":1,"hook":"Sweet words can still hurt.","quote":"Some people talk sweet but move selfish.","ending":"Nice words mean nothing without clean actions.","cta":"Save this if you learned this late.","tags":["healing","attitude","peace"]},{"index":2,"hook":"Your comeback starts now.","quote":"Your comeback begins where self-pity finally ends.","ending":"Feeling sorry for yourself keeps you stuck.","cta":"Share this for motivation.","tags":["motivation"]}]},{"day":33,"reels":[{"index":1,"hook":"Real respect looks like this.","quote":"Real respect is consistent, not convenient.","ending":"If it comes and goes, it is not respect.","cta":"Comment \"real\" if you agree.","tags":["self-respect"]},{"index":2,"hook":"Safe girls love differently.","quote":"A girl who feels safe will love without fear.","ending":"Safety opens the softest love.","cta":"Mention someone who deserves safe love.","tags":["love","mentions"]}]},{"day":34,"reels":[{"index":1,"hook":"Stop arguing with people like this.","quote":"Do not argue with people committed to misunderstanding you.","ending":"Some people do not want truth, only drama.","cta":"Save this for peace.","tags":["attitude"]},{"index":2,"hook":"Discipline is self-respect.","quote":"Discipline is choosing future peace over present comfort.","ending":"Easy now can cost you later.","cta":"Share this to your story.","tags":["motivation","self-respect","peace"]}]},{"day":35,"reels":[{"index":1,"hook":"Almost love changes you.","quote":"The heart grows wiser after enough almosts.","ending":"Near-love still leaves deep lessons.","cta":"Save this if it hit hard.","tags":["love","healing","peace"]},{"index":2,"hook":"Mothers carry a lot.","quote":"Your mother carried more than groceries and worries.","ending":"Her love was heavy and real.","cta":"Send this to your mom.","tags":["love","family","mentions"]}]},{"day":36,"reels":[{"index":1,"hook":"Watch people like this.","quote":"Friends who clap in public but compete in private are dangerous.","ending":"Not every clap is love.","cta":"Share this. Someone needs it.","tags":["love","friendship"]},{"index":2,"hook":"Let results speak.","quote":"Let your success speak where explanations keep failing.","ending":"Results end long talks.","cta":"Save this for motivation.","tags":["motivation"]}]},{"day":37,"reels":[{"index":1,"hook":"Good love feels simple.","quote":"The best relationships make small moments feel important.","ending":"Real love makes little things feel big.","cta":"Tag your person.","tags":["love","family","mentions"]},{"index":2,"hook":"Choose calm.","quote":"A peaceful room is better than a noisy crowd.","ending":"Quiet peace beats loud company.","cta":"Comment \"peace\" if you feel this.","tags":["peace"]}]},{"day":38,"reels":[{"index":1,"hook":"Some heartbreaks save you.","quote":"Some exits are blessings wearing heartbreak.","ending":"Pain can still protect you.","cta":"Save this for healing.","tags":["healing","peace"]},{"index":2,"hook":"Real brothers do this.","quote":"A real brother protects your dignity, not just your name.","ending":"Real men protect more than image.","cta":"Tag your brother.","tags":["family","mentions"]}]},{"day":39,"reels":[{"index":1,"hook":"Honesty changes your circle.","quote":"The more honest you become, the fewer people fit.","ending":"Truth clears the wrong crowd.","cta":"Share this to your story.","tags":["friendship"]},{"index":2,"hook":"Stop saying sorry for this.","quote":"Stop apologizing for boundaries that saved your mind.","ending":"Boundaries are not a crime.","cta":"Save this if you needed it.","tags":["self-respect"]}]},{"day":40,"reels":[{"index":1,"hook":"You cannot heal here.","quote":"You cannot heal in the same place you kept shrinking.","ending":"Healing needs new space.","cta":"Share this. Someone needs it.","tags":["healing","attitude"]},{"index":2,"hook":"Ambition looks rude to some people.","quote":"Ambition looks rude to people addicted to comfort.","ending":"Growth bothers people who stay the same.","cta":"Comment \"growth\" if you agree.","tags":["motivation"]}]},{"day":41,"reels":[{"index":1,"hook":"A real girlfriend feels like this.","quote":"A girlfriend should feel like peace, not pressure.","ending":"Love should not feel like work every day.","cta":"Send this to someone in love.","tags":["love","peace","mentions"]},{"index":2,"hook":"People test your limits first.","quote":"People test your limits before they respect them.","ending":"Boundaries teach people how to treat you.","cta":"Save this for later.","tags":["self-respect"]}]},{"day":42,"reels":[{"index":1,"hook":"Your low season changed you.","quote":"Your lowest season introduced your strongest version.","ending":"Pain can build power too.","cta":"Share this for strength.","tags":["motivation"]},{"index":2,"hook":"If they call only when bored, read this.","quote":"If they only call when bored, stay busy.","ending":"Do not be someone's free time.","cta":"Save this if it hit hard.","tags":["wisdom"]}]},{"day":43,"reels":[{"index":1,"hook":"Distance teaches value.","quote":"Some hearts need distance to remember your value.","ending":"Space shows what words hide.","cta":"Share this to your story.","tags":["love","self-respect"]},{"index":2,"hook":"Right paths feel hard first.","quote":"The right path feels heavy before it feels rewarding.","ending":"Hard now can mean better later.","cta":"Save this for motivation.","tags":["wisdom"]}]},{"day":44,"reels":[{"index":1,"hook":"Parents are getting older.","quote":"Parents age while children stay distracted.","ending":"Time moves faster at home.","cta":"Send this to your family.","tags":["family","mentions"]},{"index":2,"hook":"Quiet people see a lot.","quote":"Quiet people notice what loud people miss.","ending":"Silence often sees the truth first.","cta":"Comment \"true\" if you agree.","tags":["attitude","peace"]}]},{"day":45,"reels":[{"index":1,"hook":"Healing does not need a crowd.","quote":"Not everyone deserves updates on your healing.","ending":"Some healing is better kept private.","cta":"Save this for your healing season.","tags":["healing"]},{"index":2,"hook":"Small circles save peace.","quote":"A small circle saves you from big disappointments.","ending":"Fewer people, less damage.","cta":"Share this. Someone needs it.","tags":["friendship","peace"]}]},{"day":46,"reels":[{"index":1,"hook":"Love needs effort.","quote":"Love without effort becomes just a label.","ending":"Words alone do not keep love alive.","cta":"Tag someone who knows this.","tags":["love","motivation","mentions"]},{"index":2,"hook":"Your future self wants this.","quote":"Your future self is begging you to stay consistent.","ending":"Keep going, even when you feel slow.","cta":"Save this for discipline.","tags":["love","motivation"]}]},{"day":47,"reels":[{"index":1,"hook":"Loyalty looks like this.","quote":"Real loyalty stays when benefit leaves.","ending":"Real people stay when there is nothing to gain.","cta":"Comment \"loyal\" if you agree.","tags":["friendship"]},{"index":2,"hook":"Sisters know fast.","quote":"A sister can read your mood before your words.","ending":"Some love understands before you speak.","cta":"Mention your sister.","tags":["love","family","mentions"]}]},{"day":48,"reels":[{"index":1,"hook":"Closure can be simple.","quote":"Sometimes closure is seeing their pattern one last time.","ending":"Patterns end the questions.","cta":"Save this if it felt real.","tags":["healing"]},{"index":2,"hook":"Work until doubt gets quiet.","quote":"Work so deeply that doubt loses your address.","ending":"Deep work makes doubt weaker.","cta":"Share this for motivation.","tags":["peace"]}]},{"day":49,"reels":[{"index":1,"hook":"The right people will not do this.","quote":"The right ones do not weaponize your honesty.","ending":"Honesty should not be used against you.","cta":"Share this. Someone needs it.","tags":["wisdom"]},{"index":2,"hook":"Comparison steals too much.","quote":"Confidence grows when comparison finally dies.","ending":"Your lane is enough.","cta":"Save this for self-worth.","tags":["wisdom"]}]},{"day":50,"reels":[{"index":1,"hook":"Some people come back for the wrong reason.","quote":"Some people return only when they feel replaced.","ending":"Missing access is not missing you.","cta":"Comment \"facts\" if you agree.","tags":["wisdom"]},{"index":2,"hook":"Love should feel clear.","quote":"Your heart deserves someone who chooses you clearly.","ending":"Clear love is better than mixed signals.","cta":"Send this to someone who needs it.","tags":["love","mentions"]}]},{"day":51,"reels":[{"index":1,"hook":"Tag your real friend.","quote":"A true friend defends you in rooms you never enter.","ending":"Real friendship protects your name too.","cta":"Mention that friend now.","tags":["friendship","mentions"]},{"index":2,"hook":"Fake people do this.","quote":"The fake ones memorize your weakness, not your dreams.","ending":"Not everyone close to you is for you.","cta":"Save this if it hit hard.","tags":["motivation","attitude"]}]},{"day":52,"reels":[{"index":1,"hook":"Brotherhood is tested here.","quote":"Brotherhood is proven in problems, not parties.","ending":"Hard times show real people.","cta":"Tag your brother.","tags":["family","friendship","mentions"]},{"index":2,"hook":"Check on the funny friend.","quote":"The friend who laughs with everyone may cry alone at night.","ending":"Loud smiles can hide deep pain.","cta":"Send this to a friend.","tags":["friendship","healing","mentions"]}]},{"day":53,"reels":[{"index":1,"hook":"Growth changes friendships too.","quote":"Some friendships end because growth changes the conversation.","ending":"Not all people fit every version of you.","cta":"Share this to your story.","tags":["friendship","motivation"]},{"index":2,"hook":"A good circle changes everything.","quote":"A good circle makes your goals look normal.","ending":"Right people make big dreams feel possible.","cta":"Save this for motivation.","tags":["friendship","motivation"]}]},{"day":54,"reels":[{"index":1,"hook":"Not every best friend stays forever.","quote":"Not every best friend is meant for every season.","ending":"Some people are only for one chapter.","cta":"Share this. Someone needs it.","tags":["friendship","attitude"]},{"index":2,"hook":"Honest friends are rare.","quote":"A real one tells you the truth without humiliating you.","ending":"Truth should help, not shame.","cta":"Tag the honest friend.","tags":["friendship","mentions"]}]},{"day":55,"reels":[{"index":1,"hook":"One-sided effort kills bonds.","quote":"Friendship dies slowly when effort becomes one-way.","ending":"One person cannot hold a bond forever.","cta":"Save this if you felt it.","tags":["friendship","motivation"]},{"index":2,"hook":"This kind of peace is rare.","quote":"The rarest blessing is feeling understood without overexplaining.","ending":"Being understood feels like home.","cta":"Comment \"real\" if you know this feeling.","tags":["peace"]}]},{"day":56,"reels":[{"index":1,"hook":"Loud groups are not always safe.","quote":"The loudest group is not always the safest one.","ending":"Noise can hide bad energy.","cta":"Share this to your story.","tags":["wisdom"]},{"index":2,"hook":"Protect the friend like this.","quote":"Protect the friend who loves your success sincerely.","ending":"Real support is a rare gift.","cta":"Mention that friend.","tags":["love","friendship","motivation","mentions"]}]},{"day":57,"reels":[{"index":1,"hook":"Brothers show love in rough ways.","quote":"Brothers argue hard because love lives underneath pride.","ending":"Rough words can still carry love.","cta":"Tag your brother now.","tags":["love","family","peace","mentions"]},{"index":2,"hook":"Watch people like this.","quote":"Some people sit at your table just to count your plates.","ending":"Not everyone near you wants your good.","cta":"Save this for later.","tags":["wisdom"]}]},{"day":58,"reels":[{"index":1,"hook":"Keep the friend who does this.","quote":"Keep the friend who reminds you who you are.","ending":"Some friends bring you back to yourself.","cta":"Send this to that friend.","tags":["friendship","mentions"]},{"index":2,"hook":"Loyalty stays through busy days.","quote":"Loyalty is checking in even when life gets busy.","ending":"Care finds time.","cta":"Share this. Someone needs it.","tags":["friendship"]}]},{"day":59,"reels":[{"index":1,"hook":"Jealous claps feel different.","quote":"A jealous friend claps with tight hands.","ending":"Fake support never feels warm.","cta":"Save this if you learned it.","tags":["friendship","attitude"]},{"index":2,"hook":"History is not always heart.","quote":"Do not confuse shared history with shared heart.","ending":"Time alone does not make people real.","cta":"Comment \"facts\" if you agree.","tags":["wisdom"]}]},{"day":60,"reels":[{"index":1,"hook":"Good friendships survive this.","quote":"The best friendships survive silence, distance, and growth.","ending":"Real bonds stay strong through change.","cta":"Tag your real friend.","tags":["friendship","healing","motivation","attitude","mentions"]},{"index":2,"hook":"Your circle changes your life.","quote":"Your vibe changes when your circle stops draining you.","ending":"Right people make life feel lighter.","cta":"Share this to your story.","tags":["friendship"]}]},{"day":61,"reels":[{"index":1,"hook":"Mothers know before words.","quote":"Your mother heard your pain before you found the words.","ending":"A mother feels what you hide.","cta":"Send this to your mom.","tags":["family","mentions"]},{"index":2,"hook":"Fathers worry quietly.","quote":"Fathers worry quietly and provide loudly.","ending":"His care may be quiet, but it is deep.","cta":"Send this to your father.","tags":["family","peace","mentions"]}]},{"day":62,"reels":[{"index":1,"hook":"Home changes when parents are tired.","quote":"Home feels different when one parent is tired.","ending":"A tired parent changes the whole house.","cta":"Share this with family.","tags":["family"]},{"index":2,"hook":"Growing up shows the truth.","quote":"The older you grow, the more you understand their sacrifices.","ending":"Time makes their love easier to see.","cta":"Save this if it felt real.","tags":["love"]}]},{"day":63,"reels":[{"index":1,"hook":"Sisters love softly.","quote":"A sister's love sounds playful but runs deep.","ending":"Soft love can still be strong.","cta":"Mention your sister.","tags":["love","family","peace","mentions"]},{"index":2,"hook":"Brothers care like this.","quote":"Brothers show care in rough ways and real actions.","ending":"Their love may be rough, but it is real.","cta":"Tag your brother.","tags":["love","family","mentions"]}]},{"day":64,"reels":[{"index":1,"hook":"Family forgives fast.","quote":"Parents forgive faster than the world ever will.","ending":"Their love is bigger than your mistakes.","cta":"Send this home.","tags":["love","family"]},{"index":2,"hook":"One day you will miss this.","quote":"One day you will miss the questions you now ignore.","ending":"Small moments at home matter later.","cta":"Save this if it touched you.","tags":["family"]}]},{"day":65,"reels":[{"index":1,"hook":"Family is not perfect.","quote":"Family is not perfect; it is still precious.","ending":"Imperfect love is still love.","cta":"Share this. Someone needs it.","tags":["love","family","peace"]},{"index":2,"hook":"Parents gave up a lot.","quote":"Your parents skipped comforts so you could chase options.","ending":"Their struggle opened your path.","cta":"Send this to your parents.","tags":["family","mentions"]}]},{"day":66,"reels":[{"index":1,"hook":"Mothers carry love in tired eyes.","quote":"A mother's tired eyes hide undefeated love.","ending":"Her love keeps going, even when she is tired.","cta":"Mention your mother.","tags":["love","family","mentions"]},{"index":2,"hook":"Respect your father.","quote":"Respect your father before life teaches you why.","ending":"One day you will understand his weight.","cta":"Send this to your father.","tags":["family","self-respect","mentions"]}]},{"day":67,"reels":[{"index":1,"hook":"Home feels different when they smile.","quote":"The house feels warmer when your people are smiling.","ending":"Peace at home changes everything.","cta":"Share this with family.","tags":["family","peace"]},{"index":2,"hook":"Strict parents feel fear too.","quote":"Even strict parents are usually scared for your future.","ending":"Their rules often come from worry.","cta":"Save this if you needed this view.","tags":["family","healing"]}]},{"day":68,"reels":[{"index":1,"hook":"Sisters notice changed laughter.","quote":"Your sister notices when your laughter changes.","ending":"Love hears pain in small changes.","cta":"Tag your sister.","tags":["love","family","mentions"]},{"index":2,"hook":"Brothers tease and protect.","quote":"A brother may tease you all day and defend you all night.","ending":"Rough love still stands up for you.","cta":"Mention your brother.","tags":["love","family","peace","mentions"]}]},{"day":69,"reels":[{"index":1,"hook":"Do not wait for loss.","quote":"Do not wait for loss to become grateful.","ending":"Thank people while they are still here.","cta":"Save this for today.","tags":["peace"]},{"index":2,"hook":"Parents want this most.","quote":"The best gift to parents is becoming peaceful, not just successful.","ending":"Peace at home matters more than showing off.","cta":"Share this to your story.","tags":["family","motivation","peace"]}]},{"day":70,"reels":[{"index":1,"hook":"Family heals with less ego.","quote":"Family healing begins when ego leaves the room.","ending":"Soft hearts fix what pride breaks.","cta":"Save this if it hit home.","tags":["love","family","healing","attitude"]},{"index":2,"hook":"Some prayers built your life.","quote":"Some prayers in your life were whispered by your mother.","ending":"You were covered in love before you knew it.","cta":"Send this to your mom.","tags":["love","family","mentions"]}]},{"day":71,"reels":[{"index":1,"hook":"Love should not keep you anxious.","quote":"Love should not leave you anxious every night.","ending":"Real love lets your heart rest.","cta":"Share this. Someone needs it.","tags":["love"]},{"index":2,"hook":"The right person makes this easy.","quote":"The right person makes honesty feel easy.","ending":"Safe love tells the truth without fear.","cta":"Tag your person.","tags":["love","mentions"]}]},{"day":72,"reels":[{"index":1,"hook":"Stop chasing people like this.","quote":"Stop chasing people who enjoy being chased.","ending":"Some people like attention, not love.","cta":"Save this if you needed it.","tags":["love"]},{"index":2,"hook":"Healthy love feels like this.","quote":"A healthy bond feels calm, not confusing.","ending":"Peace is a sign of real love.","cta":"Share this to your story.","tags":["love","healing","peace"]}]},{"day":73,"reels":[{"index":1,"hook":"Real love shows through action.","quote":"If they love you, consistency will show it.","ending":"Love that stays is love that acts.","cta":"Comment \"real\" if you agree.","tags":["love","motivation"]},{"index":2,"hook":"The right girl feels like peace.","quote":"The right girl never competes with your peace.","ending":"Good love adds calm, not stress.","cta":"Mention a girl who deserves this.","tags":["love","peace","mentions"]}]},{"day":74,"reels":[{"index":1,"hook":"Boyfriends should not test hearts.","quote":"A boyfriend should protect your heart, not test it.","ending":"Love is not a game.","cta":"Send this to a girl who needs it.","tags":["love","mentions"]},{"index":2,"hook":"Strong couples do this.","quote":"The strongest couples choose respect on hard days.","ending":"Respect matters most on bad days.","cta":"Tag your person.","tags":["love","motivation","self-respect","mentions"]}]},{"day":75,"reels":[{"index":1,"hook":"Attraction is fast. Trust is slow.","quote":"Attraction can start fast; trust takes proof.","ending":"Feelings start quickly. Trust does not.","cta":"Save this if it felt true.","tags":["wisdom"]},{"index":2,"hook":"Some people love attention more.","quote":"Some people love attention more than connection.","ending":"Not every close bond is deep.","cta":"Share this. Someone needs it.","tags":["love"]}]},{"day":76,"reels":[{"index":1,"hook":"Effort should match words.","quote":"You deserve effort that matches their words.","ending":"Love should not sound bigger than it acts.","cta":"Share this to your story.","tags":["love","motivation"]},{"index":2,"hook":"Real love listens.","quote":"Real love listens even when it disagrees.","ending":"Respect listens before it reacts.","cta":"Comment \"facts\" if you agree.","tags":["love","self-respect"]}]},{"day":77,"reels":[{"index":1,"hook":"Wrong love teaches this.","quote":"The wrong person teaches you to beg.","ending":"You should never beg for basic love.","cta":"Save this for healing.","tags":["love"]},{"index":2,"hook":"Right love feels like this.","quote":"The right person teaches you to breathe.","ending":"Good love feels light on the heart.","cta":"Send this to someone you love.","tags":["love","self-respect","mentions"]}]},{"day":78,"reels":[{"index":1,"hook":"Breaking you is not love.","quote":"Love that keeps breaking you is not romantic.","ending":"Pain is not proof of love.","cta":"Share this. Someone needs it.","tags":["love"]},{"index":2,"hook":"Soft hearts need this too.","quote":"A soft heart still needs strong boundaries.","ending":"Kindness should not make you easy to hurt.","cta":"Save this if you needed it.","tags":["love","healing","self-respect","peace"]}]},{"day":79,"reels":[{"index":1,"hook":"Nice moments do not erase red flags.","quote":"Do not ignore red flags because the moments felt nice.","ending":"A few good moments cannot fix a bad pattern.","cta":"Share this to your story.","tags":["family"]},{"index":2,"hook":"The right person does not enjoy confusion.","quote":"The person meant for you will not enjoy your confusion.","ending":"Real love likes clarity.","cta":"Tag someone who needs this.","tags":["love","mentions"]}]},{"day":80,"reels":[{"index":1,"hook":"Some relationships survive like this.","quote":"Some relationships survive because one person stays silent too long.","ending":"Silence can hide pain, not fix it.","cta":"Save this if it felt personal.","tags":["love","healing","attitude"]},{"index":2,"hook":"Peace is part of love.","quote":"Peace is a love language too.","ending":"Real love feels safe and calm.","cta":"Comment \"peace\" if you agree.","tags":["love","peace"]}]},{"day":81,"reels":[{"index":1,"hook":"Missing them is not a sign.","quote":"Missing them is not a reason to return.","ending":"Missing someone does not mean they are good for you.","cta":"Save this for hard nights.","tags":["wisdom"]},{"index":2,"hook":"Healing hurts because of this.","quote":"Healing hurts because truth finally enters.","ending":"Truth stings before it frees you.","cta":"Share this. Someone needs it.","tags":["healing"]}]},{"day":82,"reels":[{"index":1,"hook":"Some goodbyes save you.","quote":"Some goodbyes save more than they end.","ending":"The ending may have protected you.","cta":"Save this for healing.","tags":["healing"]},{"index":2,"hook":"Deep love can still leave.","quote":"You can love deeply and still walk away.","ending":"Love should not cost your peace.","cta":"Share this to your story.","tags":["love","peace"]}]},{"day":83,"reels":[{"index":1,"hook":"Broken hearts can still help you.","quote":"Every broken heart teaches better standards.","ending":"Pain should leave wisdom behind.","cta":"Comment \"growth\" if you felt this.","tags":["love","healing","self-respect","peace"]},{"index":2,"hook":"Self-respect helps healing.","quote":"The pain fades faster when self-respect stays.","ending":"Respecting yourself speeds up healing.","cta":"Save this if you needed it.","tags":["healing","self-respect"]}]},{"day":84,"reels":[{"index":1,"hook":"Stop checking if they changed.","quote":"Stop checking if someone changed after they showed you enough.","ending":"Repeated patterns are your answer.","cta":"Share this. Someone needs it.","tags":["wisdom"]},{"index":2,"hook":"Closure can look quiet.","quote":"Closure sometimes looks like no more questions.","ending":"Peace starts when questions stop.","cta":"Save this for peace.","tags":["healing","peace"]}]},{"day":85,"reels":[{"index":1,"hook":"The hardest part is this.","quote":"The hardest part was accepting who they really were.","ending":"Truth hurts most when hope was strong.","cta":"Share this to your story.","tags":["healing"]},{"index":2,"hook":"Stop romanticizing the pain.","quote":"You heal quicker when you stop romanticizing the damage.","ending":"Pain is not a love story.","cta":"Save this for healing.","tags":["love","healing"]}]},{"day":86,"reels":[{"index":1,"hook":"Do not reopen this door.","quote":"Do not reopen doors your peace fought to close.","ending":"Healing should not go backward.","cta":"Share this. Someone needs it.","tags":["healing","peace"]},{"index":2,"hook":"Sad songs are cheaper.","quote":"Sad songs are cheaper than wrong people.","ending":"Music hurts less than the wrong love.","cta":"Comment \"facts\" if you agree.","tags":["love","healing"]}]},{"day":87,"reels":[{"index":1,"hook":"Acceptance calms the heart.","quote":"The heart calms down when the mind accepts reality.","ending":"Peace starts when truth is accepted.","cta":"Save this for a hard day.","tags":["love","peace"]},{"index":2,"hook":"One day this happens.","quote":"One day their name will feel ordinary again.","ending":"Healing makes old pain feel small.","cta":"Share this to your story.","tags":["healing"]}]},{"day":88,"reels":[{"index":1,"hook":"Heartbreak can build strength.","quote":"Heartbreak becomes strength when blame becomes wisdom.","ending":"Growth starts when blame ends.","cta":"Save this if it hit home.","tags":["healing","motivation"]},{"index":2,"hook":"Pain should change something.","quote":"Your standards rose because your pain had to mean something.","ending":"Let the pain teach, not waste you.","cta":"Share this. Someone needs it.","tags":["self-respect"]}]},{"day":89,"reels":[{"index":1,"hook":"Denial keeps pain longer.","quote":"Tears end sooner when denial does.","ending":"Truth shortens suffering.","cta":"Save this for healing.","tags":["healing"]},{"index":2,"hook":"Leaving late still matters.","quote":"Leaving late still counts as leaving.","ending":"A late goodbye is still brave.","cta":"Comment \"healing\" if you needed this.","tags":["healing","peace"]}]},{"day":90,"reels":[{"index":1,"hook":"Some endings answer everything.","quote":"Some endings are the answer you kept asking for.","ending":"The goodbye explained more than the words did.","cta":"Share this to your story.","tags":["healing"]},{"index":2,"hook":"Healing can look boring.","quote":"Healing looks boring until it saves your life.","ending":"Quiet healing still changes everything.","cta":"Save this for your healing season.","tags":["healing","peace"]}]},{"day":91,"reels":[{"index":1,"hook":"You were never too much.","quote":"You are not too much for the right soul.","ending":"Right people will not call your heart heavy.","cta":"Share this. Someone needs it.","tags":["love"]},{"index":2,"hook":"Being clearly chosen feels different.","quote":"Being chosen clearly feels different from being kept nearby.","ending":"Clear love feels safe.","cta":"Send this to someone who needs it.","tags":["love","mentions"]}]},{"day":92,"reels":[{"index":1,"hook":"Stop explaining to shallow people.","quote":"Stop explaining yourself to people committed to shallow views.","ending":"Not everyone deserves your full story.","cta":"Save this if it hit hard.","tags":["wisdom"]},{"index":2,"hook":"Peace is not rude.","quote":"Your peace is not rude.","ending":"Protecting your heart is not bad manners.","cta":"Comment \"peace\" if you agree.","tags":["love","peace"]}]},{"day":93,"reels":[{"index":1,"hook":"Knowing your worth changes things.","quote":"The moment you know your worth, access becomes expensive.","ending":"Not everyone should reach the real you.","cta":"Share this to your story.","tags":["family","self-respect"]},{"index":2,"hook":"Self-respect has its own glow.","quote":"Self-respect is a quiet glow.","ending":"Respecting yourself changes your whole energy.","cta":"Save this for self-worth.","tags":["self-respect","peace"]}]},{"day":94,"reels":[{"index":1,"hook":"Not everyone deserves your full heart.","quote":"Not everyone deserves the real you.","ending":"Some people only deserve distance.","cta":"Share this. Someone needs it.","tags":["wisdom"]},{"index":2,"hook":"Kindness should not cost confidence.","quote":"Your kindness should not cost your confidence.","ending":"Be kind, but do not lose yourself.","cta":"Save this if you needed it.","tags":["wisdom"]}]},{"day":95,"reels":[{"index":1,"hook":"Alone is better than this.","quote":"Being alone is better than being misread daily.","ending":"Peace alone beats pain together.","cta":"Share this to your story.","tags":["peace"]},{"index":2,"hook":"The right crowd will not shrink you.","quote":"The right crowd will not ask you to shrink.","ending":"Right people make room for you.","cta":"Tag someone safe.","tags":["attitude","mentions"]}]},{"day":96,"reels":[{"index":1,"hook":"Some people liked the old you.","quote":"Some people only liked the version of you with no boundaries.","ending":"They miss access, not the real you.","cta":"Save this if it felt real.","tags":["self-respect"]},{"index":2,"hook":"Protect this part of you.","quote":"Protect the part of you that stayed soft.","ending":"Staying soft is still strength.","cta":"Share this. Someone needs it.","tags":["peace"]}]},{"day":97,"reels":[{"index":1,"hook":"Standards come from memory too.","quote":"Your standards are not ego; they are memory.","ending":"Pain teaches what to never accept again.","cta":"Save this for later.","tags":["self-respect"]},{"index":2,"hook":"Quiet choices can be loud.","quote":"Respect yourself loudly through quiet decisions.","ending":"You do not need noise to choose yourself.","cta":"Comment \"self-respect\" if you agree.","tags":["self-respect","peace"]}]},{"day":98,"reels":[{"index":1,"hook":"Knowing yourself changes everything.","quote":"The more you know yourself, the less you chase.","ending":"Self-knowledge kills the need to beg.","cta":"Share this to your story.","tags":["wisdom"]},{"index":2,"hook":"Insecure people cannot measure this.","quote":"Value is not something insecure people can measure.","ending":"Wrong eyes cannot judge your worth.","cta":"Save this for self-worth.","tags":["self-respect"]}]},{"day":99,"reels":[{"index":1,"hook":"Choose the safe kind of honesty.","quote":"Choose people who feel safe to be honest with.","ending":"Safe people make truth easier.","cta":"Tag someone safe.","tags":["mentions"]},{"index":2,"hook":"Remember your own heart.","quote":"You stop settling once you remember your own heart.","ending":"Self-love raises standards.","cta":"Share this. Someone needs it.","tags":["love","self-respect"]}]},{"day":100,"reels":[{"index":1,"hook":"Approval is not confidence.","quote":"Confidence begins where approval ends.","ending":"You get stronger when outside praise matters less.","cta":"Save this for your growth.","tags":["wisdom"]},{"index":2,"hook":"Stop auditioning for love.","quote":"Your energy changes when you stop auditioning for love.","ending":"Real love should not feel like a test.","cta":"Send this to someone who needs it.","tags":["love","mentions"]}]},{"day":101,"reels":[{"index":1,"hook":"Dreams need this more.","quote":"Dreams respect routine more than excuses.","ending":"Big goals grow from small daily work.","cta":"Save this for motivation.","tags":["motivation","self-respect"]},{"index":2,"hook":"Let results make the noise.","quote":"Work in silence until your results sound rude.","ending":"Quiet work shocks loud people.","cta":"Share this to your story.","tags":["motivation","attitude","peace"]}]},{"day":102,"reels":[{"index":1,"hook":"Motivation starts. This stays.","quote":"Motivation starts you; discipline carries you.","ending":"Feelings fade, discipline stays.","cta":"Comment \"discipline\" if you agree.","tags":["motivation"]},{"index":2,"hook":"A tired step still counts.","quote":"A tired step still beats a lazy plan.","ending":"Slow action still beats no action.","cta":"Save this for hard days.","tags":["peace"]}]},{"day":103,"reels":[{"index":1,"hook":"Progress loves this.","quote":"Progress loves consistency, not mood.","ending":"Show up even when you do not feel like it.","cta":"Share this for motivation.","tags":["love","motivation"]},{"index":2,"hook":"Build where noise cannot reach.","quote":"Build quietly so the noise stays outside.","ending":"Less noise, more growth.","cta":"Save this for focus.","tags":["motivation","peace"]}]},{"day":104,"reels":[{"index":1,"hook":"New life needs this.","quote":"If you want a new life, train old habits to leave.","ending":"New results need new habits.","cta":"Share this to your story.","tags":["motivation"]},{"index":2,"hook":"Easy roads do not do this.","quote":"The easy road rarely leads to your best self.","ending":"Hard roads build strong people.","cta":"Save this if you needed it.","tags":["motivation"]}]},{"day":105,"reels":[{"index":1,"hook":"Nobody sees this part.","quote":"Your future is built on the days nobody claps.","ending":"The quiet days still matter.","cta":"Comment \"keep going\" if this is for you.","tags":["peace"]},{"index":2,"hook":"Be patient here.","quote":"Stay patient with results and strict with effort.","ending":"You control the work, not the timing.","cta":"Save this for the journey.","tags":["motivation"]}]},{"day":106,"reels":[{"index":1,"hook":"Every excuse you beat matters.","quote":"Every skipped excuse strengthens your next win.","ending":"Winning starts when excuses stop.","cta":"Share this for motivation.","tags":["motivation"]},{"index":2,"hook":"Focus can beat talent.","quote":"A focused mind can outrun a talented distracted one.","ending":"Focus makes average look powerful.","cta":"Save this if it hit hard.","tags":["motivation"]}]},{"day":107,"reels":[{"index":1,"hook":"Comfort cannot choose your future.","quote":"Success begins when comfort stops making decisions.","ending":"Comfort keeps many dreams small.","cta":"Share this. Someone needs it.","tags":["motivation"]},{"index":2,"hook":"Goals need this more.","quote":"Your goals need more hours, not more speeches.","ending":"Less talk, more work.","cta":"Comment \"locked in\" if you agree.","tags":["motivation"]}]},{"day":108,"reels":[{"index":1,"hook":"Discipline is self-love.","quote":"Discipline is self-love with a schedule.","ending":"Loving yourself also means showing up.","cta":"Save this for your routine.","tags":["love","motivation","self-respect"]},{"index":2,"hook":"Small wins matter.","quote":"Small wins look tiny until they become your life.","ending":"Little steps build big futures.","cta":"Share this to your story.","tags":["motivation"]}]},{"day":109,"reels":[{"index":1,"hook":"Pray and work together.","quote":"Do not pray for results you refuse to work for.","ending":"Faith still needs effort.","cta":"Save this for motivation.","tags":["motivation","peace"]},{"index":2,"hook":"Purpose makes it lighter.","quote":"The grind gets lighter when the purpose gets clearer.","ending":"Knowing why helps you keep going.","cta":"Comment \"purpose\" if you feel this.","tags":["motivation"]}]},{"day":110,"reels":[{"index":1,"hook":"Wake up like this matters.","quote":"Wake up like someone is depending on your future.","ending":"Your work today may help more than just you.","cta":"Save this for tomorrow morning.","tags":["motivation"]},{"index":2,"hook":"Boring work builds loud wins.","quote":"The strongest comeback is built on boring repetition.","ending":"Simple work done daily changes everything.","cta":"Share this for motivation.","tags":["motivation"]}]},{"day":111,"reels":[{"index":1,"hook":"Winners treat mornings different.","quote":"Winners respect mornings differently.","ending":"A good start changes the whole day.","cta":"Save this for discipline.","tags":["motivation","self-respect"]},{"index":2,"hook":"Habits expose truth.","quote":"Your habits expose your excuses.","ending":"What you do daily tells the real story.","cta":"Comment \"facts\" if you agree.","tags":["motivation"]}]},{"day":112,"reels":[{"index":1,"hook":"Consistency looks like this.","quote":"Consistency is talent in work clothes.","ending":"Daily work makes gifts look bigger.","cta":"Share this to your story.","tags":["motivation"]},{"index":2,"hook":"Action makes plans real.","quote":"A plan matters only after action joins it.","ending":"Thinking is not the same as moving.","cta":"Save this if you needed it.","tags":["wisdom"]}]},{"day":113,"reels":[{"index":1,"hook":"Roots grow in private.","quote":"Nobody sees the roots while the tree is growing.","ending":"Private growth still counts.","cta":"Share this. Someone needs it.","tags":["motivation","peace"]},{"index":2,"hook":"Choose effort on empty days.","quote":"Choose effort even when inspiration misses the day.","ending":"You do not need a perfect mood to work.","cta":"Save this for hard days.","tags":["motivation"]}]},{"day":114,"reels":[{"index":1,"hook":"The mirror remembers.","quote":"The mirror remembers every promise you broke.","ending":"Be honest with yourself first.","cta":"Comment \"discipline\" if you feel this.","tags":["wisdom"]},{"index":2,"hook":"Keep going until doubt looks silly.","quote":"Keep going until your old doubts feel silly.","ending":"Time and work prove a lot.","cta":"Share this for motivation.","tags":["wisdom"]}]},{"day":115,"reels":[{"index":1,"hook":"Slow grind still wins.","quote":"A slow grind still beats standing still.","ending":"Slow progress is still progress.","cta":"Save this for your journey.","tags":["motivation","peace"]},{"index":2,"hook":"Ambition feels lonely first.","quote":"Ambition sounds lonely before it sounds inspiring.","ending":"Keep going through the quiet stage.","cta":"Share this to your story.","tags":["motivation","peace"]}]},{"day":116,"reels":[{"index":1,"hook":"Do not stop now.","quote":"Do not stop because nobody noticed the start.","ending":"The early days are always quiet.","cta":"Save this for motivation.","tags":["peace"]},{"index":2,"hook":"Progress whispers first.","quote":"Progress often whispers before it roars.","ending":"Little change comes before big change.","cta":"Comment \"keep going\" if you agree.","tags":["motivation"]}]},{"day":117,"reels":[{"index":1,"hook":"Hard days count more.","quote":"Hard days count twice when you still show up.","ending":"Showing up tired is still powerful.","cta":"Save this for a hard day.","tags":["motivation","peace"]},{"index":2,"hook":"Make discipline the backup plan.","quote":"Make discipline your backup when emotions disappear.","ending":"Feelings leave. Discipline carries you.","cta":"Share this for motivation.","tags":["motivation"]}]},{"day":118,"reels":[{"index":1,"hook":"Your future self is watching.","quote":"The person you want to become is watching you waste time.","ending":"Time lost today will be felt tomorrow.","cta":"Save this if you needed the push.","tags":["motivation"]},{"index":2,"hook":"Train your mind.","quote":"Train your mind to obey your goals.","ending":"Your mind should follow your purpose, not your mood.","cta":"Comment \"mindset\" if you agree.","tags":["motivation"]}]},{"day":119,"reels":[{"index":1,"hook":"Great things grow quietly.","quote":"Great things grow in private first.","ending":"Private work creates public shock.","cta":"Share this to your story.","tags":["peace"]},{"index":2,"hook":"Focus costs noise.","quote":"The price of focus is missing some noise.","ending":"You cannot grow and chase every distraction.","cta":"Save this for focus.","tags":["motivation"]}]},{"day":120,"reels":[{"index":1,"hook":"Results respect this.","quote":"Results respect repetition.","ending":"The same good work done daily changes lives.","cta":"Share this for discipline.","tags":["motivation","self-respect"]},{"index":2,"hook":"Dream life hates this.","quote":"Your dream life is allergic to procrastination.","ending":"Delay steals more than failure.","cta":"Save this if it hit hard.","tags":["motivation"]}]},{"day":121,"reels":[{"index":1,"hook":"Growth feels expensive.","quote":"Growth feels expensive because comfort was cheap.","ending":"Growth costs more, but gives more.","cta":"Comment \"growth\" if you agree.","tags":["motivation"]},{"index":2,"hook":"New levels cost old versions.","quote":"Every new level costs an old version.","ending":"You cannot stay the same and rise.","cta":"Save this for your next level.","tags":["wisdom"]}]},{"day":122,"reels":[{"index":1,"hook":"You outgrow places first.","quote":"You outgrow places before you leave them.","ending":"Your spirit leaves before your body does.","cta":"Share this to your story.","tags":["wisdom"]},{"index":2,"hook":"Healing changes your taste.","quote":"Healing changes your taste in people.","ending":"What felt normal starts feeling wrong.","cta":"Save this for healing.","tags":["healing"]}]},{"day":123,"reels":[{"index":1,"hook":"Maturity looks like this.","quote":"Maturity is learning not every feeling needs a reaction.","ending":"Not every pain needs noise.","cta":"Share this. Someone needs it.","tags":["wisdom"]},{"index":2,"hook":"Peace comes when this gets clear.","quote":"Peace comes when patterns become visible.","ending":"Once you see the pattern, peace gets easier.","cta":"Save this if it felt real.","tags":["peace"]}]},{"day":124,"reels":[{"index":1,"hook":"Strength often sounds calm.","quote":"The stronger you become, the calmer you reply.","ending":"Real strength does not always shout.","cta":"Comment \"calm\" if you agree.","tags":["peace"]},{"index":2,"hook":"Growth hurts for this reason.","quote":"Growth is painful only because truth is sharp.","ending":"Truth cuts before it heals.","cta":"Save this for your healing season.","tags":["healing","motivation"]}]},{"day":125,"reels":[{"index":1,"hook":"Change your circle or your ceiling.","quote":"Change your circle or change your ceiling.","ending":"Who you sit with shapes how far you go.","cta":"Share this to your story.","tags":["friendship"]},{"index":2,"hook":"Better standards end old chapters.","quote":"Some chapters end because your standards finally rose.","ending":"Growth closes doors too.","cta":"Save this for later.","tags":["motivation","attitude","self-respect"]}]},{"day":126,"reels":[{"index":1,"hook":"Better you disappoints wrong people.","quote":"Becoming better will disappoint people who enjoyed your confusion.","ending":"Some people liked you lost.","cta":"Share this. Someone needs it.","tags":["wisdom"]},{"index":2,"hook":"Healed hearts stop doing this.","quote":"A healed heart no longer entertains chaos.","ending":"Peace changes what you allow.","cta":"Save this if you needed it.","tags":["love","healing","peace"]}]},{"day":127,"reels":[{"index":1,"hook":"This is how you know you grew.","quote":"You know you grew when old triggers lose power.","ending":"Healing shows in what no longer controls you.","cta":"Comment \"healed\" if you feel this.","tags":["healing","motivation"]},{"index":2,"hook":"This season is shaping you.","quote":"The next version of you needs this uncomfortable season.","ending":"Hard seasons build future strength.","cta":"Save this for a hard day.","tags":["motivation"]}]},{"day":128,"reels":[{"index":1,"hook":"Inner peace proves the work.","quote":"Inner peace is proof of private work.","ending":"Calm does not come for free.","cta":"Share this to your story.","tags":["peace"]},{"index":2,"hook":"Growth gets called attitude.","quote":"Evolution is often mistaken for attitude.","ending":"Some people hate the new you because they lost control.","cta":"Save this if it felt personal.","tags":["motivation","attitude"]}]},{"day":129,"reels":[{"index":1,"hook":"Not everyone can meet the new you.","quote":"Not everyone can meet the new you.","ending":"New standards close old doors.","cta":"Share this. Someone needs it.","tags":["self-respect"]},{"index":2,"hook":"Growth teaches this first.","quote":"Growth teaches distance before it teaches peace.","ending":"Space often comes before calm.","cta":"Save this for healing.","tags":["motivation","peace"]}]},{"day":130,"reels":[{"index":1,"hook":"Your future self loves this.","quote":"Your future self will thank every boundary you set today.","ending":"Boundaries protect tomorrow too.","cta":"Save this for self-respect.","tags":["love","motivation","self-respect"]},{"index":2,"hook":"Healing is this hard.","quote":"Healing is choosing differently while still hurting.","ending":"Pain and growth can happen together.","cta":"Share this to your story.","tags":["healing","motivation","peace"]}]},{"day":131,"reels":[{"index":1,"hook":"Betrayal hurts more here.","quote":"Betrayal hurts more when loyalty was real.","ending":"Pure hearts feel betrayal deeper.","cta":"Save this if it hit hard.","tags":["love","friendship","healing"]},{"index":2,"hook":"Snakes hate this.","quote":"The snake always hates the person who stopped feeding it.","ending":"Some people get angry when use ends.","cta":"Share this. Someone needs it.","tags":["wisdom"]}]},{"day":132,"reels":[{"index":1,"hook":"Some people study hearts like this.","quote":"Some people study your heart just to misuse it.","ending":"Not everyone who learns you loves you.","cta":"Save this for later.","tags":["love"]},{"index":2,"hook":"The lesson was here all along.","quote":"The lesson was not them; it was your warning signs.","ending":"Your heart knew before your mind accepted it.","cta":"Comment \"facts\" if you agree.","tags":["love","healing"]}]},{"day":133,"reels":[{"index":1,"hook":"Fake love sounds sweet first.","quote":"Fake love sounds sweet and ends cold.","ending":"Nice words can still hide empty hearts.","cta":"Share this to your story.","tags":["love","attitude","peace"]},{"index":2,"hook":"Watch who changes when you stop helping.","quote":"People show their truth when your benefit disappears.","ending":"Need changes many faces.","cta":"Save this if you felt it.","tags":["wisdom"]}]},{"day":134,"reels":[{"index":1,"hook":"Being used teaches this.","quote":"Being used teaches expensive clarity.","ending":"Pain makes some lessons very clear.","cta":"Share this. Someone needs it.","tags":["healing"]},{"index":2,"hook":"Trust this first.","quote":"Trust actions before apologies.","ending":"Changed action means more than soft words.","cta":"Save this for self-respect.","tags":["wisdom"]}]},{"day":135,"reels":[{"index":1,"hook":"Not every enemy looks angry.","quote":"Not every enemy looks angry.","ending":"Some danger smiles first.","cta":"Share this to your story.","tags":["wisdom"]},{"index":2,"hook":"Some smiles carry envy.","quote":"Some smiles come with secret competition.","ending":"Smiles do not always mean support.","cta":"Comment \"real\" if you agree.","tags":["wisdom"]}]},{"day":136,"reels":[{"index":1,"hook":"When respect leaves, read this.","quote":"When respect leaves, everything else becomes noise.","ending":"Without respect, nothing lasts clean.","cta":"Save this if it hit home.","tags":["self-respect"]},{"index":2,"hook":"Watch who smiles when you fall.","quote":"Watch who celebrates when you fail.","ending":"Some people clap louder for your loss.","cta":"Share this. Someone needs it.","tags":["wisdom"]}]},{"day":137,"reels":[{"index":1,"hook":"The worst lies feel safe first.","quote":"The worst lies are wrapped in comfort.","ending":"The sweetest lies hurt the longest.","cta":"Save this for later.","tags":["healing"]},{"index":2,"hook":"Repeated patterns are enough.","quote":"Once patterns repeat, excuses expire.","ending":"One mistake can happen. A pattern is different.","cta":"Comment \"facts\" if you agree.","tags":["motivation"]}]},{"day":138,"reels":[{"index":1,"hook":"You were never hard to love.","quote":"You were not hard to love; they were easy to reveal.","ending":"Their failure is not your flaw.","cta":"Share this to your story.","tags":["love"]},{"index":2,"hook":"Access changed, not you.","quote":"Some people call you changed because access changed.","ending":"Boundaries make some people uncomfortable.","cta":"Save this for self-respect.","tags":["self-respect"]}]},{"day":139,"reels":[{"index":1,"hook":"Broken loyalty leaves this behind.","quote":"Broken loyalty leaves permanent wisdom.","ending":"Pain can leave sharp lessons.","cta":"Share this. Someone needs it.","tags":["friendship","healing"]},{"index":2,"hook":"Learn from the wound.","quote":"Learn from the wound, not the words.","ending":"Words lie. Pain tells the truth.","cta":"Save this for healing.","tags":["healing"]}]},{"day":140,"reels":[{"index":1,"hook":"Fake ones panic when need ends.","quote":"The fake ones get uncomfortable when you stop needing them.","ending":"Some people love control, not connection.","cta":"Comment \"real\" if you agree.","tags":["love","attitude"]},{"index":2,"hook":"Familiar strangers still hurt.","quote":"Protect your heart from familiar strangers.","ending":"Closeness without care still hurts.","cta":"Share this to your story.","tags":["love","healing","peace"]}]},{"day":141,"reels":[{"index":1,"hook":"Quiet moves protect you.","quote":"Move quietly; loud plans attract lazy opinions.","ending":"Not everyone deserves your next step.","cta":"Save this for focus.","tags":["peace"]},{"index":2,"hook":"Let them doubt.","quote":"Let them doubt while you build.","ending":"Keep working while they talk.","cta":"Share this for motivation.","tags":["wisdom"]}]},{"day":142,"reels":[{"index":1,"hook":"Silence gets strong like this.","quote":"Silence is powerful when your work is loud.","ending":"Quiet confidence feels different.","cta":"Save this if it hit hard.","tags":["motivation","attitude","peace"]},{"index":2,"hook":"Not every move needs a post.","quote":"Not every move needs an announcement.","ending":"Some growth is better kept private.","cta":"Share this. Someone needs it.","tags":["motivation"]}]},{"day":143,"reels":[{"index":1,"hook":"The hungriest people do this.","quote":"The hungriest people often post the least.","ending":"Real hunger is usually quiet.","cta":"Save this for motivation.","tags":["peace"]},{"index":2,"hook":"Protect your goals.","quote":"Keep your goals away from joking minds.","ending":"Not everyone can hold your vision.","cta":"Comment \"focus\" if you agree.","tags":["motivation"]}]},{"day":144,"reels":[{"index":1,"hook":"Let your life explain it.","quote":"Work until your lifestyle explains the missing details.","ending":"Some wins speak for themselves.","cta":"Share this to your story.","tags":["wisdom"]},{"index":2,"hook":"Some dreams need privacy.","quote":"Some dreams need privacy more than praise.","ending":"Quiet growth stays safer.","cta":"Save this for later.","tags":["motivation","peace"]}]},{"day":145,"reels":[{"index":1,"hook":"Stay low until then.","quote":"Stay low until your results speak clearly.","ending":"Let the work arrive before the noise.","cta":"Share this for motivation.","tags":["motivation"]},{"index":2,"hook":"Private work creates shock.","quote":"Private discipline creates public surprise.","ending":"Quiet work makes loud results.","cta":"Save this if you needed it.","tags":["motivation","peace"]}]},{"day":146,"reels":[{"index":1,"hook":"Focus changes rooms.","quote":"The room changes when a focused person enters.","ending":"Real focus has its own energy.","cta":"Comment \"locked in\" if you feel this.","tags":["motivation"]},{"index":2,"hook":"Save energy for this.","quote":"Save your energy for progress, not proof.","ending":"You do not owe everyone an explanation.","cta":"Share this. Someone needs it.","tags":["motivation"]}]},{"day":147,"reels":[{"index":1,"hook":"Value grows in private too.","quote":"Not everything valuable grows in public.","ending":"Hidden work can still be powerful.","cta":"Save this for your journey.","tags":["motivation","self-respect","peace"]},{"index":2,"hook":"Next level needs this.","quote":"Your next level requires less talking and more repeating.","ending":"Repeat the good work until it changes your life.","cta":"Share this for motivation.","tags":["wisdom"]}]},{"day":148,"reels":[{"index":1,"hook":"Quiet effort shocks people.","quote":"Quiet effort shocks people addicted to noise.","ending":"Noise cannot compete with real work.","cta":"Save this if it hit home.","tags":["motivation","peace"]},{"index":2,"hook":"Build this kind of life.","quote":"Build the life you do not need to explain.","ending":"The best life feels calm, not loud.","cta":"Share this to your story.","tags":["motivation","peace"]}]},{"day":149,"reels":[{"index":1,"hook":"Humble does not mean small.","quote":"Humble does not mean small.","ending":"You can stay low and still grow big.","cta":"Comment \"facts\" if you agree.","tags":["peace"]},{"index":2,"hook":"Let habits speak.","quote":"Speak less about goals and more through habits.","ending":"Habits are louder than promises.","cta":"Save this for discipline.","tags":["motivation"]}]},{"day":150,"reels":[{"index":1,"hook":"Silent climbs still win.","quote":"A silent climb still reaches the top.","ending":"Quiet steps still move you higher.","cta":"Share this for motivation.","tags":["attitude","peace"]},{"index":2,"hook":"Let consistency keep working.","quote":"Let curiosity wonder while consistency works.","ending":"People can ask later. Keep building now.","cta":"Save this for your focus.","tags":["motivation"]}]},{"day":151,"reels":[{"index":1,"hook":"Soft hearts feel deeply.","quote":"Soft hearts feel deeply and leave slowly.","ending":"Deep hearts do not move on fast.","cta":"Share this. Someone needs it.","tags":["love"]},{"index":2,"hook":"Kind does not mean always open.","quote":"You can be kind without becoming available to everyone.","ending":"Kindness still needs limits.","cta":"Save this if you needed it.","tags":["peace"]}]},{"day":152,"reels":[{"index":1,"hook":"Strong people still cry.","quote":"The strongest people cry and still continue.","ending":"Tears do not cancel strength.","cta":"Share this to your story.","tags":["healing","motivation","peace"]},{"index":2,"hook":"Some nights feel heavy.","quote":"Some nights are heavy because the heart remembers everything.","ending":"Night brings back what the day hides.","cta":"Save this for your healing days.","tags":["love"]}]},{"day":153,"reels":[{"index":1,"hook":"Sensitive is not weak.","quote":"Being sensitive is not weakness; it is full awareness.","ending":"Feeling deeply is not a flaw.","cta":"Comment \"real\" if you agree.","tags":["wisdom"]},{"index":2,"hook":"Gentle souls need this too.","quote":"A gentle soul still deserves solid loyalty.","ending":"Soft people still need safe love.","cta":"Share this. Someone needs it.","tags":["love","friendship","peace"]}]},{"day":154,"reels":[{"index":1,"hook":"Quiet pain still exists.","quote":"People forget quiet pain exists.","ending":"Not all pain looks loud.","cta":"Save this if it felt personal.","tags":["peace"]},{"index":2,"hook":"Some smiles are only survival.","quote":"Some smiles are only holding the day together.","ending":"A smile can still hide pain.","cta":"Send this to someone who needs it.","tags":["peace","mentions"]}]},{"day":155,"reels":[{"index":1,"hook":"Check on the strong friend.","quote":"Check on the friend who always says they are fine.","ending":"The strongest one may need love too.","cta":"Tag a friend like this.","tags":["love","friendship","motivation","mentions"]},{"index":2,"hook":"Tender hearts meet careless hands.","quote":"Tender hearts attract careless hands too often.","ending":"Soft hearts are often hurt by hard people.","cta":"Share this to your story.","tags":["love","healing","attitude"]}]},{"day":156,"reels":[{"index":1,"hook":"Not all tiredness comes from work.","quote":"Not all exhaustion comes from work.","ending":"Some tiredness lives in the heart.","cta":"Save this for a heavy day.","tags":["wisdom"]},{"index":2,"hook":"The deepest feelers say less.","quote":"The people who feel the most often say the least.","ending":"Silence can carry a lot.","cta":"Comment \"facts\" if you agree.","tags":["attitude"]}]},{"day":157,"reels":[{"index":1,"hook":"Some days need this more.","quote":"Sometimes you need a hug more than advice.","ending":"Not every pain needs words.","cta":"Send this to someone you love.","tags":["mentions"]},{"index":2,"hook":"Calm voices can still be tired.","quote":"A peaceful voice can hide a tired spirit.","ending":"Quiet people carry things too.","cta":"Share this. Someone needs it.","tags":["peace"]}]},{"day":158,"reels":[{"index":1,"hook":"The softest people carry this.","quote":"The softest people carry the hardest stories.","ending":"Gentle hearts often survived a lot.","cta":"Save this if it hit hard.","tags":["love","healing"]},{"index":2,"hook":"Feeling deeply is still a gift.","quote":"Feeling deeply is hard, but feeling nothing is worse.","ending":"A soft heart still matters.","cta":"Share this to your story.","tags":["love","peace"]}]},{"day":159,"reels":[{"index":1,"hook":"Your emotions are not the enemy.","quote":"Your emotions are signals, not enemies.","ending":"Feelings are there to teach too.","cta":"Save this for your healing.","tags":["wisdom"]},{"index":2,"hook":"Some days, this is enough.","quote":"Some days surviving quietly is enough.","ending":"Small survival still counts.","cta":"Comment \"still here\" if you feel this.","tags":["peace"]}]},{"day":160,"reels":[{"index":1,"hook":"Kind people are healing too.","quote":"The kind ones are usually healing something unseen.","ending":"Some kindness comes from pain survived.","cta":"Share this. Someone needs it.","tags":["healing"]},{"index":2,"hook":"Understanding helps more than you think.","quote":"A little understanding can save a heavy heart.","ending":"Softness can heal more than advice.","cta":"Save this for later.","tags":["healing"]}]},{"day":161,"reels":[{"index":1,"hook":"Send this to your mother.","quote":"Send this to your mother before life gets busier.","ending":"Do not wait to show love at home.","cta":"Send this now.","tags":["love","family"]},{"index":2,"hook":"Fathers deserve this too.","quote":"Tell your father you noticed more than he said.","ending":"Quiet care deserves words back.","cta":"Send this to your father.","tags":["family","peace","mentions"]}]},{"day":162,"reels":[{"index":1,"hook":"A sister's hug heals.","quote":"A sister's hug fixes what words cannot reach.","ending":"Some love heals without speaking.","cta":"Mention your sister.","tags":["love","family","healing","mentions"]},{"index":2,"hook":"Brothers act strong for a reason.","quote":"Your brother may act strong because he thinks he has to.","ending":"Some boys hide pain behind strength.","cta":"Tag your brother.","tags":["family","mentions"]}]},{"day":163,"reels":[{"index":1,"hook":"Parents ask for little.","quote":"Parents rarely ask for much, only respect and time.","ending":"Give them love while you can.","cta":"Share this with family.","tags":["love","family","self-respect"]},{"index":2,"hook":"One message home matters.","quote":"One good message to home can heal a whole day.","ending":"Small love reaches far at home.","cta":"Send this home now.","tags":["love","family","healing"]}]},{"day":164,"reels":[{"index":1,"hook":"Family needs this most.","quote":"Family needs presence more than perfect gifts.","ending":"Your time means more than things.","cta":"Save this if it touched you.","tags":["family"]},{"index":2,"hook":"Real success looks like this too.","quote":"The best children make their parents sleep peacefully.","ending":"Your peace becomes their peace too.","cta":"Share this to your story.","tags":["family","motivation","peace"]}]},{"day":165,"reels":[{"index":1,"hook":"Give your mother flowers.","quote":"Your mother deserves flowers without a reason.","ending":"Love should not wait for a big day.","cta":"Send this to your mom.","tags":["love","family","mentions"]},{"index":2,"hook":"Father's hands built a lot.","quote":"A father's tired hands built more than money.","ending":"His work built your safety too.","cta":"Send this to your father.","tags":["family","mentions"]}]},{"day":166,"reels":[{"index":1,"hook":"Respect at home comes first.","quote":"Respect at home is the first success.","ending":"How you act at home says a lot.","cta":"Save this for yourself.","tags":["family","motivation","self-respect"]},{"index":2,"hook":"Sisters remember promises.","quote":"Your sister remembers the promises you forgot.","ending":"Family remembers the little things.","cta":"Mention your sister.","tags":["family","mentions"]}]},{"day":167,"reels":[{"index":1,"hook":"Brothers get soft when family hurts.","quote":"Brothers become softer when life hits the family.","ending":"Pain makes hidden love come out.","cta":"Tag your brother.","tags":["love","family","healing","mentions"]},{"index":2,"hook":"Call home today.","quote":"Call your parents before regret learns your name.","ending":"Some calls should not wait.","cta":"Call home after this.","tags":["family"]}]},{"day":168,"reels":[{"index":1,"hook":"Love your people while time is here.","quote":"Love your people loudly while time is listening.","ending":"Time does not wait for us.","cta":"Share this with family.","tags":["love"]},{"index":2,"hook":"Sometimes home is one voice.","quote":"Sometimes home is one person's voice.","ending":"One person can feel like safety.","cta":"Save this if it hit home.","tags":["family"]}]},{"day":169,"reels":[{"index":1,"hook":"Family pain feels different.","quote":"Family pain hurts differently because love lives there.","ending":"Where love is deep, pain feels deeper too.","cta":"Share this. Someone needs it.","tags":["love","family","healing"]},{"index":2,"hook":"Strong homes are built like this.","quote":"The strongest homes are built on patience.","ending":"Patience holds families together.","cta":"Save this for later.","tags":["motivation"]}]},{"day":170,"reels":[{"index":1,"hook":"Thank your parents now.","quote":"Thank your parents while they can still hear it daily.","ending":"Gratitude should not come late.","cta":"Send this to your parents.","tags":["family","peace","mentions"]},{"index":2,"hook":"Kindness at home changes everything.","quote":"A little kindness at home changes everything.","ending":"Softness at home goes a long way.","cta":"Share this with family.","tags":["family"]}]},{"day":171,"reels":[{"index":1,"hook":"Mention the one who stayed.","quote":"Mention the one who always stayed.","ending":"Some people are rare for a reason.","cta":"Tag that person now.","tags":["mentions"]},{"index":2,"hook":"Tag the friend who protects your peace.","quote":"Tag the friend who protects your peace.","ending":"Real friends bring calm, not stress.","cta":"Mention them now.","tags":["friendship","peace","mentions"]}]},{"day":172,"reels":[{"index":1,"hook":"Send this to your brother.","quote":"Send this to your brother if he means the world.","ending":"Brother love deserves words too.","cta":"Send it now.","tags":["love","family"]},{"index":2,"hook":"Mention her if she matters.","quote":"Mention her if her smile matters to you.","ending":"Some smiles become your peace.","cta":"Tag her now.","tags":["peace","mentions"]}]},{"day":173,"reels":[{"index":1,"hook":"Tag your sister if this is her.","quote":"Tag your sister if she reads you instantly.","ending":"Some sisters know before you speak.","cta":"Mention your sister.","tags":["family","mentions"]},{"index":2,"hook":"Send this to the friend who stayed.","quote":"Send this to the friend who never switched sides.","ending":"Loyalty is rare and worth naming.","cta":"Send it now.","tags":["friendship","self-respect"]}]},{"day":174,"reels":[{"index":1,"hook":"Mention your mother's prayers.","quote":"Mention your mother if her prayers kept you going.","ending":"Some prayers carried you quietly.","cta":"Tag your mom.","tags":["family","peace","mentions"]},{"index":2,"hook":"Honor the man who helped you.","quote":"Send this to the father figure who carried your hope.","ending":"Real care does not need blood to matter.","cta":"Send it now.","tags":["family"]}]},{"day":175,"reels":[{"index":1,"hook":"Tag the one you never want to lose.","quote":"Tag the one person you never want to lose.","ending":"Some people feel too important to stay unspoken.","cta":"Mention them now.","tags":["mentions"]},{"index":2,"hook":"Mention your ride or die.","quote":"Mention your ride or die without overthinking.","ending":"Real people deserve real words.","cta":"Tag them now.","tags":["mentions"]}]},{"day":176,"reels":[{"index":1,"hook":"Send this to your favorite human.","quote":"Send this to your favorite human.","ending":"The best people deserve a simple reminder.","cta":"Send it now.","tags":["wisdom"]},{"index":2,"hook":"Tag the friend who checks in.","quote":"Tag the friend who checks in without being asked.","ending":"Quiet care means a lot.","cta":"Mention that friend.","tags":["friendship","peace","mentions"]}]},{"day":177,"reels":[{"index":1,"hook":"Mention the girl who deserves soft love.","quote":"Mention the girl who deserves soft love.","ending":"Some girls need peace more than promises.","cta":"Tag her now.","tags":["love","peace","mentions"]},{"index":2,"hook":"Send this to the boy hiding pain.","quote":"Send this to the boy who hides pain behind jokes.","ending":"Funny people can still be hurting.","cta":"Send it now.","tags":["healing","peace"]}]},{"day":178,"reels":[{"index":1,"hook":"Tag your parents if this is true.","quote":"Tag your parents if you owe them calm.","ending":"Peace is one of the best gifts you can give them.","cta":"Mention your parents.","tags":["family","peace","mentions"]},{"index":2,"hook":"Mention the sibling who loves hard.","quote":"Mention the sibling who loves you roughly but truly.","ending":"Rough love can still be the realest.","cta":"Tag them now.","tags":["love","family","peace","mentions"]}]},{"day":179,"reels":[{"index":1,"hook":"Send this to the one who helped you.","quote":"Send this to the one who made dark days lighter.","ending":"Some people become light in bad times.","cta":"Send it now.","tags":["self-respect"]},{"index":2,"hook":"Tag the friend who stayed in the mess.","quote":"Tag the friend who stayed when life got messy.","ending":"Anyone can stay in good times.","cta":"Mention that friend.","tags":["friendship","mentions"]}]},{"day":180,"reels":[{"index":1,"hook":"Mention someone you never want to change.","quote":"Mention someone you pray never changes.","ending":"Some people feel rare because they are.","cta":"Tag them now.","tags":["mentions"]},{"index":2,"hook":"Send this to the person who feels like home.","quote":"Send this to the person who feels like home.","ending":"Home can be a person too.","cta":"Send it now.","tags":["family"]}]},{"day":181,"reels":[{"index":1,"hook":"Stop proving yourself to doubters.","quote":"I stopped proving myself to people who enjoy doubting.","ending":"Some people are committed to missing your worth.","cta":"Share this to your story.","tags":["attitude","self-respect"]},{"index":2,"hook":"Shorter talks, better peace.","quote":"My peace got better when my explanations got shorter.","ending":"Too much explaining drains the soul.","cta":"Save this if you needed it.","tags":["attitude","peace"]}]},{"day":182,"reels":[{"index":1,"hook":"I do not chase anymore.","quote":"I do not chase; I notice.","ending":"Noticing saves you from begging.","cta":"Comment \"growth\" if you agree.","tags":["love","attitude"]},{"index":2,"hook":"Silence speaks better sometimes.","quote":"I learned silence speaks better than wounded pride.","ending":"Some answers do not need a reply.","cta":"Save this for peace.","tags":["healing","attitude"]}]},{"day":183,"reels":[{"index":1,"hook":"I grew when I got quieter.","quote":"I grew when I stopped announcing every plan.","ending":"Private goals feel safer.","cta":"Share this. Someone needs it.","tags":["motivation","attitude","peace"]},{"index":2,"hook":"Energy is guarded now.","quote":"I protect my energy like money now.","ending":"Peace becomes valuable after pain.","cta":"Save this if it hit hard.","tags":["peace"]}]},{"day":184,"reels":[{"index":1,"hook":"Forgiveness does not mean return.","quote":"I forgive, but I do not return unchanged.","ending":"Healing changes what you allow.","cta":"Share this to your story.","tags":["healing","attitude"]},{"index":2,"hook":"Not everyone has to understand me.","quote":"I outgrew the need to be understood by everyone.","ending":"Peace comes when approval matters less.","cta":"Save this for growth.","tags":["motivation","peace"]}]},{"day":185,"reels":[{"index":1,"hook":"Patterns matter more than promises.","quote":"I trust patterns more than promises.","ending":"Repeated action tells the real truth.","cta":"Share this. Someone needs it.","tags":["wisdom"]},{"index":2,"hook":"Harder to fool now.","quote":"I became harder to fool, not harder to love.","ending":"Lessons made me wiser, not colder.","cta":"Save this if it felt personal.","tags":["love","healing","attitude"]}]},{"day":186,"reels":[{"index":1,"hook":"Peace can look rude to some people.","quote":"I chose peace, and some people called it attitude.","ending":"Boundaries upset people who used your silence.","cta":"Comment \"peace\" if you agree.","tags":["attitude","self-respect","peace"]},{"index":2,"hook":"I do not argue here anymore.","quote":"I no longer argue with disrespect.","ending":"Some things are better left alone.","cta":"Save this for self-respect.","tags":["attitude"]}]},{"day":187,"reels":[{"index":1,"hook":"Quieter because clearer.","quote":"I got quieter because I got clearer.","ending":"Clarity removes the need to explain.","cta":"Share this to your story.","tags":["peace"]},{"index":2,"hook":"Confusion was left behind.","quote":"I left confusion where it belonged.","ending":"Peace grows when confusion goes.","cta":"Save this if you needed it.","tags":["attitude","peace"]}]},{"day":188,"reels":[{"index":1,"hook":"Selective is not cold.","quote":"I am not distant; I am selective.","ending":"Not everyone should reach the real you.","cta":"Share this. Someone needs it.","tags":["attitude"]},{"index":2,"hook":"I choose what chooses me.","quote":"I started choosing what chooses me.","ending":"Mutual effort feels different.","cta":"Save this for self-worth.","tags":["motivation","attitude"]}]},{"day":189,"reels":[{"index":1,"hook":"Dignity feels better than begging.","quote":"I stopped begging for effort and found my dignity.","ending":"Self-respect starts where begging ends.","cta":"Share this to your story.","tags":["love","motivation","attitude","self-respect"]},{"index":2,"hook":"Be your own safe place.","quote":"I became my own safe place first.","ending":"Peace starts inside too.","cta":"Save this for healing.","tags":["attitude","peace"]}]},{"day":190,"reels":[{"index":1,"hook":"Boundaries cost some people access.","quote":"I lost people when I found boundaries.","ending":"Some people only loved the easy version of you.","cta":"Share this. Someone needs it.","tags":["love","attitude","self-respect"]},{"index":2,"hook":"Shrinking is over.","quote":"I do not shrink to keep anyone comfortable.","ending":"Your light is not too much.","cta":"Comment \"never again\" if you agree.","tags":["attitude","self-respect"]}]},{"day":191,"reels":[{"index":1,"hook":"Pain raised my standards.","quote":"My standards rose after my pain taught me.","ending":"Hard lessons change your limits.","cta":"Save this if it hit hard.","tags":["healing","attitude","self-respect"]},{"index":2,"hook":"Calm comes from surviving.","quote":"I am calm because I survived worse than this.","ending":"Strong people do not always look loud.","cta":"Share this to your story.","tags":["healing","attitude","peace"]}]},{"day":192,"reels":[{"index":1,"hook":"Being underestimated helps sometimes.","quote":"Being underestimated saves me energy.","ending":"Let them guess while you build.","cta":"Save this for motivation.","tags":["attitude"]},{"index":2,"hook":"Solitude does not scare me now.","quote":"I do not fear solitude anymore.","ending":"Being alone feels better than being drained.","cta":"Share this. Someone needs it.","tags":["healing","attitude"]}]},{"day":193,"reels":[{"index":1,"hook":"Glow returns like this.","quote":"My glow returned when overthinking left.","ending":"Peace shows on your face too.","cta":"Save this for healing.","tags":["attitude","peace"]},{"index":2,"hook":"Mutual energy only.","quote":"I make space for what feels mutual.","ending":"One-sided love is no longer welcome.","cta":"Comment \"mutual\" if you agree.","tags":["love","attitude"]}]},{"day":194,"reels":[{"index":1,"hook":"Closure is not always needed.","quote":"I stopped waiting for closure and started healing.","ending":"Some healing starts without an answer.","cta":"Share this to your story.","tags":["healing","attitude"]},{"index":2,"hook":"Mixed signals do not decide me.","quote":"My value is not decided by mixed signals.","ending":"Confusion does not change your worth.","cta":"Save this for self-worth.","tags":["attitude","self-respect"]}]},{"day":195,"reels":[{"index":1,"hook":"I do not compete here.","quote":"I do not compete where I do not belong.","ending":"Your place should feel natural, not forced.","cta":"Share this. Someone needs it.","tags":["attitude"]},{"index":2,"hook":"Self-respect changes your face.","quote":"Self-respect changed my whole face.","ending":"Peace changes your whole energy.","cta":"Save this if it hit home.","tags":["self-respect","peace"]}]},{"day":196,"reels":[{"index":1,"hook":"Hard lessons made me private.","quote":"I became more private after learning people watch loosely.","ending":"Privacy protects peace.","cta":"Share this to your story.","tags":["healing","attitude","peace"]},{"index":2,"hook":"Give yourself the same effort.","quote":"I owe myself the consistency I give others.","ending":"You deserve your best effort too.","cta":"Save this for your growth.","tags":["motivation"]}]},{"day":197,"reels":[{"index":1,"hook":"Alone is better than this.","quote":"I would rather be alone than emotionally borrowed.","ending":"Half-love is still pain.","cta":"Share this. Someone needs it.","tags":["love","peace"]},{"index":2,"hook":"Hard lessons changed my steps.","quote":"I move different because I learned hard.","ending":"Pain taught me what peace needs.","cta":"Save this if you felt it.","tags":["healing","attitude","peace"]}]},{"day":198,"reels":[{"index":1,"hook":"Half-love is not enough.","quote":"I am no longer available for half-love.","ending":"My heart deserves full effort now.","cta":"Comment \"full love\" if you agree.","tags":["love","motivation","attitude"]},{"index":2,"hook":"Peace has a strict list.","quote":"My peace has a strict guest list.","ending":"Not everyone gets access anymore.","cta":"Save this for self-respect.","tags":["attitude","peace"]}]},{"day":199,"reels":[{"index":1,"hook":"I did not miss the chaos.","quote":"I do not miss chaos; I miss illusions.","ending":"Sometimes you miss the idea, not the pain.","cta":"Share this to your story.","tags":["attitude"]},{"index":2,"hook":"Quiet confidence feels real.","quote":"Confidence is quiet when it is real.","ending":"Real confidence does not beg to be seen.","cta":"Save this for growth.","tags":["peace"]}]},{"day":200,"reels":[{"index":1,"hook":"Strength was always there.","quote":"I found strength in the parts people overlooked.","ending":"What they missed became your power.","cta":"Share this. Someone needs it.","tags":["wisdom"]},{"index":2,"hook":"My next chapter needs no permission.","quote":"My next chapter is not asking for permission.","ending":"Growth does not wait for approval.","cta":"Save this for your next level.","tags":["motivation","attitude"]}]},{"day":201,"reels":[{"index":1,"hook":"Some smiles are just survival.","quote":"Some days you smile only because quitting looks uglier.","ending":"Not every smile means peace.","cta":"Share this to your story.","tags":["peace"]},{"index":2,"hook":"Life gets lighter like this.","quote":"Life gets lighter when fake people get distant.","ending":"Wrong people make life heavy.","cta":"Save this if it felt true.","tags":["attitude"]}]},{"day":202,"reels":[{"index":1,"hook":"Hoping twice hurts more.","quote":"A lot of pain comes from hoping twice.","ending":"Hope hurts when the person does not change.","cta":"Share this. Someone needs it.","tags":["healing"]},{"index":2,"hook":"Age teaches this.","quote":"The older you grow, the less you explain.","ending":"Peace grows when long talks end.","cta":"Save this for later.","tags":["peace"]}]},{"day":203,"reels":[{"index":1,"hook":"Heavy days are not your whole life.","quote":"Not every heavy day means a bad life.","ending":"One hard day does not define your story.","cta":"Comment \"needed this\" if you felt it.","tags":["wisdom"]},{"index":2,"hook":"Simple routines can save you.","quote":"Peace is often hidden inside simple routines.","ending":"Small habits can hold a tired heart.","cta":"Save this for peace.","tags":["motivation","peace"]}]},{"day":204,"reels":[{"index":1,"hook":"People leave, lessons stay.","quote":"People leave, lessons stay, life moves.","ending":"Not everything that leaves is meant to stay.","cta":"Share this to your story.","tags":["healing"]},{"index":2,"hook":"Tired hearts learn a lot.","quote":"You get wiser when your heart gets tired enough.","ending":"Pain teaches when words cannot.","cta":"Save this if it hit home.","tags":["love"]}]},{"day":205,"reels":[{"index":1,"hook":"Most people want honesty until this.","quote":"Most people want honesty until it points at them.","ending":"Truth feels good only when it is easy.","cta":"Share this. Someone needs it.","tags":["wisdom"]},{"index":2,"hook":"Quiet rooms heal loud weeks.","quote":"A quiet room can heal a loud week.","ending":"Peaceful spaces fix tired minds.","cta":"Save this for later.","tags":["healing","peace"]}]},{"day":206,"reels":[{"index":1,"hook":"Rest is not always lazy.","quote":"Sometimes rest is the most productive choice.","ending":"A tired mind needs rest to work well.","cta":"Share this to your story.","tags":["wisdom"]},{"index":2,"hook":"The real glow-up starts here.","quote":"The strongest glow-up starts in private pain.","ending":"Pain can rebuild you too.","cta":"Save this for healing.","tags":["motivation"]}]},{"day":207,"reels":[{"index":1,"hook":"Standards change life fast.","quote":"Life changes fast when your standards finally do.","ending":"Better standards bring better peace.","cta":"Share this. Someone needs it.","tags":["self-respect","peace"]},{"index":2,"hook":"One honest talk can save a lot.","quote":"One honest conversation can save months of guessing.","ending":"Clarity saves time and pain.","cta":"Save this if you needed it.","tags":["wisdom"]}]},{"day":208,"reels":[{"index":1,"hook":"Protect your mornings.","quote":"Protect your mornings from yesterday's damage.","ending":"New days need clean energy.","cta":"Comment \"morning peace\" if you agree.","tags":["motivation"]},{"index":2,"hook":"Small habits save mindsets.","quote":"A small habit can rescue a broken mindset.","ending":"Tiny steps can pull you back up.","cta":"Save this for motivation.","tags":["healing","motivation"]}]},{"day":209,"reels":[{"index":1,"hook":"Distance is not always cold.","quote":"Not all distance is cold; some is healing.","ending":"Space can be love for yourself.","cta":"Share this to your story.","tags":["love","healing"]},{"index":2,"hook":"Real life rewards this.","quote":"Real life rewards patience more than panic.","ending":"Rushing ruins what patience can build.","cta":"Save this for peace.","tags":["wisdom"]}]},{"day":210,"reels":[{"index":1,"hook":"Peace needs daily work.","quote":"Your peace is a full-time job.","ending":"Calm needs protecting every day.","cta":"Share this. Someone needs it.","tags":["peace"]},{"index":2,"hook":"Growing up hurts like this.","quote":"Growing up is grieving people who are still alive.","ending":"Some pain comes before the goodbye.","cta":"Save this if it hit hard.","tags":["healing","peace"]}]},{"day":211,"reels":[{"index":1,"hook":"A real girlfriend feels like this.","quote":"A real girlfriend adds softness to your war.","ending":"Good love makes life feel lighter.","cta":"Tag your person.","tags":["love","mentions"]},{"index":2,"hook":"Good boyfriends make this easy.","quote":"A good boyfriend makes trust feel natural.","ending":"Trust should not feel forced.","cta":"Share this with someone in love.","tags":["love"]}]},{"day":212,"reels":[{"index":1,"hook":"Honest friends matter most.","quote":"The best friend you need is honest, not entertaining.","ending":"Fun is nice, but truth saves you.","cta":"Tag your honest friend.","tags":["friendship","mentions"]},{"index":2,"hook":"Mothers deserve this tone.","quote":"Your mother deserves your gentlest tone.","ending":"The woman who prayed for you deserves softness too.","cta":"Send this to your mom.","tags":["family","mentions"]}]},{"day":213,"reels":[{"index":1,"hook":"Brothers love like this.","quote":"A brother's love is loud in danger, quiet in daily life.","ending":"Real care shows up when it matters most.","cta":"Tag your brother.","tags":["love","family","peace","mentions"]},{"index":2,"hook":"Sisters warn before tears come.","quote":"A sister's warning often saves later tears.","ending":"Family sees danger early sometimes.","cta":"Mention your sister.","tags":["family","healing","mentions"]}]},{"day":214,"reels":[{"index":1,"hook":"Good love does this.","quote":"Good love makes your mind rest.","ending":"Rest is one of the best feelings in love.","cta":"Share this to your story.","tags":["love"]},{"index":2,"hook":"Great friends make wins feel better.","quote":"Great friends make your success feel shared.","ending":"Real support makes winning feel warmer.","cta":"Tag your real friend.","tags":["friendship","motivation","mentions"]}]},{"day":215,"reels":[{"index":1,"hook":"Choose the one who does this.","quote":"Choose the person who protects your name offline.","ending":"Respect behind your back matters most.","cta":"Save this if it hit hard.","tags":["self-respect"]},{"index":2,"hook":"Love home first.","quote":"Send love home before sending it online.","ending":"Home should hear your love too.","cta":"Send this to your family.","tags":["love","family","mentions"]}]},{"day":216,"reels":[{"index":1,"hook":"The right person will not do this.","quote":"The right person will not punish you for honesty.","ending":"Safe love does not attack truth.","cta":"Share this. Someone needs it.","tags":["love"]},{"index":2,"hook":"Family is this kind of love.","quote":"Family is where stubborn love keeps returning.","ending":"Home love comes back, even after hurt.","cta":"Save this for later.","tags":["love","family","healing"]}]},{"day":217,"reels":[{"index":1,"hook":"Girls need safe love too.","quote":"Your girl should feel safe enough to be soft.","ending":"Safety lets love bloom.","cta":"Tag your girl.","tags":["love","mentions"]},{"index":2,"hook":"Boys need safe honesty too.","quote":"Your boy should feel safe enough to be honest.","ending":"Men need softness too.","cta":"Share this with someone in love.","tags":["wisdom"]}]},{"day":218,"reels":[{"index":1,"hook":"Some friends are quiet blessings.","quote":"Some friends are blessings disguised as ordinary people.","ending":"The best people often look simple at first.","cta":"Tag a friend like this.","tags":["friendship","peace","mentions"]},{"index":2,"hook":"Parents root for you like this.","quote":"Parents are often the only people rooting without envy.","ending":"Their love is pure in a hard world.","cta":"Send this to your parents.","tags":["love","family","mentions"]}]},{"day":219,"reels":[{"index":1,"hook":"The best love does this.","quote":"The best relationships lower your anxiety, not your standards.","ending":"Good love calms you without making you smaller.","cta":"Share this to your story.","tags":["love","self-respect","peace"]},{"index":2,"hook":"Caring siblings notice silence.","quote":"A caring sibling notices the silence between your words.","ending":"Love listens between the lines too.","cta":"Mention your sibling.","tags":["love","family","attitude","mentions"]}]},{"day":220,"reels":[{"index":1,"hook":"Real love gets clear.","quote":"Love is clear when effort stops hiding.","ending":"Effort makes love easy to read.","cta":"Save this if it felt true.","tags":["love","motivation"]},{"index":2,"hook":"Friendship survives absence.","quote":"Friendship is real when absence changes nothing.","ending":"Real bonds do not need daily proof.","cta":"Tag your real friend.","tags":["friendship","healing","mentions"]}]},{"day":221,"reels":[{"index":1,"hook":"Some people wanted this, not love.","quote":"They wanted access, not responsibility.","ending":"Easy access is not real care.","cta":"Share this. Someone needs it.","tags":["love"]},{"index":2,"hook":"Control leaves when you stop bending.","quote":"Some people lose interest when they cannot control you.","ending":"Some people loved control, not connection.","cta":"Save this for self-respect.","tags":["love"]}]},{"day":222,"reels":[{"index":1,"hook":"Clarity hurts once.","quote":"Clarity hurts once; confusion hurts daily.","ending":"Truth cuts once. Confusion cuts every day.","cta":"Share this to your story.","tags":["healing"]},{"index":2,"hook":"Loyalty feels rare now.","quote":"Loyalty feels rare because selfishness became normal.","ending":"Real loyalty shines in selfish times.","cta":"Comment \"loyalty\" if you agree.","tags":["friendship","attitude"]}]},{"day":223,"reels":[{"index":1,"hook":"Wrong people do this.","quote":"The wrong people make you question your softness.","ending":"Careless hearts make kind people doubt themselves.","cta":"Save this if it hit home.","tags":["love","attitude"]},{"index":2,"hook":"Respect leaves first.","quote":"Respect disappears before the relationship ends.","ending":"The end starts before the goodbye.","cta":"Share this. Someone needs it.","tags":["love","healing","self-respect"]}]},{"day":224,"reels":[{"index":1,"hook":"Energy tells the truth.","quote":"Energy never lies for long.","ending":"Sooner or later, real vibes show.","cta":"Save this for later.","tags":["wisdom"]},{"index":2,"hook":"Who you become matters more.","quote":"Who you become matters more than who left.","ending":"Growth matters more than loss.","cta":"Share this to your story.","tags":["motivation"]}]},{"day":225,"reels":[{"index":1,"hook":"Some apologies are just a way back.","quote":"Some apologies are just bridges back to misuse.","ending":"Sorry is easy when access is the goal.","cta":"Save this for healing.","tags":["motivation"]},{"index":2,"hook":"Protect your heart from this.","quote":"Protect your heart from repeated lessons.","ending":"One lesson is enough.","cta":"Share this. Someone needs it.","tags":["love","healing"]}]},{"day":226,"reels":[{"index":1,"hook":"Silence offends some people.","quote":"Your silence will offend those living off your reactions.","ending":"Some people need your noise to feel strong.","cta":"Save this if it felt real.","tags":["attitude"]},{"index":2,"hook":"Detachment looks cold at first.","quote":"Detachment looks cold until chaos returns.","ending":"Peace often gets called cold by loud people.","cta":"Share this to your story.","tags":["peace"]}]},{"day":227,"reels":[{"index":1,"hook":"They feared this, not your flaws.","quote":"They did not hate your flaws; they feared your growth.","ending":"Some people fear your next level.","cta":"Save this for later.","tags":["motivation"]},{"index":2,"hook":"Strong people do this.","quote":"Weak people test what strong people walk away from.","ending":"Walking away is a kind of power too.","cta":"Share this. Someone needs it.","tags":["wisdom"]}]},{"day":228,"reels":[{"index":1,"hook":"Peace changes your taste.","quote":"When peace enters, drama loses its charm.","ending":"Healing makes chaos feel ugly.","cta":"Save this for healing.","tags":["healing","peace"]},{"index":2,"hook":"Stop translating disrespect.","quote":"Stop translating disrespect into potential.","ending":"Bad treatment is not hidden love.","cta":"Comment \"facts\" if you agree.","tags":["love"]}]},{"day":229,"reels":[{"index":1,"hook":"You were not hard to handle.","quote":"You are not hard to handle; they were used to easy control.","ending":"Boundaries feel hard only to controlling people.","cta":"Share this to your story.","tags":["self-respect"]},{"index":2,"hook":"Not every bond needs more words.","quote":"Not every connection deserves another explanation.","ending":"Some people already understood and still chose wrong.","cta":"Save this for peace.","tags":["peace"]}]},{"day":230,"reels":[{"index":1,"hook":"Losing people can save you.","quote":"Sometimes losing people is how you keep yourself.","ending":"Some exits give you back your peace.","cta":"Share this. Someone needs it.","tags":["peace"]},{"index":2,"hook":"Distance shows intention.","quote":"Distance reveals intention faster than words.","ending":"Space makes truth easier to see.","cta":"Save this if it hit hard.","tags":["wisdom"]}]},{"day":231,"reels":[{"index":1,"hook":"Patterns matter more.","quote":"Pay attention to patterns, not performances.","ending":"A show is easy. Consistency is rare.","cta":"Share this to your story.","tags":["motivation"]},{"index":2,"hook":"If they cared, it would show.","quote":"If they cared, effort would not feel rare.","ending":"Love should not feel like waiting all the time.","cta":"Save this for healing.","tags":["love","motivation"]}]},{"day":232,"reels":[{"index":1,"hook":"Need changes people fast.","quote":"People change fast when they no longer need your help.","ending":"Some people love use, not you.","cta":"Share this. Someone needs it.","tags":["love"]},{"index":2,"hook":"Some hearts come only when empty.","quote":"Some hearts only visit when they are empty elsewhere.","ending":"Do not be someone's backup peace.","cta":"Save this for self-respect.","tags":["love","peace"]}]},{"day":233,"reels":[{"index":1,"hook":"Being ignored teaches this.","quote":"Being ignored teaches expensive independence.","ending":"Pain teaches you to stop waiting.","cta":"Share this to your story.","tags":["wisdom"]},{"index":2,"hook":"Gentle lies still hurt.","quote":"The most dangerous lies arrive gently.","ending":"Soft lies still break hearts.","cta":"Save this for later.","tags":["love","healing","peace"]}]},{"day":234,"reels":[{"index":1,"hook":"Convenience is not care.","quote":"Convenience is not care.","ending":"Easy moments do not always mean real love.","cta":"Share this. Someone needs it.","tags":["love","family"]},{"index":2,"hook":"Real love does not do this.","quote":"Real love does not enjoy your insecurity.","ending":"Safe love never feeds your fear.","cta":"Save this for healing.","tags":["love"]}]},{"day":235,"reels":[{"index":1,"hook":"Praise and envy can live together.","quote":"The same mouth can praise you and envy you.","ending":"Not every compliment is clean.","cta":"Share this to your story.","tags":["wisdom"]},{"index":2,"hook":"Peace disappoints chaos.","quote":"Choosing peace means disappointing chaos.","ending":"Some people hate the calm they cannot control.","cta":"Save this for peace.","tags":["peace"]}]},{"day":236,"reels":[{"index":1,"hook":"Leave before this happens.","quote":"Learn to leave before your self-respect begs.","ending":"Do not stay until you break.","cta":"Share this. Someone needs it.","tags":["self-respect"]},{"index":2,"hook":"No reply still says something.","quote":"No reply is a reply with clear grammar.","ending":"Silence can be the answer too.","cta":"Save this if it hit hard.","tags":["attitude","peace"]}]},{"day":237,"reels":[{"index":1,"hook":"They call it ego when this ends.","quote":"Some people call it ego when you stop tolerating nonsense.","ending":"Boundaries bother people who benefit from none.","cta":"Share this to your story.","tags":["attitude","self-respect"]},{"index":2,"hook":"Rare souls feel like this.","quote":"A rare soul brings peace without trying.","ending":"Some people just feel safe.","cta":"Tag someone like this.","tags":["peace","mentions"]}]},{"day":238,"reels":[{"index":1,"hook":"Needed is not loved.","quote":"Being needed is not the same as being loved.","ending":"Use can look like love at first.","cta":"Save this for self-worth.","tags":["love"]},{"index":2,"hook":"Some endings rescue you.","quote":"Certain endings rescue your future.","ending":"Losing something now can save a lot later.","cta":"Share this. Someone needs it.","tags":["wisdom"]}]},{"day":239,"reels":[{"index":1,"hook":"Stop knocking on locked doors.","quote":"Stop knocking on doors your intuition already locked.","ending":"Your heart knew before your hands did.","cta":"Save this for healing.","tags":["love"]},{"index":2,"hook":"Wrong rooms dim bright people.","quote":"The wrong room can make you forget your light.","ending":"Do not judge yourself in the wrong place.","cta":"Share this to your story.","tags":["wisdom"]}]},{"day":240,"reels":[{"index":1,"hook":"Standards come from scars.","quote":"Your standards are built from scars.","ending":"Pain drew the new line.","cta":"Save this if it felt real.","tags":["healing","self-respect"]},{"index":2,"hook":"Some lessons look attractive.","quote":"Some people are lessons with good lighting.","ending":"Pretty things can still hurt deeply.","cta":"Share this. Someone needs it.","tags":["healing","peace"]}]},{"day":241,"reels":[{"index":1,"hook":"Keep your heart like this.","quote":"Keep your heart kind, not careless.","ending":"Stay soft, but stay wise.","cta":"Save this for later.","tags":["love","attitude"]},{"index":2,"hook":"Let time show the truth.","quote":"Let time expose what effort could not.","ending":"Time reveals what words hide.","cta":"Share this to your story.","tags":["motivation"]}]},{"day":242,"reels":[{"index":1,"hook":"Minds heal like this.","quote":"The mind heals when the heart stops negotiating.","ending":"Peace starts when you stop begging inside.","cta":"Save this for healing.","tags":["love","healing","peace"]},{"index":2,"hook":"Quiet lives can still be good lives.","quote":"A good life is often a quiet one.","ending":"Peace does not always look loud.","cta":"Share this. Someone needs it.","tags":["peace"]}]},{"day":243,"reels":[{"index":1,"hook":"Outgrow this need.","quote":"Outgrow the need to be invited everywhere.","ending":"Your peace matters more than every room.","cta":"Save this if you needed it.","tags":["peace"]},{"index":2,"hook":"Your worth survives moods.","quote":"Your worth survives other people's moods.","ending":"Their bad mood is not your value.","cta":"Share this to your story.","tags":["healing","self-respect"]}]},{"day":244,"reels":[{"index":1,"hook":"Stay near honest energy.","quote":"Stay close to people who feel honest.","ending":"Honest energy feels calm and clear.","cta":"Tag someone safe.","tags":["peace","mentions"]},{"index":2,"hook":"Healed people do not chase noise.","quote":"A healed person does not chase noise.","ending":"Peace changes what looks interesting.","cta":"Save this for your healing season.","tags":["healing","peace"]}]},{"day":245,"reels":[{"index":1,"hook":"The right circle feels like this.","quote":"The right circle feels light, not loud.","ending":"Good people feel easy on the heart.","cta":"Share this. Someone needs it.","tags":["friendship"]},{"index":2,"hook":"Some wins stay private.","quote":"Not every win needs witnesses.","ending":"Quiet wins still count big.","cta":"Save this for motivation.","tags":["motivation","peace"]}]},{"day":246,"reels":[{"index":1,"hook":"Be proud of this rebuild.","quote":"Be proud of the peace you built from pain.","ending":"Calm after chaos is a real win.","cta":"Share this to your story.","tags":["peace"]},{"index":2,"hook":"This calm version cost a lot.","quote":"The calm version of you cost a lot.","ending":"Peace is expensive when earned through pain.","cta":"Save this if it hit home.","tags":["peace"]}]},{"day":247,"reels":[{"index":1,"hook":"Some people meet the healed you.","quote":"Some people meet you after you finish surviving.","ending":"Not everyone sees the hard part you lived through.","cta":"Share this. Someone needs it.","tags":["healing","peace"]},{"index":2,"hook":"Bless the exits too.","quote":"Bless the exits that protected your future.","ending":"Some closed doors were saving you.","cta":"Save this for healing.","tags":["wisdom"]}]},{"day":248,"reels":[{"index":1,"hook":"Choose this over attention.","quote":"Choose alignment over attention.","ending":"Peace fits better than noise.","cta":"Share this to your story.","tags":["peace"]},{"index":2,"hook":"Drain teaches a lot.","quote":"What drains you is teaching you where not to stay.","ending":"Tired energy is also a message.","cta":"Save this for peace.","tags":["wisdom"]}]},{"day":249,"reels":[{"index":1,"hook":"Your soul knows first.","quote":"Your soul knows before your mouth admits it.","ending":"Deep down, you knew already.","cta":"Share this. Someone needs it.","tags":["wisdom"]},{"index":2,"hook":"Leaving gently still counts.","quote":"Sometimes the answer is to leave gently.","ending":"Soft exits can still be strong.","cta":"Save this for healing.","tags":["peace"]}]},{"day":250,"reels":[{"index":1,"hook":"Heal enough to stop this.","quote":"Heal enough to stop entertaining familiar hurt.","ending":"Peace starts when old pain stops feeling normal.","cta":"Share this to your story.","tags":["healing","peace"]},{"index":2,"hook":"Make your younger self proud.","quote":"Become the reason your younger self feels proud.","ending":"Let your healing become your proof.","cta":"Save this and keep going.","tags":["healing"]}]}];
+
+const CATEGORIES = [
+  {id:'all', label:'All'},
+  {id:'love', label:'Love'},
+  {id:'family', label:'Family'},
+  {id:'friendship', label:'Friendship'},
+  {id:'healing', label:'Healing'},
+  {id:'motivation', label:'Motivation'},
+  {id:'attitude', label:'Attitude'},
+  {id:'self-respect', label:'Self-Respect'},
+  {id:'peace', label:'Peace'},
+  {id:'mentions', label:'Mentions'},
+  {id:'wisdom', label:'Wisdom'},
+];
+
+const STORAGE_KEY = 'reel-studio-v1';
+const THEME_KEY = 'reel-studio-theme';
+const START_KEY = 'reel-studio-start';
+
+const state = {
+  posted: new Set(),
+  filter: 'all',
+  search: '',
+  visibleDays: 20,
+  startDate: null,
+};
+
+try {
+  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+  if (Array.isArray(saved.posted)) state.posted = new Set(saved.posted);
+} catch (e) {}
+
+try {
+  const t = localStorage.getItem(THEME_KEY);
+  if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
+} catch (e) {}
+
+try {
+  const s = localStorage.getItem(START_KEY);
+  if (s && /^\d{4}-\d{2}-\d{2}$/.test(s)) state.startDate = s;
+} catch (e) {}
+
+function saveState() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ posted: [...state.posted] })); } catch (e) {}
+}
+
+function reelId(day, idx) { return day + '-' + idx; }
+function safe(s) { return (s == null ? '' : String(s)); }
+
+function fullReelText(r) {
+  return '🔥 ' + safe(r.hook) + '\n\n💭 ' + safe(r.quote) + '\n\n🖤 ' + safe(r.ending) + '\n\n📲 ' + safe(r.cta);
+}
+
+function escapeHtml(s) {
+  return safe(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+}
+
+const ICONS = {
+  copy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>',
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
+  share: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg>',
+  circle: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/></svg>',
+};
+
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 1500);
+}
+
+function copyText(text, btn, opts) {
+  opts = opts || {};
+  const doCopy = () => {
+    if (btn) {
+      if (btn._copyTimer) clearTimeout(btn._copyTimer);
+      if (!btn._originalHTML) btn._originalHTML = btn.innerHTML;
+      btn.classList.add('copied');
+      btn.innerHTML = opts.label ? (ICONS.check + ' ' + opts.label) : ICONS.check;
+      btn._copyTimer = setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.innerHTML = btn._originalHTML;
+        btn._copyTimer = null;
+      }, 1400);
+    }
+    showToast(opts.toastMsg || 'Copied');
+  };
+  const onFail = () => showToast('Copy failed');
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(doCopy).catch(() => fallbackCopy(text, doCopy, onFail));
+  } else {
+    fallbackCopy(text, doCopy, onFail);
+  }
+}
+
+function fallbackCopy(text, ok, fail) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.setAttribute('readonly', '');
+  ta.style.cssText = 'position:fixed;top:-1000px;left:-1000px;opacity:0';
+  document.body.appendChild(ta);
+  const prev = document.getSelection().rangeCount ? document.getSelection().getRangeAt(0) : null;
+  ta.select();
+  try {
+    if (document.execCommand('copy')) ok();
+    else fail();
+  } catch (e) { fail(); }
+  document.body.removeChild(ta);
+  if (prev) { const s = document.getSelection(); s.removeAllRanges(); s.addRange(prev); }
+}
+
+function shareReel(reel, btn) {
+  const text = fullReelText(reel);
+  if (navigator.share) {
+    navigator.share({ text }).then(() => showToast('Shared')).catch((err) => {
+      if (err && err.name === 'AbortError') return;
+      copyText(text, btn, { toastMsg: 'Copied (share unavailable)' });
+    });
+  } else {
+    copyText(text, btn, { toastMsg: 'Copied — paste to share' });
+  }
+}
+
+function getTagCounts() {
+  const counts = { all: 0 };
+  for (const day of DATA) for (const reel of day.reels) {
+    counts.all++;
+    for (const tag of (reel.tags || [])) counts[tag] = (counts[tag] || 0) + 1;
+  }
+  return counts;
+}
+
+function matchesFilter(reel, search) {
+  if (state.filter !== 'all' && !(reel.tags || []).includes(state.filter)) return false;
+  if (search) {
+    const hay = (safe(reel.hook) + ' ' + safe(reel.quote) + ' ' + safe(reel.ending) + ' ' + safe(reel.cta)).toLowerCase();
+    if (!hay.includes(search)) return false;
+  }
+  return true;
+}
+
+function getFiltered() {
+  const search = state.search.toLowerCase().trim();
+  const result = [];
+  for (const day of DATA) {
+    const reels = day.reels.filter(r => matchesFilter(r, search));
+    if (reels.length) result.push({ day: day.day, reels });
+  }
+  return result;
+}
+
+// TODAY logic
+function todayISO() {
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth()+1).padStart(2,'0');
+  const day = String(d.getDate()).padStart(2,'0');
+  return y + '-' + m + '-' + day;
+}
+
+function currentDayNumber() {
+  if (!state.startDate) return null;
+  const start = new Date(state.startDate + 'T00:00:00');
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const diff = Math.floor((today - start) / 86400000) + 1;
+  return Math.max(1, Math.min(diff, DATA.length));
+}
+
+function formatPretty(iso) {
+  try {
+    const d = new Date(iso + 'T00:00:00');
+    return d.toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+  } catch(e) { return iso; }
+}
+
+function setStartDate(iso) {
+  state.startDate = iso;
+  if (iso) localStorage.setItem(START_KEY, iso);
+  else localStorage.removeItem(START_KEY);
+  updateToday();
+}
+
+function updateToday() {
+  const hasStart = Boolean(state.startDate);
+  document.getElementById('todayCard').hidden = !hasStart;
+  document.getElementById('startCard').hidden = hasStart;
+  if (hasStart) {
+    const n = currentDayNumber();
+    document.getElementById('todayNum').textContent = n;
+    document.getElementById('todayMeta').textContent = formatPretty(todayISO()) + ' · started ' + formatPretty(state.startDate);
+  }
+  // Refresh day highlight
+  document.querySelectorAll('.day').forEach(el => el.classList.remove('today-highlight'));
+  if (hasStart) {
+    const n = currentDayNumber();
+    const el = document.getElementById('day-' + n);
+    if (el) el.classList.add('today-highlight');
+  }
+}
+
+// RENDER
+function renderFilters() {
+  const counts = getTagCounts();
+  const el = document.getElementById('filters');
+  el.innerHTML = '';
+  for (const cat of CATEGORIES) {
+    const n = cat.id === 'all' ? counts.all : (counts[cat.id] || 0);
+    if (cat.id !== 'all' && !n) continue;
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'chip' + (state.filter === cat.id ? ' active' : '');
+    chip.setAttribute('role', 'tab');
+    chip.setAttribute('aria-selected', state.filter === cat.id ? 'true' : 'false');
+    chip.innerHTML = cat.label + '<span class="chip-count">' + n + '</span>';
+    chip.addEventListener('click', () => {
+      if (state.filter === cat.id) return;
+      state.filter = cat.id;
+      state.visibleDays = 20;
+      render();
+      const c = document.querySelector('.controls');
+      const top = c.getBoundingClientRect().top + window.scrollY - 8;
+      window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    });
+    el.appendChild(chip);
+  }
+}
+
+function renderReel(day, reel) {
+  const id = reelId(day.day, reel.index);
+  const posted = state.posted.has(id);
+  const div = document.createElement('article');
+  div.className = 'reel' + (posted ? ' posted' : '');
+  div.dataset.id = id;
+
+  div.innerHTML = `
+    <div class="reel-top">
+      <span class="reel-index">Reel ${reel.index}</span>
+      <div class="tags">${(reel.tags || []).slice(0, 3).map(t => `<span class="tag ${escapeHtml(t)}">${escapeHtml(t)}</span>`).join('')}</div>
+    </div>
+    <div class="part">
+      <span class="part-icon">🔥</span>
+      <div class="part-body">
+        <div class="part-label">Hook</div>
+        <div class="part-text" data-field="hook">${escapeHtml(reel.hook)}</div>
+      </div>
+      <button type="button" class="copy-btn" data-copy="hook" title="Copy hook" aria-label="Copy hook">${ICONS.copy}</button>
+    </div>
+    <div class="part main">
+      <span class="part-icon">💭</span>
+      <div class="part-body">
+        <div class="part-label">Main Quote</div>
+        <div class="part-text" data-field="quote">${escapeHtml(reel.quote)}</div>
+      </div>
+      <button type="button" class="copy-btn" data-copy="quote" title="Copy quote" aria-label="Copy quote">${ICONS.copy}</button>
+    </div>
+    <div class="part">
+      <span class="part-icon">🖤</span>
+      <div class="part-body">
+        <div class="part-label">Ending</div>
+        <div class="part-text" data-field="ending">${escapeHtml(reel.ending)}</div>
+      </div>
+      <button type="button" class="copy-btn" data-copy="ending" title="Copy ending" aria-label="Copy ending">${ICONS.copy}</button>
+    </div>
+    <div class="part">
+      <span class="part-icon">📲</span>
+      <div class="part-body">
+        <div class="part-label">CTA</div>
+        <div class="part-text" data-field="cta">${escapeHtml(reel.cta)}</div>
+      </div>
+      <button type="button" class="copy-btn" data-copy="cta" title="Copy CTA" aria-label="Copy CTA">${ICONS.copy}</button>
+    </div>
+    <div class="reel-actions">
+      <button type="button" class="action-btn primary" data-copy-all>${ICONS.copy} Copy full post</button>
+      <button type="button" class="action-btn secondary icon" data-share title="Share" aria-label="Share reel">${ICONS.share}</button>
+      <button type="button" class="action-btn secondary ${posted ? 'posted' : ''}" data-mark>${posted ? ICONS.check + ' Posted' : ICONS.circle + ' Mark posted'}</button>
+    </div>
+  `;
+
+  div.querySelectorAll('[data-copy]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const field = btn.dataset.copy;
+      const text = safe(reel[field]);
+      copyText(text, btn);
+    });
+  });
+  div.querySelector('[data-copy-all]').addEventListener('click', (e) => {
+    copyText(fullReelText(reel), e.currentTarget, { label: 'Copied', toastMsg: 'Full post copied' });
+  });
+  div.querySelector('[data-share]').addEventListener('click', (e) => {
+    shareReel(reel, e.currentTarget);
+  });
+  div.querySelector('[data-mark]').addEventListener('click', () => {
+    if (state.posted.has(id)) state.posted.delete(id);
+    else state.posted.add(id);
+    saveState();
+    render(true);
+  });
+
+  return div;
+}
+
+function renderDaySection(day) {
+  const sec = document.createElement('section');
+  sec.className = 'day';
+  sec.id = 'day-' + day.day;
+  const posted = day.reels.filter(r => state.posted.has(reelId(day.day, r.index))).length;
+  let badge = '';
+  if (day.reels.length && posted === day.reels.length) badge = '<div class="day-posted">' + ICONS.check + ' Complete</div>';
+  else if (posted > 0) badge = '<div class="day-posted">' + posted + '/' + day.reels.length + ' posted</div>';
+
+  sec.innerHTML = `
+    <div class="day-header">
+      <div class="day-title">
+        <span class="day-number">DAY ${day.day}</span>
+        <span>${day.reels.length} ${day.reels.length === 1 ? 'reel' : 'reels'}</span>
+      </div>
+      <div class="day-actions">
+        ${badge}
+        <button type="button" class="day-copy-btn" data-copy-day title="Copy both reels of Day ${day.day}">${ICONS.copy} Copy day</button>
+      </div>
+    </div>
+    <div class="reels"></div>
+  `;
+  const rWrap = sec.querySelector('.reels');
+  for (const reel of day.reels) rWrap.appendChild(renderReel(day, reel));
+
+  sec.querySelector('[data-copy-day]').addEventListener('click', (e) => {
+    const joined = day.reels.map((r, i) => 'Reel ' + r.index + '\n' + fullReelText(r)).join('\n\n— — —\n\n');
+    const text = 'Day ' + day.day + '\n\n' + joined;
+    copyText(text, e.currentTarget, { label: 'Copied', toastMsg: 'Day ' + day.day + ' copied' });
+  });
+
+  return sec;
+}
+
+function updateStats() {
+  document.getElementById('postedCount').textContent = state.posted.size;
+  const totalReels = DATA.reduce((a, d) => a + d.reels.length, 0);
+  document.getElementById('reelsTotal').textContent = totalReels;
+  document.getElementById('reelsTotalB').textContent = totalReels;
+  document.getElementById('daysTotal').textContent = DATA.length;
+  document.getElementById('progressFill').style.width = totalReels ? ((state.posted.size / totalReels) * 100) + '%' : '0%';
+}
+
+function render(keepScroll) {
+  const scrollY = window.scrollY;
+  renderFilters();
+  updateStats();
+  const grid = document.getElementById('daysGrid');
+  grid.innerHTML = '';
+  const filtered = getFiltered();
+  if (!filtered.length) {
+    grid.innerHTML = '<div class="empty"><div class="empty-icon">🔍</div><h3>No reels match</h3><p>Try a different search or category.</p></div>';
+    updateToday();
+    if (keepScroll) window.scrollTo({ top: scrollY });
+    return;
+  }
+  const slice = filtered.slice(0, state.visibleDays);
+  for (const day of slice) grid.appendChild(renderDaySection(day));
+  if (filtered.length > state.visibleDays) {
+    const wrap = document.createElement('div');
+    wrap.className = 'load-more-wrap';
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'load-more-btn';
+    const rem = filtered.length - state.visibleDays;
+    btn.textContent = rem === 1 ? 'Load 1 more day' : 'Load ' + Math.min(20, rem) + ' more days (' + rem + ' left)';
+    btn.addEventListener('click', () => { state.visibleDays += 20; render(true); });
+    wrap.appendChild(btn);
+    grid.appendChild(wrap);
+  }
+  updateToday();
+  if (keepScroll) window.scrollTo({ top: scrollY });
+}
+
+// CONFIRM MODAL
+const modal = document.getElementById('confirmModal');
+let modalResolve = null;
+function confirmDialog(title, body, confirmLabel) {
+  return new Promise(resolve => {
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalBody').textContent = body;
+    modal.querySelector('[data-modal-confirm]').textContent = confirmLabel || 'Confirm';
+    modal.classList.add('show');
+    modalResolve = resolve;
+  });
+}
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) { modal.classList.remove('show'); if (modalResolve) modalResolve(false); }
+});
+modal.querySelector('[data-modal-cancel]').addEventListener('click', () => {
+  modal.classList.remove('show'); if (modalResolve) modalResolve(false);
+});
+modal.querySelector('[data-modal-confirm]').addEventListener('click', () => {
+  modal.classList.remove('show'); if (modalResolve) modalResolve(true);
+});
+
+// EVENTS
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  state.search = e.target.value;
+  state.visibleDays = 20;
+  render();
+});
+document.getElementById('searchInput').addEventListener('focus', () => {
+  document.getElementById('searchKbd').style.opacity = '0';
+});
+document.getElementById('searchInput').addEventListener('blur', () => {
+  document.getElementById('searchKbd').style.opacity = '';
+});
+
+document.getElementById('themeBtn').addEventListener('click', () => {
+  const cur = document.documentElement.dataset.theme;
+  const next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.dataset.theme = next;
+  try { localStorage.setItem(THEME_KEY, next); } catch (e) {}
+});
+
+document.getElementById('resetBtn').addEventListener('click', async () => {
+  if (!state.posted.size) { showToast('Nothing to reset'); return; }
+  const ok = await confirmDialog('Reset progress?', 'This will clear every reel you\'ve marked as posted. This can\'t be undone.', 'Reset');
+  if (!ok) return;
+  state.posted.clear(); saveState(); render(); showToast('Progress reset');
+});
+
+document.getElementById('randomBtn').addEventListener('click', pickRandom);
+document.getElementById('nextBtn').addEventListener('click', jumpNext);
+
+document.getElementById('startPlanBtn').addEventListener('click', () => {
+  setStartDate(todayISO());
+  showToast('Plan started — Day 1 is today');
+  render();
+});
+document.getElementById('todayJumpBtn').addEventListener('click', () => {
+  const n = currentDayNumber();
+  if (!n) return;
+  const idx = DATA.findIndex(d => d.day === n);
+  if (idx + 1 > state.visibleDays) state.visibleDays = idx + 2;
+  state.filter = 'all'; state.search = '';
+  document.getElementById('searchInput').value = '';
+  render();
+  requestAnimationFrame(() => {
+    const el = document.getElementById('day-' + n);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+document.getElementById('todayEditBtn').addEventListener('click', async () => {
+  const ok = await confirmDialog('Restart plan?', 'This will set today as Day 1. Your posted reels stay saved.', 'Restart');
+  if (!ok) return;
+  setStartDate(todayISO());
+  showToast('Plan restarted — Day 1 is today');
+  render();
+});
+
+function pickRandom() {
+  const options = [];
+  for (const day of DATA) for (const reel of day.reels) {
+    if (!state.posted.has(reelId(day.day, reel.index))) options.push({ day, reel });
+  }
+  if (!options.length) { showToast('All posted! Reset to roll again.'); return; }
+  const pick = options[Math.floor(Math.random() * options.length)];
+  state.search = ''; state.filter = 'all';
+  document.getElementById('searchInput').value = '';
+  const idx = DATA.findIndex(d => d.day === pick.day.day);
+  if (idx + 1 > state.visibleDays) state.visibleDays = idx + 2;
+  render();
+  setTimeout(() => spotlight(pick.day.day, pick.reel.index), 80);
+}
+
+function jumpNext() {
+  for (const day of DATA) for (const reel of day.reels) {
+    if (!state.posted.has(reelId(day.day, reel.index))) {
+      const idx = DATA.findIndex(d => d.day === day.day);
+      if (idx + 1 > state.visibleDays) state.visibleDays = idx + 2;
+      render();
+      setTimeout(() => spotlight(day.day, reel.index), 80);
+      return;
+    }
+  }
+  showToast('Everything posted!');
+}
+
+function spotlight(day, reelIdx) {
+  const id = day + '-' + reelIdx;
+  const el = document.querySelector('[data-id="' + id + '"]');
+  if (!el) return;
+  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  if (el.animate) {
+    el.animate([
+      { boxShadow: '0 0 0 0 rgba(168,85,247,0)' },
+      { boxShadow: '0 0 0 10px rgba(168,85,247,.22)' },
+      { boxShadow: '0 0 0 0 rgba(168,85,247,0)' },
+    ], { duration: 1400, iterations: 1 });
+  }
+  showToast('Day ' + day + ' — Reel ' + reelIdx);
+}
+
+// Keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+  const active = document.activeElement;
+  const isInput = active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.isContentEditable);
+  if (isInput) {
+    if (e.key === 'Escape' && active.id === 'searchInput') active.blur();
+    return;
+  }
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  if (e.key === '/') { e.preventDefault(); document.getElementById('searchInput').focus(); }
+  else if (e.key === 'r' || e.key === 'R') { e.preventDefault(); pickRandom(); }
+  else if (e.key === 'n' || e.key === 'N') { e.preventDefault(); jumpNext(); }
+  else if (e.key === 't' || e.key === 'T') { e.preventDefault(); document.getElementById('themeBtn').click(); }
+});
+
+// FAB
+const fab = document.getElementById('scrollTop');
+window.addEventListener('scroll', () => {
+  fab.classList.toggle('show', window.scrollY > 600);
+}, { passive: true });
+fab.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+// Initial render
+render();
+updateToday();
+</script>
+</body>
+</html>
